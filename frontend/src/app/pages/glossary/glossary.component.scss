@@ -1,0 +1,327 @@
+@use 'styles/abstracts' as *;
+
+.glossary-page {
+  @include page-container(900px);
+}
+
+// ── Keresés és szűrők ─────────────────────────────────────────────
+.toolbar {
+  @include flex-col($space-md);
+  margin-bottom: $space-xl;
+}
+
+.search-box {
+  position: relative;
+
+  .bi-search {
+    position: absolute;
+    left: $space-md;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    pointer-events: none;
+  }
+
+  input {
+    @include input;
+    padding: 0.75rem 2.75rem;
+    font-size: $text-md;
+
+    &:focus {
+      box-shadow: 0 0 0 3px $primary-muted;
+    }
+  }
+}
+
+.clear-btn {
+  @include btn-icon;
+  position: absolute;
+  right: $space-sm;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+
+  // Telefonon egy sorban, vízszintesen görgethető (nem foglal sok helyet)
+  @include mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.chip {
+  @include btn-base;
+  flex-shrink: 0;
+  padding: 0.4rem 0.9rem;
+  background: tint(0.04);
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: $radius-full;
+  font-size: $text-sm;
+  font-weight: 500;
+
+  .chip-count {
+    font-size: $text-xs;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    border-color: $border-hover;
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $primary-muted;
+    color: $primary-text;
+    border-color: $primary-border;
+  }
+
+  // Nincs találat ebben a kategóriában az aktuális keresésre
+  &--empty:not(.active) {
+    opacity: 0.45;
+  }
+}
+
+.result-bar {
+  @include flex(center, space-between, $space-md);
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.link-btn {
+  padding: 0;
+  background: none;
+  border: none;
+  color: $primary-text;
+  font: inherit;
+  font-size: $text-sm;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.alert--error .link-btn {
+  margin-left: $space-sm;
+  color: inherit;
+  text-decoration: underline;
+}
+
+// ── Kategória szakaszok ───────────────────────────────────────────
+.category {
+  margin-bottom: $space-xl;
+}
+
+.category-head {
+  @include flex(center, flex-start, $space-sm);
+  margin-bottom: $space-sm;
+  padding: 0 $space-xs;
+
+  h3 {
+    font-size: $text-sm;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+  }
+
+  .count {
+    padding: 0.05rem 0.55rem;
+    border-radius: $radius-full;
+    background: tint(0.06);
+    color: $text-secondary;
+    font-size: $text-xs;
+    font-weight: 600;
+  }
+
+  // Vékony vonal a fejléc után
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $border;
+  }
+}
+
+// Egy kategória fogalmai egyetlen lekerekített "kártyában", vékony elválasztókkal
+.term-list {
+  @include card(0);
+  overflow: hidden;
+}
+
+// ── Egy fogalom (harmonika) ───────────────────────────────────────
+.term {
+  border-bottom: 1px solid $border;
+  transition: background 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.open {
+    background: tint(0.025);
+    box-shadow: inset 3px 0 0 $primary; // bal oldali kiemelő sáv
+  }
+}
+
+.term-row {
+  display: flex;
+  align-items: center;
+}
+
+.term-toggle {
+  flex: 1;
+  min-width: 0;
+  @include flex(center, flex-start, $space-sm);
+  padding: 0.95rem $space-lg;
+  background: transparent;
+  border: none;
+  color: $text-primary;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: tint(0.03);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: -2px;
+  }
+
+  @include mobile {
+    padding: 0.85rem $space-md;
+  }
+}
+
+.term-title {
+  flex: 1;
+  min-width: 0;
+  font-size: $text-md;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.hint-chip {
+  flex-shrink: 0;
+  padding: 0.1rem 0.5rem;
+  border-radius: $radius-full;
+  background: $info-bg;
+  color: $info;
+  font-size: $text-xs;
+  font-weight: 600;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: $text-muted;
+  font-size: $text-sm;
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+
+  .term.open & {
+    transform: rotate(180deg);
+    color: $primary-text;
+  }
+}
+
+.term-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-right: $space-sm;
+}
+
+.btn-icon--danger:hover {
+  background: $error-bg;
+  color: $error;
+}
+
+// Kinyílás animációja: a sor magassága 0fr → 1fr (nem kell fix magasság)
+.term-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+
+  &.open {
+    grid-template-rows: 1fr;
+  }
+}
+
+.term-body-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.term-def {
+  max-width: 70ch; // kényelmes sorhossz olvasáshoz
+  padding: 0 $space-lg 1.1rem;
+  color: $text-secondary;
+  font-size: $text-base;
+  line-height: 1.75;
+  white-space: pre-line; // a magyarázatban beírt sortöréseket megtartja
+
+  @include mobile {
+    padding: 0 $space-md 1rem;
+  }
+}
+
+// Keresett kifejezés kiemelése
+mark {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: $warning-bg-hover;
+  color: inherit;
+}
+
+// ── Betöltés közbeni váz ──────────────────────────────────────────
+.skeleton-row {
+  height: 54px;
+  border-bottom: 1px solid $border;
+  background: linear-gradient(90deg, tint(0.02), tint(0.06), tint(0.02));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.empty-state .btn-primary,
+.empty-state .btn-secondary {
+  margin-top: $space-md;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term,
+  .chevron,
+  .term-body,
+  .skeleton-row {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,29 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.roles-page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  @include page-header;
+}
+
+.td-name {
+  font-weight: 500;
+  color: $text-primary;
+}
+
+.td-permissions {
+  .permission-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .empty-text {
+    color: $text-muted;
+    font-size: $text-sm;
+  }
+}

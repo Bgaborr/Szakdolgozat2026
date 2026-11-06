@@ -1,0 +1,220 @@
+<div class="mu-page">
+    <div class="page-header">
+        @if (authservice.hasPermission('edit-vehicles')) {
+        <h2>Motorvonatok (Admin felület)</h2>
+        <button class="btn-primary" (click)="openCreate()">+ Új Motorvonatok</button>
+        }
+        @else {
+        <h2>Motorvonatok</h2>
+        }
+    </div>
+
+    @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
+    @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Motorvonatok betöltése...</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>UIC Pályaszám</th>
+                    <th>Típus</th>
+                    <th>Honállomás</th>
+                    <th>Honállomás KTH</th>
+                    <th>Státusz</th>
+                    <th style="text-align: right;">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (mu of multipleunits(); track mu.id) {
+                <tr [class.row-inactive]="!mu.is_active">
+                    <td class="td-city">{{ mu.formatted_uic || mu.uic }}</td>
+                    <td>{{ mu.type?.name || '-' }}</td>
+                    <td>{{ mu.home_depot?.name || 'Nincs megadva' }}</td>
+                    <td>{{ mu.service_location?.name || 'Nincs megadva'}}</td>
+                    <td>
+                        <span [ngClass]="mu.is_active ? 'text-success' : 'text-danger'">
+                            {{ mu.is_active ? 'Üzemképes' : 'Javításra vár' }}
+                        </span>
+                    </td>
+                    <td class="td-actions">
+                        <button class="btn-secondary" (click)="openDetails(mu)">Részletek</button>
+
+                        @if (authservice.hasPermission('edit-vehicles')) {
+                        <button class="btn-edit" (click)="openEdit(mu)">Szerkesztés</button>
+                        <button class="btn-danger" (click)="deleteMu(mu)">Törlés</button>
+                        } @else if(authservice.isLoggedIn()) {
+                        <button class="btn-suggest" (click)="suggestMu(mu)">💡 Javaslat</button>
+                        }
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="6" class="empty">Nincs rögzített motorvonat.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>{{ editingMu() ? (authservice.hasPermission("edit-vehicles") ? 'Motorvonat szerkesztése' :
+                'Módosítási javaslat') : 'Új motorvonat' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-body form-grid">
+
+                <div class="field col-span-2">
+                    <label>UIC Pályaszám</label>
+                    <input type="text" formControlName="uic" placeholder="Pl.: 50552005001-2">
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Motorvonat Típusa</label>
+                    <select formControlName="multiple_unit_type_id" class="form-select">
+                        <option [ngValue]="null">-- Válassz típust --</option>
+                        @for (type of types(); track type.id) {
+                        <option [ngValue]="type.id">{{ type.type_number }} - {{ type.name }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Honállomás</label>
+                    <select formControlName="home_depot_id" class="form-select">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Honállomás KTH</label>
+                    <select formControlName="service_location_id" class="form-select">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="field col-span-2 checkbox-group">
+                    <input type="checkbox" formControlName="is_active" id="is_active">
+                    <label for="is_active">A jármű jelenleg aktív (Active)</label>
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Megjegyzés</label>
+                    <textarea formControlName="comment" placeholder="Opcionális megjegyzés..." rows="2"></textarea>
+                </div>
+
+                @if (!authservice.hasPermission('edit-vehicles')) {
+                <div class="field col-span-2">
+                    <hr style="margin: 1rem 0; border-color: #e2e8f0;">
+                </div>
+                <div class="field col-span-2">
+                    <label>Módosítás forrása</label>
+                    <select formControlName="source" class="form-select">
+                        <option value="saját forrás">Saját forrás (Saját észlelés / fotó)</option>
+                        <option value="más forrás">Más forrás (Hivatalos irat, weboldal stb.)</option>
+                    </select>
+                </div>
+                @if (form.get('source')?.value === 'más forrás') {
+                <div class="field col-span-2">
+                    <label>Forrás megnevezése / Linkje</label>
+                    <input type="text" formControlName="source_link" placeholder="Pl.: vagonweb.cz linkje...">
+                </div>
+                }
+                }
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">Mentés</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+}
+
+@if (showDetails()) {
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Motorvonat részletes információk</h2>
+            <button class="modal-close" (click)="closeDetails()">&times;</button>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="modal-body form-grid">
+
+                <div class="field col-span-2">
+                    <label>UIC Pályaszám</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" formControlName="uic" readonly class="readonly-input">
+                    </div>
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Motorvonat Típusa</label>
+                    <select formControlName="multiple_unit_type_id" class="form-select readonly-input"
+                        style="pointer-events: none;">
+                        <option [ngValue]="null">-- Válassz típust --</option>
+                        @for (type of types(); track type.id) {
+                        <option [ngValue]="type.id">{{ type.type_number }} - {{ type.name }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Honállomás</label>
+                    <select formControlName="home_depot_id" class="form-select readonly-input"
+                        style="pointer-events: none;">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Honállomás KTH</label>
+                    <select formControlName="service_location_id" class="form-select readonly-input"
+                        style="pointer-events: none;">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="field col-span-2 checkbox-group readonly-input">
+                    <input type="checkbox" formControlName="is_active" id="is_active_detail" onclick="return false;">
+                    <label for="is_active_detail">A jármű jelenleg aktív (Active)</label>
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Megjegyzés</label>
+                    <textarea formControlName="comment" readonly class="readonly-input" rows="2"></textarea>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeDetails()">Bezárás</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+}

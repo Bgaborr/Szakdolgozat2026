@@ -1,0 +1,85 @@
+<div class="suggestions-page">
+    <div class="page-header">
+        <div class="header-content">
+            <h2>Várakozási Javaslatok</h2>
+            <p class="subtitle">Itt bírálhatod el a felhasználók által beküldött módosításokat.</p>
+        </div>
+    </div>
+
+    @if (message()) {
+    <div class="alert alert--{{ message()?.type }}">
+        {{ message()?.text }}
+    </div>
+    }
+
+    <div class="content-section">
+        @if (isLoading()) {
+        <div class="loading">Adatok betöltése folyamatban...</div>
+        } @else if (suggestions().length === 0) {
+        <div class="empty">
+            <h3 class="text-success mb-2"><i class="bi bi-check2-circle me-2"></i>Nincs várakozó javaslat!</h3>
+            <p>Minden beküldött adatot feldolgoztál. Szép munka!</p>
+        </div>
+        } @else {
+        <div class="table-wrapper">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>UIC / Jármű</th>
+                        <th>Beküldő</th>
+                        <th>Adatok összehasonlítása</th>
+                        <th>Dátum</th>
+                        <th class="text-end">Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (sugg of suggestions(); track sugg.id) {
+                    <tr>
+                        <td class="td-vehicle">
+                            @if (sugg.suggestable_type === 'App\\Models\\PassengerCar') {
+                            <span class="badge badge--car">Személykocsi</span>
+                            } @else if (sugg.suggestable_type === 'App\\Models\\Locomotive') {
+                            <span class="badge badge--locomotive">Mozdony</span>
+                            } @else if (sugg.suggestable_type === 'App\\Models\\MultipleUnit') {
+                            <span class="badge badge--mu">Motorvonat</span>
+                            }
+                            <br>
+                            <span class="uic-text">
+                                {{ sugg.suggestable?.uic || sugg.suggestable?.track_number || 'Ismeretlen azonosító' }}
+                            </span>
+                        </td>
+                        <td class="text-muted">Felhasználó #{{ sugg.user_id }}</td>
+                        <td class="diff-cell">
+                            <div class="diff-container">
+                                <div class="data-box old-data">
+                                    <div class="box-header">Eredeti (Régi)</div>
+                                    <pre>{{ sugg.original_data | json }}</pre>
+                                </div>
+                                <div class="data-box new-data">
+                                    <div class="box-header">Javasolt (Új)</div>
+                                    <pre>{{ sugg.suggested_data | json }}</pre>
+                                </div>
+                            </div>
+                            <div class="source-info">
+                                <strong>Forrás:</strong>
+                                <span class="source-badge">{{ sugg.source }}</span>
+                                @if (sugg.source_link) {
+                                <a [href]="sugg.source_link" target="_blank" class="source-link">Link megnyitása</a>
+                                }
+                            </div>
+                        </td>
+                        <td class="date-cell">
+                            {{ sugg.created_at | date:'yyyy. MM. dd. HH:mm' }}
+                        </td>
+                        <td class="td-actions stacked-actions">
+                            <button class="btn-primary w-100 justify-content-center" (click)="approve(sugg.id)">Elfogad</button>
+                            <button class="btn-danger w-100 justify-content-center" (click)="reject(sugg.id)">Elutasít</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>

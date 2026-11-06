@@ -1,0 +1,75 @@
+<div class="stat-page">
+    <div class="page-header">
+        <h2>📊 Statisztikák</h2>
+    </div>
+
+    <section class="stat-section">
+        <h3 class="section-title">🚂 Mozdony Statisztikák</h3>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4>Vontatási nemek</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="locoTractionData()" [options]="pieChartOptions" type="pie"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Aktív / Selejt arány</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="locoStatusData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Típusok eloszlása</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="locoTypesData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="stat-section">
+        <h3 class="section-title">🚆 Motorvonat Statisztikák</h3>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4>Vontatási nemek</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="muTractionData()" [options]="pieChartOptions" type="pie"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Státusz (Aktív / Javításon)</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="muStatusData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Típusok szerinti eloszlás</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="muTypesData()" [options]="pieChartOptions" type="doughnut"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="stat-section">
+        <h3 class="section-title">🚋 Személykocsi Statisztikák</h3>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4>Kategóriák szerinti eloszlás</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="carCategoryData()" [options]="pieChartOptions" type="pie"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Maximális sebesség eloszlása</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="carVmaxData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

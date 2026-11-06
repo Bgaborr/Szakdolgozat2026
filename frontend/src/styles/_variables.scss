@@ -1,0 +1,118 @@
+// ── Felületek ─────────────────────────────────────────────────────
+$bg-base: var(--bg-base);
+$bg-surface: var(--bg-surface);
+$bg-elevated: var(--bg-elevated);
+$bg-overlay: var(--bg-overlay);
+$nav-bg: var(--nav-bg);
+$side-bg: var(--side-bg);
+
+$nav-text: #e2e8f0;
+$nav-text-muted: #94a3b8;
+
+// ── Szöveg ────────────────────────────────────────────────────────
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-muted: var(--text-muted);
+$text-subtle: var(--text-subtle);
+
+// ── Fő szín (kék) ─────────────────────────────────────────────────
+$primary: var(--primary);
+$primary-hover: var(--primary-hover);
+$primary-muted: var(--primary-muted);
+$primary-muted-hover: var(--primary-muted-hover);
+$primary-border: var(--primary-border);
+$primary-text: var(--primary-text);
+
+// ── Szerepkörök ───────────────────────────────────────────────────
+$role-bossadmin: var(--role-bossadmin);
+$role-bossadmin-bg: var(--role-bossadmin-bg);
+$role-admin: var(--role-admin);
+$role-admin-bg: var(--role-admin-bg);
+$role-mod: var(--role-mod);
+$role-mod-bg: var(--role-mod-bg);
+$role-user: var(--role-user);
+$role-user-bg: var(--role-user-bg);
+$role-editor: var(--role-editor);
+$role-editor-bg: var(--role-editor-bg);
+
+// ── Állapotok ─────────────────────────────────────────────────────
+$success: var(--success);
+$success-bg: var(--success-bg);
+$success-bg-hover: var(--success-bg-hover);
+$success-border: var(--success-border);
+
+$error: var(--error);
+$error-bg: var(--error-bg);
+$error-bg-hover: var(--error-bg-hover);
+$error-border: var(--error-border);
+
+$warning: var(--warning);
+$warning-bg: var(--warning-bg);
+$warning-bg-hover: var(--warning-bg-hover);
+$warning-border: var(--warning-border);
+
+$info: var(--info);
+$info-bg: var(--info-bg);
+$info-border: var(--info-border);
+$accent: $warning;
+$secondary-bg: var(--secondary-bg);
+
+// Diff-nézet szövegei (régi / új)
+$diff-old-text: var(--diff-old-text);
+$diff-new-text: var(--diff-new-text);
+
+// ── Vonalak ───────────────────────────────────────────────────────
+$border: var(--border);
+$border-hover: var(--border-hover);
+$border-focus: $primary;
+
+// ── Lekerekítés ───────────────────────────────────────────────────
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-full: 9999px;
+
+// ── Betű ──────────────────────────────────────────────────────────
+$font-base: 'Inter', system-ui, sans-serif;
+$font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+$text-xs: 0.72rem;
+$text-sm: 0.8rem;
+$text-base: 0.875rem;
+$text-md: 1rem;
+$text-lg: 1.25rem;
+$text-xl: 1.5rem;
+$text-2xl: 2rem;
+
+// ── Távolságok ────────────────────────────────────────────────────
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+
+// ── Animáció ──────────────────────────────────────────────────────
+$transition: all 0.15s ease;
+
+// ── Layout méretek ────────────────────────────────────────────────
+$navbar-height: 45px;
+$sidebar-width: 220px;
+$sidebar-collapsed: 60px;
+$sidebar-mobile-width: 280px;
+$sidebar-mobile-max: 82vw;
+
+// Oldalak maximális tartalomszélessége
+$page-width: 1100px;
+$page-width-wide: 1400px;
+
+$content-pad: 1.5rem;
+$content-pad-tablet: 1rem;
+$content-pad-mobile: 0.75rem;
+
+// ── Rétegsorrend (z-index) ────────────────────────────────────────
+$z-navbar: 100;
+$z-sidebar: 100;
+$z-backdrop: 140;
+$z-sidebar-mobile: 150;
+$z-modal: 200;

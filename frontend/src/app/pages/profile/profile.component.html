@@ -1,0 +1,65 @@
+<div class="profile-container">
+    <h2>Profil szerkesztése</h2>
+
+    @if (success()) {
+    <div class="alert alert--success">
+        {{ success() }}
+    </div>
+    }
+    @if (error()) {
+    <div class="alert alert--error">
+        {{ error() }}
+    </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="field">
+            <label for="name-input">Név</label>
+            <input id="name-input" type="text" formControlName="name" placeholder="Írd be a neved" />
+            @if (form.get('name')?.invalid && form.get('name')?.touched) {
+            <small class="text-danger">A név megadása kötelező (min. 3 karakter).</small>
+            }
+        </div>
+
+        <div class="field">
+            <label for="email-input">E-mail cím</label>
+            <input id="email-input" type="email" formControlName="email" placeholder="pelda@email.hu" />
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <small class="text-danger">Érvényes e-mail cím megadása kötelező.</small>
+            }
+        </div>
+
+        <div class="field">
+            <label for="password">Új jelszó</label>
+            <input id="password" type="password" formControlName="password"
+                placeholder="Hagyd üresen, ha nem akarod módosítani" />
+        </div>
+        <div class="field">
+            <label for="theme">Megjelenés</label>
+            <select id="theme" [value]="theme.mode()" (change)="theme.set($any($event.target).value)">
+                <option value="system">Rendszer szerint</option>
+                <option value="light">Világos</option>
+                <option value="dark">Sötét</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="roles">Aktuális rangjaid</label>
+            <div class="roles-wrapper">
+                @if (!auth.currentUser()?.roles?.length) {
+                <span id="roles" class="badge badge--empty">Felhasználó</span>
+                }
+                @for (role of auth.currentUser()?.roles; track role.name) {
+                <span id="roles" class="badge" [class]="'badge--' + (role.name || role)">
+                    {{ role.label }}
+                </span>
+                }
+            </div>
+            <small class="text-muted">A rangodat csak az adminisztrátorok módosíthatják.</small>
+        </div>
+
+        <button type="submit" class="btn-primary w-100" [disabled]="form.invalid || loading()">
+            {{ loading() ? 'Mentés folyamatban...' : 'Mentés' }}
+        </button>
+    </form>
+</div>

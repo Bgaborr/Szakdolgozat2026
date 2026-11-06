@@ -1,0 +1,339 @@
+@use 'abstracts' as *;
+
+// ── Gombok ────────────────────────────────────────────────────────
+.btn-primary {
+  @include btn-primary;
+}
+.btn-secondary {
+  @include btn-secondary;
+}
+.btn-edit {
+  @include btn-edit;
+}
+.btn-suggest {
+  @include btn-suggest;
+}
+.btn-icon {
+  @include btn-icon;
+}
+
+.btn-danger,
+.btn-delete,
+.btn-reject {
+  @include btn-danger;
+}
+.btn-success,
+.btn-approve {
+  @include btn-success;
+}
+
+// ── Értesítések (Alert) ───────────────────────────────────────────
+.alert {
+  &--success {
+    @include alert($success, $success-bg, $success-border);
+    margin-bottom: $space-md;
+  }
+  &--error {
+    @include alert($error, $error-bg, $error-border);
+    margin-bottom: $space-md;
+  }
+}
+
+// ── Szöveg segédosztályok ─────────────────────────────────────────
+.text-success {
+  color: $success;
+  font-weight: 600;
+}
+.text-danger {
+  color: $error;
+  font-weight: 600;
+}
+.text-end {
+  text-align: right !important;
+}
+
+// ── Oldal fejléc ──────────────────────────────────────────────────
+.page-header {
+  @include page-header;
+
+  // Nagyobb alsó térköz (dashboard)
+  &--spacious {
+    margin-bottom: $space-xl;
+  }
+}
+
+// ── Üres / betöltési állapot ──────────────────────────────────────
+.loading,
+.empty {
+  padding: 3rem;
+  text-align: center;
+  color: $text-subtle;
+  font-size: $text-base;
+}
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: tint(0.01);
+  border: 1px dashed $border;
+  border-radius: $radius-md;
+  color: $text-muted;
+
+  .empty-icon,
+  > i {
+    display: block;
+    font-size: 2.5rem;
+    color: $text-subtle;
+  }
+
+  h3,
+  h4 {
+    color: $text-primary;
+    margin: $space-md 0 $space-xs;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $text-sm;
+  }
+}
+
+// ── Táblázat ──────────────────────────────────────────────────────
+.table-wrapper {
+  @include card(0);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    background: tint(0.03);
+    border-bottom: 1px solid $border;
+  }
+
+  th {
+    padding: 0.875rem $space-md;
+    text-align: left;
+    font-size: $text-xs;
+    font-weight: 600;
+    color: $text-subtle;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid tint(0.04);
+    transition: $transition;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: tint(0.02);
+    }
+  }
+
+  td {
+    padding: 0.875rem $space-md;
+    font-size: $text-base;
+    color: $text-secondary;
+    vertical-align: middle;
+  }
+
+  // Telefonon a táblázat nem törpül össze, inkább görgethető
+  @include mobile {
+    min-width: 750px;
+  }
+}
+
+// Inaktív sor (pl. mozdonyoknál)
+tr.row-inactive {
+  background-color: alpha($error, 0.1);
+}
+
+// Cella-segédosztályok (több oldal használja)
+.td-id {
+  color: $text-subtle;
+  width: 80px;
+}
+
+.td-name,
+.td-city {
+  font-weight: 500;
+  color: $text-primary;
+}
+.td-actions {
+  text-align: right;
+  white-space: nowrap;
+
+  > * + * {
+    margin-left: $space-sm;
+  }
+}
+
+// ── Badge ─────────────────────────────────────────────────────────
+.badge {
+  @include badge-class;
+}
+
+// ── Modális ablakok (Modal) ───────────────────────────────────────
+@include keyframes-modal;
+
+.modal-overlay {
+  @include modal-overlay;
+
+  // Telefonon alulról kicsúszó panel
+  @include mobile {
+    align-items: flex-end;
+    padding: 0;
+  }
+}
+
+.modal {
+  @include modal-box(600px);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+
+  &-header {
+    @include flex(center, space-between);
+    padding: $space-md $space-lg;
+    border-bottom: 1px solid $border;
+    flex-shrink: 0;
+
+    h2 {
+      font-size: $text-lg;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: $text-muted;
+      font-size: $text-xl;
+      cursor: pointer;
+      transition: $transition;
+
+      &:hover {
+        color: $text-primary;
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  &-body {
+    padding: $space-lg;
+    overflow-y: auto;
+
+    @include mobile {
+      padding: $space-md;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  &-footer {
+    @include flex(center, flex-end, $space-md);
+    padding: $space-md $space-lg;
+    border-top: 1px solid $border;
+    flex-shrink: 0;
+  }
+
+  @include mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 85vh;
+    margin: 0;
+    border-radius: $radius-lg $radius-lg 0 0;
+  }
+}
+
+// ── Formok és rács ────────────────────────────────────────────────
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-md;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-span-2 {
+  grid-column: span 2;
+
+  @include mobile {
+    grid-column: span 1;
+  }
+}
+
+.field {
+  @include form-field;
+
+  .error-text {
+    color: $error;
+    font-size: $text-xs;
+    margin-top: $space-xs;
+  }
+}
+
+.checkbox-group {
+  @include flex(center, flex-start, $space-sm);
+
+  label {
+    margin: 0;
+    cursor: pointer;
+  }
+}
+
+.readonly-input {
+  opacity: 0.7;
+  pointer-events: none;
+  background-color: tint(0.02);
+}
+
+// ── Admin: szerepkör- és jogosultság-checkboxok ───────────────────
+.role-checkboxes {
+  @include flex(center, flex-start, $space-sm);
+  flex-wrap: wrap;
+}
+
+.role-checkbox {
+  @include flex(center, flex-start, 0.4rem);
+  padding: 0.4rem 0.75rem;
+  background: tint(0.03);
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  font-size: $text-sm;
+  color: $text-muted;
+  cursor: pointer;
+  transition: $transition;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  &.active {
+    background: $primary-muted;
+    border-color: $primary-border;
+    color: $primary-text;
+  }
+
+  &:hover {
+    border-color: $border-hover;
+  }
+}

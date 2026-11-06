@@ -1,0 +1,11 @@
+// ================================================================
+// multiple-units.component.scss
+// Csak ami ennek az oldalnak a sajátja. Minden más (alert, táblázat,
+// gombok, modal, űrlap, oldalfejléc) a globális _components.scss-ből jön.
+// ================================================================
+
+@use 'styles/abstracts' as *;
+
+.mu-page {
+  @include page-container;
+}

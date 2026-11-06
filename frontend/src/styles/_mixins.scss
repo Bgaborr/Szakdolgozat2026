@@ -1,0 +1,337 @@
+@use 'variables' as *;
+@use 'functions' as *;
+@use 'breakpoints' as *;
+
+// ── Layout segédletek ─────────────────────────────────────────────
+@mixin flex($align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+// Flex oszlop
+@mixin flex-col($gap: 0) {
+  display: flex;
+  flex-direction: column;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+// Középre igazítás
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin page-container($max: $page-width) {
+  width: 100%;
+  max-width: $max;
+  margin: 0 auto;
+}
+
+// ── Kártya ────────────────────────────────────────────────────────
+@mixin card($padding: $space-lg) {
+  background: $bg-surface;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  padding: $padding;
+}
+
+// ── Gombok ────────────────────────────────────────────────────────
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $text-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Elsődleges gomb (kék, tömör)
+@mixin btn-primary($padding: 0.4rem 0.875rem) {
+  @include btn-base;
+  padding: $padding;
+  background: $primary;
+  color: white;
+  font-size: $text-sm;
+
+  &:hover:not(:disabled) {
+    background: $primary-hover;
+  }
+}
+
+// Másodlagos gomb (háttere: $secondary-bg)
+@mixin btn-secondary($padding: 0.4rem 0.875rem) {
+  @include btn-base;
+  padding: $padding;
+  background: $secondary-bg;
+  color: $text-secondary;
+  border: 1px solid $border;
+  font-size: $text-sm;
+
+  &:hover:not(:disabled) {
+    background: tint(0.08);
+  }
+}
+
+// Halvány kék gomb (szerkesztés)
+@mixin btn-edit($padding: 0.4rem 0.875rem) {
+  @include btn-base;
+  padding: $padding;
+  background: $primary-muted;
+  color: $primary-text;
+  border: 1px solid $primary-border;
+  font-size: $text-sm;
+
+  &:hover:not(:disabled) {
+    background: $primary-muted-hover;
+  }
+}
+
+// Veszélyes gomb (piros, törlés / elutasítás)
+@mixin btn-danger($padding: 0.4rem 0.875rem) {
+  @include btn-base;
+  padding: $padding;
+  background: $error-bg;
+  color: $error;
+  border: 1px solid $error-border;
+  font-size: $text-sm;
+
+  &:hover:not(:disabled) {
+    background: $error-bg-hover;
+  }
+}
+
+// Sikeres gomb (zöld, jóváhagyás)
+@mixin btn-success($padding: 0.4rem 0.875rem) {
+  @include btn-base;
+  padding: $padding;
+  background: $success-bg;
+  color: $success;
+  border: 1px solid $success-border;
+  font-size: $text-sm;
+
+  &:hover:not(:disabled) {
+    background: $success-bg-hover;
+  }
+}
+
+// Sárga gomb (javaslat)
+@mixin btn-suggest($padding: 0.4rem 0.875rem) {
+  @include btn-base;
+  padding: $padding;
+  background: $warning-bg;
+  color: $warning;
+  border: 1px solid $warning-border;
+  font-size: $text-sm;
+
+  &:hover:not(:disabled) {
+    background: $warning-bg-hover;
+  }
+}
+
+// Ikon-gomb: átlátszó, csak hoverre látszik (pl. szótár szerkesztés)
+@mixin btn-icon {
+  background: transparent;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  color: $text-secondary;
+  transition: $transition;
+
+  &:hover {
+    background: tint(0.08);
+    color: $text-primary;
+  }
+}
+
+// ── Input mező ────────────────────────────────────────────────────
+@mixin input {
+  padding: 0.65rem 0.875rem;
+  background: $bg-overlay;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  color: $text-primary;
+  font-size: $text-base;
+  width: 100%;
+  transition: $transition;
+
+  &:focus {
+    outline: none;
+    border-color: $border-focus;
+  }
+
+  &::placeholder {
+    color: $text-subtle;
+  }
+}
+
+// ── Form mező (label + input együtt) ──────────────────────────────
+@mixin form-field {
+  @include flex-col($space-xs);
+
+  label {
+    font-size: $text-sm;
+    font-weight: 500;
+    color: $text-muted;
+  }
+
+  input,
+  select,
+  textarea {
+    @include input;
+  }
+}
+
+// ── Alert / Értesítés ─────────────────────────────────────────────
+@mixin alert($color, $bg, $border-color) {
+  padding: 0.75rem $space-md;
+  border-radius: $radius-md;
+  font-size: $text-base;
+  color: $color;
+  background: $bg;
+  border: 1px solid $border-color;
+}
+
+// ── Badge / Chip ──────────────────────────────────────────────────
+@mixin badge($color: $text-secondary, $bg: tint(0.06)) {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: $radius-full;
+  font-size: $text-xs;
+  font-weight: 600;
+  color: $color;
+  margin: 0.25rem;
+  background: $bg;
+}
+
+@mixin badge-class {
+  @include badge;
+
+  &--bossadmin {
+    @include badge($role-bossadmin, $role-bossadmin-bg);
+  }
+  &--admin {
+    @include badge($role-admin, $role-admin-bg);
+  }
+  &--moderator {
+    @include badge($role-mod, $role-mod-bg);
+  }
+  &--user {
+    @include badge($role-user, $role-user-bg);
+  }
+  &--editor {
+    @include badge($role-editor, $role-editor-bg);
+  }
+  &--empty {
+    background: transparent;
+    color: $text-subtle;
+    border: 1px dashed tint(0.08);
+  }
+}
+
+// ── Oldal fejléc ──────────────────────────────────────────────────
+// EGY helyen él: a globális .page-header használja (_components.scss).
+// A komponensekben NE @include-old újra.
+@mixin page-header {
+  @include flex(center, space-between, $space-md);
+  margin-bottom: $space-lg;
+
+  h2 {
+    font-size: $text-lg;
+    color: $text-primary;
+  }
+
+  .page-title {
+    font-size: $text-xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $space-xs;
+  }
+
+  .page-subtitle {
+    color: $text-subtle;
+    font-size: $text-base;
+  }
+
+  @include tablet {
+    margin-bottom: $space-md;
+  }
+
+  // Telefonon a cím és a gomb egymás alá kerül
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// ── Modal ─────────────────────────────────────────────────────────
+@mixin modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: shade(0.6);
+  backdrop-filter: blur(4px);
+  @include center;
+  z-index: $z-modal;
+  padding: $space-md;
+}
+
+@mixin modal-box($max-width: 480px) {
+  background: $bg-elevated;
+  border: 1px solid $border;
+  border-radius: $radius-xl;
+  width: 100%;
+  max-width: $max-width;
+  animation: modal-in 0.2s ease;
+}
+
+// ── Scrollbar ─────────────────────────────────────────────────────
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: tint(0.1);
+    border-radius: 2px;
+  }
+}
+
+// ── Animációk ─────────────────────────────────────────────────────
+// Csak EGYSZER, a styles.scss-ben @include-old (globális keyframes).
+@mixin keyframes-modal {
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+}

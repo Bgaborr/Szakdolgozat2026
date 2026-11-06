@@ -1,0 +1,43 @@
+@use 'abstracts' as *;
+
+@mixin auth-page {
+  .auth-wrapper {
+    @include center;
+    min-height: 100vh;
+    min-height: 100dvh; // mobilon a böngészősáv mozgását is követi
+    padding: $space-md; // keskeny telefonon se érjen a kártya a képernyő széléhez
+    background: $bg-base;
+  }
+
+  form {
+    @include card($space-xl);
+    @include flex-col(1.25rem);
+    width: 100%;
+    max-width: 400px;
+
+    h1 {
+      color: $text-primary;
+      font-size: $text-xl;
+      text-align: center;
+    }
+  }
+
+  .auth-link {
+    color: $text-muted;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: $space-sm;
+
+    a {
+      color: $primary;
+      text-decoration: none;
+      font-weight: 500;
+      transition: $transition;
+
+      &:hover {
+        color: $primary-hover;
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.profile-container {
+  max-width: 600px; 
+  margin: 0 auto;
+  padding: $space-xl 0;
+
+  h2 {
+    @include page-header;
+    margin-bottom: $space-lg;
+  }
+}
+
+form {
+  @include card($space-lg);
+  @include flex-col($space-md);
+}
+
+.roles-wrapper {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}

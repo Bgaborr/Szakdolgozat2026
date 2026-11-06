@@ -1,0 +1,53 @@
+<div class="gallery-page">
+    <div class="page-header">
+        <h2><i class="bi bi-shield-lock text-warning me-2"></i> Várakozó képek moderálása</h2>
+        <span class="badge badge-pending">
+             Összesen: {{ pendingPosts().length }} db
+        </span>
+    </div>
+
+    @if (success()) {
+    <div class="alert alert--success">
+        <i class="bi bi-check-circle-fill me-2"></i> {{ success() }}
+    </div>
+    }
+    @if (error()) {
+    <div class="alert alert--error">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ error() }}
+    </div>
+    }
+
+    @if (!loading()) {
+    <div class="gallery-grid">
+        @for (post of pendingPosts(); track post.id) {
+        <div class="gallery-card">
+            <img [src]="storageUrl + post.image_path" [alt]="post.title">
+            <div class="card-content">
+                <h5>{{ post.title }}</h5>
+                <span class="badge">{{ post.vehicle_category }}</span>
+                
+                <p class="uploader-info">
+                    <strong>Feltöltötte:</strong> {{ post.user?.name || 'Ismeretlen felhasználó' }}<br>
+                    <span class="description">{{ post.description || 'Nincs leírás megadva.' }}</span>
+                </p>
+            </div>
+            
+            <div class="card-footer admin-actions">
+                <button class="btn-approve" (click)="approvePost(post)">
+                    <i class="bi bi-check-lg"></i> Jóváhagyás
+                </button>
+                <button class="btn-reject" (click)="rejectPost(post)">
+                    <i class="bi bi-trash3-fill"></i> Elutasítás
+                </button>
+            </div>
+        </div>
+        } @empty {
+        <div class="empty-state">
+            <i class="bi bi-inbox mb-3 empty-icon"></i>
+            <h4>Nincs moderálandó kép!</h4>
+            <p>Jelenleg egyetlen felhasználó sem töltött fel képet a galériába.</p>
+        </div>
+        }
+    </div>
+    }
+</div>

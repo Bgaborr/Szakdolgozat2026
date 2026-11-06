@@ -1,0 +1,145 @@
+<div class="catalog-page">
+    <div class="page-header">
+        <div>
+            <h2>Járműkatalógus</h2>
+            <p class="page-subtitle">Böngéssz a MÁV Csoport regisztrált járműállományában</p>
+        </div>
+    </div>
+
+    <!-- Keresés és szűrők -->
+    <div class="toolbar">
+        <div class="search-box">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <input type="text" inputmode="search" autocomplete="off" aria-label="Keresés a járművek között"
+                placeholder="Keresés pályaszám, sorozat, becenév (pl. Szili) vagy honállomás alapján..."
+                [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" />
+            @if (searchTerm()) {
+            <button type="button" class="clear-btn" (click)="searchTerm.set('')" aria-label="Keresés törlése">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            }
+        </div>
+
+        @if (vehicles().length > 0) {
+        <div class="facets">
+            <div class="facet" role="group" aria-label="Szűrés típus szerint">
+                <span class="facet-label">Típus</span>
+                <div class="chips">
+                    <button type="button" class="chip" [class.active]="typeFilter() === ''"
+                        [attr.aria-pressed]="typeFilter() === ''" (click)="typeFilter.set('')">
+                        Összes <span class="chip-count">{{ allCountForType() }}</span>
+                    </button>
+                    @for (o of typeOptions(); track o.value) {
+                    <button type="button" class="chip" [class.active]="typeFilter() === o.value"
+                        [class.chip--empty]="o.count === 0" [attr.aria-pressed]="typeFilter() === o.value"
+                        (click)="typeFilter.set(o.value)">
+                        {{ o.label }} <span class="chip-count">{{ o.count }}</span>
+                    </button>
+                    }
+                </div>
+            </div>
+
+            <div class="facet" role="group" aria-label="Szűrés állapot szerint">
+                <span class="facet-label">Állapot</span>
+                <div class="chips">
+                    <button type="button" class="chip" [class.active]="statusFilter() === ''"
+                        [attr.aria-pressed]="statusFilter() === ''" (click)="statusFilter.set('')">
+                        Összes <span class="chip-count">{{ allCountForStatus() }}</span>
+                    </button>
+                    @for (o of statusOptions(); track o.value) {
+                    <button type="button" class="chip" [class.active]="statusFilter() === o.value"
+                        [class.chip--empty]="o.count === 0" [attr.aria-pressed]="statusFilter() === o.value"
+                        (click)="statusFilter.set(o.value)">
+                        {{ o.label }} <span class="chip-count">{{ o.count }}</span>
+                    </button>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+
+        @if (hasFilters() && !loading()) {
+        <div class="result-bar">
+            <span>{{ filteredVehicles().length }} találat</span>
+            <button type="button" class="link-btn" (click)="clearFilters()">Szűrők törlése</button>
+        </div>
+        }
+    </div>
+
+    @if (loadError()) {
+    <div class="alert alert--error">
+        {{ loadError() }}
+        <button type="button" class="link-btn" (click)="load()">Újra</button>
+    </div>
+    }
+
+    <!-- Jármű kártyák -->
+    <div class="vehicle-grid">
+        @if (loading()) { @for (n of skeletons; track n) {
+        <div class="vehicle-card vehicle-card--skeleton" aria-hidden="true"></div>
+        } } @else { @for (vehicle of filteredVehicles(); track vehicle.id) {
+        <article class="vehicle-card">
+            <div class="card-image-wrapper">
+                <img [src]="vehicle.image_url || placeholder" [alt]="imageAlt(vehicle)" loading="lazy" decoding="async"
+                    (error)="onImgError($event)" />
+                <span class="status-badge" [ngClass]="vehicle.status">{{ statusLabel(vehicle.status) }}</span>
+            </div>
+
+            <div class="card-content">
+                <div class="vehicle-header">
+                    <span class="type-overline">{{ typeLabel(vehicle.type) }}</span>
+                    <h3>
+                        <span class="series">{{ vehicle.series }}</span>
+                        @if (vehicle.nickname) {
+                        <span class="nickname">{{ vehicle.nickname }}</span>
+                        }
+                    </h3>
+                    <p class="uic-number">{{ vehicle.uic_number }}</p>
+                </div>
+
+                <div class="vehicle-details">
+                    <div class="detail-row">
+                        <i class="bi bi-buildings" aria-hidden="true"></i>
+                        <span>{{ vehicle.manufacturer }} ({{ vehicle.year_built }})</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="bi bi-geo-alt" aria-hidden="true"></i>
+                        <span>{{ vehicle.depot }}</span>
+                    </div>
+                </div>
+
+                @if (vehicle.last_spotted; as spot) {
+                <div class="spotting-row active-spot">
+                    <span class="pulsing-dot" aria-hidden="true"></span>
+                    <span>
+                        Utoljára látva: <strong>{{ spot.location }}</strong><br />
+                        <small>{{ spottedText(spot.time) }}</small>
+                    </span>
+                </div>
+                } @else {
+                <div class="spotting-row empty-spot">
+                    <i class="bi bi-eye-slash" aria-hidden="true"></i>
+                    <span>Még nincs friss észlelés</span>
+                </div>
+                }
+
+                <a class="btn-primary-outline w-100" [routerLink]="['/vehicles', vehicle.id]">
+                    Adatlap megtekintése
+                </a>
+            </div>
+        </article>
+        } @empty {
+        <div class="empty-state">
+            <i class="bi bi-train-front empty-icon"></i>
+            @if (vehicles().length === 0) {
+            <h3>Még nincs jármű a katalógusban</h3>
+            <p>Amint járműveket rögzítenek, itt fognak megjelenni.</p>
+            } @else {
+            <h3>Nincs találat</h3>
+            <p>Nem találtunk a keresésnek megfelelő járművet az adatbázisban.</p>
+            <button type="button" class="btn-secondary" (click)="clearFilters()">Szűrők törlése</button>
+            }
+        </div>
+        } }
+    </div>
+</div>

@@ -1,0 +1,143 @@
+$dark: (
+  // Felületek
+  bg-base: #0f1117,
+  bg-surface: #131720,
+  bg-elevated: #1a1d27,
+  bg-overlay: #0d1117,
+  nav-bg: #063971,
+  side-bg: #0a1c2c,
+
+  // Szöveg
+  text-primary: #e2e8f0,
+  text-secondary: #94a3b8,
+  text-muted: #64748b,
+  text-subtle: #475569,
+
+  // Fő szín
+  primary: #3b82f6,
+  primary-hover: #2563eb,
+  primary-muted: rgba(59, 130, 246, 0.12),
+  primary-muted-hover: rgba(59, 130, 246, 0.2),
+  primary-border: rgba(59, 130, 246, 0.25),
+  primary-text: #60a5fa,
+
+  // Szerepkörök
+  role-bossadmin: #e30f0f,
+  role-bossadmin-bg: rgba(198, 53, 53, 0.141),
+  role-admin: #f87171,
+  role-admin-bg: rgba(239, 68, 68, 0.12),
+  role-mod: #c084fc,
+  role-mod-bg: rgba(168, 85, 247, 0.12),
+  role-user: #60a5fa,
+  role-user-bg: rgba(59, 130, 246, 0.12),
+  role-editor: #be3188,
+  role-editor-bg: rgba(175, 27, 113, 0.09),
+  // Állapotok
+  success: #4ade80,
+  success-bg: rgba(34, 197, 94, 0.1),
+  success-bg-hover: rgba(34, 197, 94, 0.18),
+  success-border: rgba(34, 197, 94, 0.2),
+  error: #f87171,
+  error-bg: rgba(239, 68, 68, 0.1),
+  error-bg-hover: rgba(239, 68, 68, 0.18),
+  error-border: rgba(239, 68, 68, 0.2),
+  warning: #fbbf24,
+  warning-bg: rgba(251, 191, 36, 0.1),
+  warning-bg-hover: rgba(251, 191, 36, 0.22),
+  warning-border: rgba(251, 191, 36, 0.2),
+  info: #06b6d4,
+  info-bg: rgba(6, 182, 212, 0.12),
+  info-border: rgba(6, 182, 212, 0.25),
+  // Egyéb
+  secondary-bg: rgba(14, 103, 117, 0.968),
+  border: rgba(255, 255, 255, 0.06),
+  border-hover: rgba(255, 255, 255, 0.12),
+  // az áttetsző "réteg" (tint) alapszíne: sötéten fehér, világoson sötét
+  tint-base: #ffffff,
+  diff-old-text: #fca5a5,
+  diff-new-text: #86efac,
+  delete: #ef4444
+);
+
+$light: (
+  // Felületek
+  bg-base: #f1f5f9,
+  bg-surface: #ffffff,
+  bg-elevated: #ffffff,
+  bg-overlay: #f8fafc,
+  nav-bg: #063971,
+  side-bg: #ffffff,
+
+  // Szöveg
+  text-primary: #0f172a,
+  text-secondary: #334155,
+  text-muted: #64748b,
+  text-subtle: #6b7a90,
+
+  // Fő szín
+  primary: #2563eb,
+  primary-hover: #1d4ed8,
+  primary-muted: rgba(37, 99, 235, 0.1),
+  primary-muted-hover: rgba(37, 99, 235, 0.16),
+  primary-border: rgba(37, 99, 235, 0.3),
+  primary-text: #1d4ed8,
+
+  // Szerepkörök
+  role-bossadmin: #991b1b,
+  role-bossadmin-bg: rgba(220, 38, 38, 0.12),
+  role-admin: #c81e1e,
+  role-admin-bg: rgba(220, 38, 38, 0.1),
+  role-mod: #7e22ce,
+  role-mod-bg: rgba(147, 51, 234, 0.1),
+  role-user: #1d4ed8,
+  role-user-bg: rgba(37, 99, 235, 0.1),
+  role-editor: #be185d,
+  role-editor-bg: rgba(190, 24, 93, 0.09),
+  // Állapotok
+  success: #157a39,
+  success-bg: rgba(22, 163, 74, 0.1),
+  success-bg-hover: rgba(22, 163, 74, 0.18),
+  success-border: rgba(22, 163, 74, 0.3),
+  error: #b91c1c,
+  error-bg: rgba(220, 38, 38, 0.08),
+  error-bg-hover: rgba(220, 38, 38, 0.14),
+  error-border: rgba(220, 38, 38, 0.28),
+  warning: #b45309,
+  warning-bg: rgba(217, 119, 6, 0.1),
+  warning-bg-hover: rgba(217, 119, 6, 0.18),
+  warning-border: rgba(217, 119, 6, 0.3),
+  info: #0e7490,
+  info-bg: rgba(8, 145, 178, 0.1),
+  info-border: rgba(8, 145, 178, 0.28),
+  // Egyéb
+  secondary-bg: #e2e8f0,
+  border: rgba(15, 23, 42, 0.1),
+  border-hover: rgba(15, 23, 42, 0.2),
+  tint-base: #0f172a,
+  diff-old-text: #991b1b,
+  diff-new-text: #166534,
+  delete: #ef4444
+);
+
+@mixin emit-palette($palette) {
+  @each $name, $value in $palette {
+    --#{$name}: #{$value};
+  }
+}
+
+:root {
+  color-scheme: dark;
+  @include emit-palette($dark);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  @include emit-palette($light);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    @include emit-palette($light);
+  }
+}

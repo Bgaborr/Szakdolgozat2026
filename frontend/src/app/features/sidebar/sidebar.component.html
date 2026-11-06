@@ -1,0 +1,127 @@
+@if (layout.mobileNavOpen()) {
+<div class="sidebar-backdrop" (click)="layout.close()"></div>
+}
+
+<aside class="sidebar" [class.collapsed]="collapsed" [class.mobile-open]="layout.mobileNavOpen()">
+
+  <div class="sidebar-mobile-header">
+    <span class="sidebar-mobile-title">Menü</span>
+    <button class="sidebar-close-btn" (click)="layout.close()" aria-label="Menü bezárása">✕</button>
+  </div>
+
+  <div class="sidebar-body" (click)="layout.close()">
+    <div class="nav-group">
+      <span class="nav-group-label">
+        <span class="label-short">F</span>
+        <span class="label-long">FŐMENÜ</span>
+      </span>
+
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-item">
+        <span class="nav-icon">🏡</span>
+        <span class="nav-label">Kezdőlap</span>
+      </a>
+
+      <a routerLink="/vehicles/locomotives" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🚂</span>
+        <span class="nav-label">Mozdonyok</span>
+      </a>
+
+      <a routerLink="/vehicles/multiple-units" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🚆</span>
+        <span class="nav-label">Motorvonatok</span>
+      </a>
+
+      <a routerLink="/vehicles/passenger-cars" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🚃</span>
+        <span class="nav-label">Személykocsik</span>
+      </a>
+
+      <a routerLink="/service-locations" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🏭</span>
+        <span class="nav-label">Szolgálati helyek</span>
+      </a>
+
+      <a routerLink="/glossary" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📒</span>
+        <span class="nav-label">Szójegyzék</span>
+      </a>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-group-label">
+        <span class="label-short">K</span>
+        <span class="label-long">KÖZÖSSÉG</span>
+      </span>
+
+      <a routerLink="/gallery" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🖼️</span>
+        <span class="nav-label">Galéria</span>
+      </a>
+
+      <a routerLink="/vehicles" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🚂</span>
+        <span class="nav-label">Katalógus</span>
+      </a>
+      @if (auth.hasPermission('stat-view')) {
+      <a routerLink="/stat" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Statisztikák</span>
+      </a>}
+    </div>
+
+    @if (auth.hasPermission('view-admin-panel')) {
+    <div class="nav-group">
+      <span class="nav-group-label">
+        <span class="label-short">A</span>
+        <span class="label-long">ADMIN</span>
+      </span>
+      @if (auth.hasPermission('manage-users')) {
+      <a routerLink="/admin/users" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">Felhasználók</span>
+      </a>
+      <a routerLink="/admin/roles" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🧑‍💻</span>
+        <span class="nav-label">Szerepkörök</span>
+      </a>
+      }
+      @if (auth.hasPermission('manage-permission')) {
+      <a routerLink="/admin/permissions" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🛠️</span>
+        <span class="nav-label">Jogosultságok</span>
+      </a>
+      }
+      @if (auth.hasPermission('approve-gallery')) {
+      <a routerLink="/admin/gallery" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📷</span>
+        <span class="nav-label">Várakozó képek</span>
+      </a>
+      }
+      @if (auth.hasPermission('approve-suggestions')) {
+      <a routerLink="/admin/suggestions" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">💡</span>
+        <span class="nav-label">Javaslatok</span>
+      </a>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="sidebar-footer">
+    @if (auth.isLoggedIn()) {
+    <button id="logout" class="nav-item nav-item--logout" (click)="auth.logout(); layout.close()">
+      <span class="nav-icon">🚪</span>
+      <span class="nav-label">Kijelentkezés</span>
+    </button>
+    } @else {
+    <button id="login" class="nav-item nav-item--logout" routerLink="/login" (click)="layout.close()">
+      <span class="nav-icon">🚪</span>
+      <span class="nav-label">Bejelentkezés</span>
+    </button>
+    }
+    <button id="collapse" class="collapse-btn" (click)="toggleCollapse()" [attr.aria-expanded]="!collapsed">
+      <span>{{ collapsed ? '→' : '←' }}</span>
+    </button>
+  </div>
+
+</aside>

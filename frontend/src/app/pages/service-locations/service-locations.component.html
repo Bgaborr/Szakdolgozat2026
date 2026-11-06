@@ -1,0 +1,85 @@
+<div class="locations-page">
+    <div class="page-header">
+        @if (authService.hasPermission('edit-vehicles')) {
+        <h2>Szolgálati helyek (Admin felület)</h2>
+        <button class="btn-primary" (click)="openCreate()">+ Új szolgálati hely</button>
+        }@else{
+        <h2>Szolgálati helyek</h2>
+        }
+    </div>
+    
+    @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
+    @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+    
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Adatok betöltése...</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Város / Állomás neve</th>
+                    <th>Hozzátartozó gépek száma</th>
+                    @if (authService.hasPermission('edit-vehicles')) {
+                    <th class="text-end">Műveletek</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (location of locations(); track location.id) {
+                <tr>
+                    <td class="td-id">#{{ location.id }}</td>
+                    <td class="td-city">
+                        {{ location.id === editingLocation()?.id ? '✏️ ' : '' }}{{ location.name }}
+                    </td>
+                    <td class="td-count">{{ location.vehicleCount }}</td>
+                    
+                    @if (authService.hasPermission('edit-vehicles')) {
+                    <td class="td-actions">
+                        <button class="btn-edit" (click)="openEdit(location)">Szerkesztés</button>
+                        <button class="btn-danger" (click)="deleteLocation(location)">Törlés</button>
+                    </td>
+                    }
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="4" class="empty">Jelenleg nincs rögzítve egyetlen szolgálati hely sem.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editingLocation() ? 'Szolgálati hely szerkesztése' : 'Új szolgálati hely' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+        
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label for="cityName">Város neve (Állomás vagy Műhely)</label>
+                    <input id="cityName" type="text" formControlName="name" placeholder="Pl.: Budapest-Keleti" autocomplete="off">
+                    
+                    @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                    <span class="text-danger" style="font-size: 0.8rem; margin-top: 0.25rem; display: block;">
+                        A város nevének megadása kötelező (min. 3 karakter).
+                    </span>
+                    }
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+}

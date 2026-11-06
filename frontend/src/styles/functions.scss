@@ -1,0 +1,32 @@
+// ================================================================
+// _functions.scss
+// Kis Sass függvények. Értéket adnak vissza, nem generálnak CSS-t.
+// ================================================================
+
+@use 'sass:math';
+
+// Áttetsző "réteg" a téma alapszínéből (hover, kártya, keret).
+// Sötét témán fehér, világoson sötét árnyalat, ezért mindkét témában jó.
+// Használat: background: tint(0.05);
+@function tint($alpha) {
+  @return color-mix(in srgb, var(--tint-base) #{math.percentage($alpha)}, transparent);
+}
+
+// Bármely szín áttetszővé tétele. A rgba($szín, .1) HELYETT, mert a
+// témaszínek var(...) értékek, azokon a Sass színfüggvény nem működik.
+// Használat: background: alpha($error, 0.1);
+@function alpha($color, $alpha) {
+  @return color-mix(in srgb, #{$color} #{math.percentage($alpha)}, transparent);
+}
+
+// Áttetsző fekete (árnyék, modal háttér). Mindkét témában fekete.
+// Használat: box-shadow: 0 4px 12px shade(0.2);
+@function shade($alpha) {
+  @return rgba(0, 0, 0, $alpha);
+}
+
+// Áttetsző fehér, a témától FÜGGETLENÜL. Sötét felületeken, amelyek
+// világos témában is sötétek maradnak (pl. a navbar).
+@function static-tint($alpha) {
+  @return rgba(255, 255, 255, $alpha);
+}

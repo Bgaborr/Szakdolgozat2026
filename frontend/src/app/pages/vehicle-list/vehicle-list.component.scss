@@ -1,0 +1,372 @@
+@use 'styles/abstracts' as *;
+@use 'styles/gallery' as *;
+
+$status-colors: (
+  (aktiv, #198754, white),
+  (fenntartott, #ffc107, #000),
+  (felujitas_alatt, #0dcaf0, #000),
+  (selejtezett, #dc3545, white)
+);
+
+.catalog-page {
+  @include page-container(1200px);
+}
+
+.toolbar {
+  @include flex-col($space-md);
+  margin-bottom: $space-xl;
+}
+
+.search-box {
+  position: relative;
+  max-width: 560px;
+
+  .bi-search {
+    position: absolute;
+    left: $space-md;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    pointer-events: none;
+  }
+
+  input {
+    @include input;
+    padding: 0.75rem 2.75rem;
+    font-size: $text-md;
+
+    &:focus {
+      box-shadow: 0 0 0 3px $primary-muted;
+    }
+  }
+}
+
+.clear-btn {
+  @include btn-icon;
+  position: absolute;
+  right: $space-sm;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.facets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm $space-xl;
+}
+
+.facet {
+  @include flex(center, flex-start, $space-sm);
+  min-width: 0;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+.facet-label {
+  flex-shrink: 0;
+  font-size: $text-xs;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+
+  @include mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.chip {
+  @include btn-base;
+  flex-shrink: 0;
+  padding: 0.4rem 0.9rem;
+  background: tint(0.04);
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: $radius-full;
+  font-size: $text-sm;
+  font-weight: 500;
+
+  .chip-count {
+    font-size: $text-xs;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    border-color: $border-hover;
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $primary-muted;
+    color: $primary-text;
+    border-color: $primary-border;
+  }
+
+  &--empty:not(.active) {
+    opacity: 0.45;
+  }
+}
+
+.result-bar {
+  @include flex(center, space-between, $space-md);
+  font-size: $text-sm;
+  color: $text-muted;
+}
+
+.link-btn {
+  padding: 0;
+  background: none;
+  border: none;
+  color: $primary-text;
+  font: inherit;
+  font-size: $text-sm;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.alert--error .link-btn {
+  margin-left: $space-sm;
+  color: inherit;
+  text-decoration: underline;
+}
+
+.vehicle-grid {
+  @include gallery-grid(300px);
+}
+
+.vehicle-card {
+  @include card(0);
+  @include flex-col;
+  overflow: hidden;
+  box-shadow: 0 4px 6px shade(0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px shade(0.15);
+
+      .card-image-wrapper img {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.vehicle-card--skeleton {
+  height: 380px;
+  background: linear-gradient(90deg, tint(0.03), tint(0.07), tint(0.03));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.card-image-wrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: $bg-overlay;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+}
+
+.status-badge {
+  position: absolute;
+  top: $space-md;
+  right: $space-md;
+  padding: 0.3rem 0.75rem;
+  border-radius: $radius-full;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px shade(0.2);
+
+  @each $name, $bg, $fg in $status-colors {
+    &.#{$name} {
+      background-color: $bg;
+      color: $fg;
+    }
+  }
+}
+
+.card-content {
+  @include flex-col;
+  flex: 1;
+  padding: $space-lg;
+}
+
+.vehicle-header {
+  margin-bottom: $space-md;
+
+  .type-overline {
+    display: block;
+    margin-bottom: $space-xs;
+    font-size: $text-xs;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+  }
+
+  h3 {
+    font-size: $text-lg;
+    color: $text-primary;
+    margin-bottom: $space-xs;
+  }
+
+  .nickname {
+    margin-left: 0.4rem;
+    font-weight: 500;
+    color: $text-secondary;
+  }
+}
+
+.uic-number {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-family: $font-mono;
+  font-size: $text-base;
+  color: $text-muted;
+  background: tint(0.05);
+  border-radius: $radius-sm;
+}
+
+.vehicle-details {
+  flex: 1;
+  margin-bottom: $space-lg;
+}
+
+.detail-row {
+  @include flex(center, flex-start, 0.65rem);
+  margin-bottom: $space-sm;
+  font-size: 0.9rem;
+  color: $text-secondary;
+
+  i {
+    width: 16px;
+    text-align: center;
+    color: $text-muted;
+  }
+}
+
+.spotting-row {
+  @include flex(center, flex-start, 0.65rem);
+  margin-bottom: $space-md;
+  padding: $space-sm 0.75rem;
+  border-radius: $radius-md;
+  font-size: 0.85rem;
+  line-height: 1.3;
+
+  small {
+    font-size: $text-xs;
+    opacity: 0.85;
+  }
+
+  &.active-spot {
+    background-color: $success-bg;
+    border: 1px solid $success-border;
+    color: $success;
+  }
+
+  &.empty-spot {
+    background-color: tint(0.03);
+    border: 1px dashed $border;
+    color: $text-muted;
+  }
+}
+
+.pulsing-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  background-color: $success;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 alpha($success, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px alpha($success, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 alpha($success, 0);
+  }
+}
+
+.btn-primary-outline {
+  @include btn-base;
+  padding: 0.6rem;
+  background: transparent;
+  color: $primary-text;
+  border: 2px solid $primary;
+  border-radius: $radius-sm;
+  text-decoration: none;
+
+  &:hover {
+    background: $primary;
+    color: white;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $primary-border;
+    outline-offset: 2px;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.empty-state .btn-secondary {
+  margin-top: $space-md;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vehicle-card,
+  .card-image-wrapper img,
+  .vehicle-card--skeleton,
+  .pulsing-dot {
+    animation: none;
+    transition: none;
+  }
+}

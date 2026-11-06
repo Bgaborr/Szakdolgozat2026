@@ -1,0 +1,281 @@
+<div class="gallery-page">
+    <div class="page-header">
+        <div>
+            <h2>Közösségi Galéria fal</h2>
+            <p class="page-subtitle">Mozdonyok, kocsik és motorvonatok a közösség szemével.</p>
+        </div>
+        @if (auth.isLoggedIn()) {
+        <button type="button" class="btn-primary" (click)="openModal()">
+            <i class="bi bi-cloud-arrow-up-fill"></i> Kép feltöltése
+        </button>
+        }
+    </div>
+
+    @if (success() && !showModal()) { <div class="alert alert--success">{{ success() }}</div> }
+    @if (error() && !showModal()) { <div class="alert alert--error">{{ error() }}</div> }
+    <div class="filters" role="group" aria-label="Szűrés kategória szerint">
+        @for (f of filters; track f.value) {
+        <button type="button" class="chip" [class.active]="filter() === f.value"
+            [attr.aria-pressed]="filter() === f.value" (click)="setFilter(f.value)">
+            {{ f.label }} <span class="chip-count">{{ counts()[f.value] }}</span>
+        </button>
+        }
+    </div>
+
+    <div class="gallery-grid">
+        @if (loading()) { @for (n of skeletons; track n) {
+        <div class="tile tile--skeleton" aria-hidden="true"></div>
+        } } @else { @for (post of filteredPosts(); track post.id; let i = $index) {
+        <article class="tile">
+            <button type="button" class="tile-media" (click)="openLightbox(i)"
+                [attr.aria-label]="'Megnyitás nagyban: ' + post.title">
+                <img class="tile-bg" [src]="getImageUrl(post.image_path)" alt="" aria-hidden="true" loading="lazy"
+                    decoding="async" />
+                <img class="tile-img" [src]="getImageUrl(post.image_path)" [alt]="post.title" loading="lazy"
+                    decoding="async" />
+                <span class="tile-badge">{{ categoryLabel(post.vehicle_category) }}</span>
+            </button>
+
+            @if (canDelete(post)) {
+            <button type="button" class="delete-btn" (click)="askDelete(post)"
+                [attr.aria-label]="'Kép törlése: ' + post.title" title="Kép törlése">
+                <span class="material-symbols-outlined">cancel</span>
+            </button>
+            }
+
+            <div class="tile-body">
+                <h5>{{ post.title }}</h5>
+                @if (post.description) {
+                <p>{{ post.description }}</p>
+                }
+                <div class="tile-meta">
+                    <span class="author" [class.author--unknown]="!uploaderName(post)" [title]="'Feltöltő'">
+                        <span class="avatar">{{ initial(post) }}</span>{{ uploaderName(post) ?? 'Ismeretlen feltöltő' }}
+                    </span>
+                    <time>{{ post.created_at | date:'yyyy. MM. dd.' }}</time>
+                </div>
+            </div>
+        </article>
+        } @empty {
+        <div class="empty-state">
+            <i class="bi bi-images"></i>
+            @if (filter() === 'all') {
+            <h4>Még nincs feltöltött kép a galériában.</h4>
+            <p>Légy te az első, aki megoszt egy jó fogást!</p>
+            } @else {
+            <h4>Ebben a kategóriában még nincs kép.</h4>
+            <p>Válassz másik kategóriát, vagy tölts fel egyet.</p>
+            }
+        </div>
+        } }
+    </div>
+</div>
+
+@if (current(); as post) {
+<div class="lightbox" role="dialog" aria-modal="true" [attr.aria-label]="post.title" (click)="closeLightbox()">
+    <button type="button" class="lb-btn lb-close" (click)="closeLightbox()" aria-label="Bezárás">
+        <i class="bi bi-x-lg"></i>
+    </button>
+
+    @if (filteredPosts().length > 1) {
+    <button type="button" class="lb-btn lb-nav lb-prev" (click)="prev(); $event.stopPropagation()"
+        aria-label="Előző kép">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+    <button type="button" class="lb-btn lb-nav lb-next" (click)="next(); $event.stopPropagation()"
+        aria-label="Következő kép">
+        <i class="bi bi-chevron-right"></i>
+    </button>
+    }
+
+    <figure class="lb-figure" (click)="$event.stopPropagation()">
+        <img [src]="getImageUrl(post.image_path)" [alt]="post.title" />
+        <figcaption>
+            <div class="lb-head">
+                <h3>{{ post.title }}</h3>
+                <span class="lb-count">{{ (lightboxIndex() ?? 0) + 1 }} / {{ filteredPosts().length }}</span>
+            </div>
+            @if (post.description) {
+            <p>{{ post.description }}</p>
+            }
+            <div class="lb-meta">
+                <span><i class="bi bi-tag"></i> {{ categoryLabel(post.vehicle_category) }}</span>
+                <span><i class="bi bi-person-circle"></i> {{ uploaderName(post) ?? 'Ismeretlen feltöltő' }}</span>
+                <span><i class="bi bi-calendar3"></i> {{ post.created_at | date:'yyyy. MM. dd.' }}</span>
+                @if (canDelete(post)) {
+                <button type="button" class="lb-delete" (click)="askDelete(post)">
+                    <i class="bi bi-trash3"></i> Kép törlése
+                </button>
+                }
+            </div>
+        </figcaption>
+    </figure>
+</div>
+}
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="upload-title"
+        (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 id="upload-title">Kép feltöltése</h2>
+            <button type="button" class="modal-close" (click)="closeModal()" aria-label="Bezárás">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
+        @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+                <input id="gal-file" #picker type="file" class="sr-only" accept="image/jpeg,image/png,image/webp"
+                    (change)="onFileSelected($event)" />
+
+                @if (source(); as s) {
+                <div class="cropper">
+                    <div class="crop-frame" [class.panning]="panning()" [style.aspect-ratio]="frameAspect()"
+                        tabindex="0" role="group"
+                        aria-label="Kép kivágása: húzással mozgatható, a csúszkával nagyítható"
+                        (pointerdown)="onPointerDown($event)" (pointermove)="onPointerMove($event)"
+                        (pointerup)="onPointerUp()" (pointercancel)="onPointerUp()" (wheel)="onWheel($event)"
+                        (keydown)="onFrameKey($event)">
+                        @if (cropView(); as v) {
+                        <img class="crop-img" [src]="s.url" alt="" draggable="false" [style.width.%]="v.width"
+                            [style.left.%]="v.left" [style.top.%]="v.top" />
+                        }
+                        <span class="crop-grid" aria-hidden="true"></span>
+                        <span class="crop-hint" aria-hidden="true"><i class="bi bi-arrows-move"></i> Húzd a
+                            mozgatáshoz</span>
+                    </div>
+
+                    <div class="crop-controls">
+                        <div class="zoom">
+                            <button type="button" class="btn-icon" (click)="zoomBy(1 / 1.2)" [disabled]="zoom() <= 1"
+                                aria-label="Kicsinyítés"><i class="bi bi-zoom-out"></i></button>
+                            <input type="range" class="zoom-range" min="1" [max]="maxZoom" step="0.01" [value]="zoom()"
+                                (input)="onZoomInput($event)" aria-label="Nagyítás" />
+                            <button type="button" class="btn-icon" (click)="zoomBy(1.2)" [disabled]="zoom() >= maxZoom"
+                                aria-label="Nagyítás"><i class="bi bi-zoom-in"></i></button>
+                        </div>
+                        <div class="ratio-switch" role="radiogroup" aria-label="Képarány">
+                            @for (r of ratios; track r.label) {
+                            <button type="button" class="ratio-btn" role="radio"
+                                [class.active]="ratio().label === r.label"
+                                [attr.aria-checked]="ratio().label === r.label" (click)="setRatio(r)">{{ r.label
+                                }}</button>
+                            }
+                        </div>
+                    </div>
+
+                    @if (tooSmall()) {
+                    <p class="file-error">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        @if (zoom() > 1.01) { A kivágás felbontása túl kicsi, kicsinyítsd a nagyítást. } @else { A kép
+                        felbontása
+                        túl kicsi (legalább {{ minWidth }} px széles kivágás kell), válassz nagyobb képet. }
+                    </p>
+                    }
+
+                    <div class="crop-info">
+                        <div class="crop-meta">
+                            <span class="file-name" [title]="s.name">{{ s.name }}</span>
+                            @if (outSize(); as o) {
+                            <span class="file-spec">Eredeti: {{ s.width }}×{{ s.height }} · Feltöltött: {{ o.w }}×{{ o.h
+                                }} px</span>
+                            }
+                        </div>
+                        <div class="crop-actions">
+                            <button type="button" class="btn-secondary" (click)="picker.click()">
+                                <i class="bi bi-arrow-repeat"></i> Másik kép
+                            </button>
+                            <button type="button" class="btn-danger" (click)="clearFile()">
+                                <i class="bi bi-trash3"></i> Eltávolítás
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                } @else {
+                <label class="dropzone" for="gal-file" [class.dragover]="dragging()" (dragover)="onDragOver($event)"
+                    (dragleave)="dragging.set(false)" (drop)="onDrop($event)">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    <strong>Húzd ide a képet, vagy kattints a tallózáshoz</strong>
+                    <span>Bármilyen kép megfelel, a kivágást a következő lépésben állíthatod be. JPG, PNG, WebP · max.
+                        {{ maxSourceMb }} MB</span>
+                </label>
+                }
+
+                @if (fileError()) {
+                <p class="file-error"><i class="bi bi-exclamation-triangle-fill"></i> {{ fileError() }}</p>
+                }
+
+                <div class="field">
+                    <label for="gal-title">Kép címe</label>
+                    <input id="gal-title" type="text" formControlName="title" placeholder="pl. Naplemente a Szilivel" />
+                    @if (form.get('title')?.invalid && form.get('title')?.touched) {
+                    <span class="error-text">A cím megadása kötelező.</span>
+                    }
+                </div>
+
+                <div class="field">
+                    <label for="gal-desc">Leírás</label>
+                    <textarea id="gal-desc" formControlName="description" rows="3"
+                        placeholder="Hol és mikor készült a kép?"></textarea>
+                </div>
+
+                <div class="group">
+                    <span class="group-label" id="cat-label">Járműkategória</span>
+                    <div class="segmented" role="radiogroup" aria-labelledby="cat-label">
+                        @for (c of categories; track c.value) {
+                        <label class="segment" [class.active]="form.controls.vehicle_category.value === c.value">
+                            <input type="radio" class="sr-only" formControlName="vehicle_category" [value]="c.value" />
+                            {{ c.label }}
+                        </label>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary"
+                    [disabled]="form.invalid || !source() || tooSmall() || uploading()">
+                    {{ uploading() ? 'Feltöltés folyamatban...' : 'Feltöltés' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+@if (deleteTarget(); as target) {
+<div class="modal-overlay" (click)="cancelDelete()">
+    <div class="modal modal--sm" role="alertdialog" aria-modal="true" aria-labelledby="del-title"
+        aria-describedby="del-text" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 id="del-title">Kép törlése</h2>
+            <button type="button" class="modal-close" (click)="cancelDelete()" aria-label="Bezárás">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        @if (deleteError()) { <div class="alert alert--error">{{ deleteError() }}</div> }
+
+        <div class="modal-body">
+            <div class="delete-preview">
+                <img [src]="getImageUrl(target.image_path)" [alt]="target.title" />
+            </div>
+            <p id="del-text" class="confirm-text">
+                Biztosan törlöd a(z) <strong>{{ target.title }}</strong> című képet a galériából?
+                Ez a művelet nem vonható vissza.
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn-secondary" (click)="cancelDelete()" [disabled]="deleting()">Mégse</button>
+            <button type="button" class="btn-danger" (click)="confirmDelete()" [disabled]="deleting()">
+                {{ deleting() ? 'Törlés folyamatban...' : 'Törlés' }}
+            </button>
+        </div>
+    </div>
+</div>
+}

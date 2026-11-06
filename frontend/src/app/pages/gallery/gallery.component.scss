@@ -1,0 +1,676 @@
+@use 'styles/abstracts' as *;
+@use 'styles/gallery' as *;
+$on-image: #f8fafc;
+$on-image-muted: #cbd5e1;
+$glass: rgba(10, 12, 18, 0.55);
+$glass-hover: rgba(10, 12, 18, 0.8);
+$lightbox-bg: rgba(8, 10, 15, 0.92);
+$delete-bg: rgba(220, 38, 38, 0.9);
+$delete-bg-hover: #dc2626;
+
+.gallery-page {
+  @include page-container;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+}
+
+.chip {
+  @include btn-base;
+  padding: 0.4rem 0.9rem;
+  background: tint(0.04);
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: $radius-full;
+  font-size: $text-sm;
+  font-weight: 500;
+
+  .chip-count {
+    font-size: $text-xs;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    border-color: $border-hover;
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $primary-muted;
+    color: $primary-text;
+    border-color: $primary-border;
+  }
+}
+.gallery-grid {
+  @include gallery-grid(300px);
+}
+
+.tile {
+  @include card(0);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-4px);
+      border-color: $border-hover;
+      box-shadow: 0 14px 30px shade(0.2);
+    }
+  }
+}
+
+.tile-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  background: $bg-overlay;
+  cursor: zoom-in;
+
+  .tile-bg,
+  .tile-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .tile-bg {
+    object-fit: cover;
+    filter: blur(18px) saturate(1.15);
+    transform: scale(1.15);
+    opacity: 0.6;
+  }
+
+  .tile-img {
+    object-fit: contain;
+    transition: transform 0.6s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, shade(0.5), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $primary;
+    outline-offset: -3px;
+  }
+
+  @media (hover: hover) {
+    .tile:hover & {
+      .tile-img {
+        transform: scale(1.04);
+      }
+      &::after,
+      .tile-zoom {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.tile-badge {
+  position: absolute;
+  top: $space-sm;
+  left: $space-sm;
+  z-index: 1;
+  padding: 0.2rem 0.65rem;
+  border-radius: $radius-full;
+  background: $glass;
+  backdrop-filter: blur(6px);
+  color: $on-image;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tile-zoom {
+  position: absolute;
+  right: $space-sm;
+  bottom: $space-sm;
+  z-index: 1;
+  @include center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: $glass;
+  backdrop-filter: blur(6px);
+  color: $on-image;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.delete-btn {
+  position: absolute;
+  top: $space-sm;
+  right: $space-sm;
+  z-index: 2;
+  @include center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: $delete-bg;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: $transition;
+
+  &:hover {
+    background: $delete-bg-hover;
+  }
+
+  .tile:hover &,
+  .tile:focus-within & {
+    opacity: 1;
+  }
+  @media (hover: none) {
+    opacity: 1;
+  }
+}
+
+.tile-body {
+  padding: $space-md;
+
+  h5 {
+    font-size: $text-md;
+    font-weight: 600;
+    color: $text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p {
+    margin-top: $space-xs;
+    font-size: $text-sm;
+    line-height: 1.5;
+    color: $text-secondary;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.tile-meta {
+  @include flex(center, space-between, $space-sm);
+  margin-top: $space-md;
+  padding-top: $space-sm;
+  border-top: 1px solid $border;
+  font-size: $text-xs;
+  color: $text-muted;
+
+  .author {
+    @include flex(center, flex-start, 0.4rem);
+    min-width: 0;
+  }
+}
+
+.avatar {
+  @include center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: $primary-muted;
+  color: $primary-text;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+.tile--skeleton {
+  height: 260px;
+  background: linear-gradient(90deg, tint(0.03), tint(0.07), tint(0.03));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  @include center;
+  padding: $space-lg $space-md;
+  background: $lightbox-bg;
+  backdrop-filter: blur(6px);
+  animation: lb-fade 0.2s ease;
+
+  @include mobile {
+    padding: 3.5rem $space-sm $space-md;
+  }
+}
+
+.lb-figure {
+  @include flex-col($space-md);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+
+  img {
+    align-self: center;
+    max-width: 100%;
+    max-height: calc(100vh - 12rem);
+    max-height: calc(100dvh - 12rem);
+    object-fit: contain;
+    border-radius: $radius-md;
+    box-shadow: 0 20px 60px shade(0.6);
+  }
+
+  figcaption {
+    max-width: 900px;
+    width: 100%;
+    align-self: center;
+    color: $on-image-muted;
+  }
+
+  p {
+    margin-top: $space-xs;
+    font-size: $text-base;
+    line-height: 1.5;
+  }
+}
+
+.lb-head {
+  @include flex(baseline, space-between, $space-md);
+
+  h3 {
+    font-size: $text-lg;
+    font-weight: 600;
+    color: $on-image;
+  }
+}
+
+.lb-count {
+  flex-shrink: 0;
+  font-size: $text-sm;
+  color: $on-image-muted;
+}
+
+.lb-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs $space-md;
+  margin-top: $space-sm;
+  font-size: $text-sm;
+  color: $on-image-muted;
+
+  i {
+    margin-right: 0.3rem;
+  }
+}
+
+.lb-btn {
+  position: absolute;
+  z-index: 1;
+  @include center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: $glass;
+  color: $on-image;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: $glass-hover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $on-image;
+    outline-offset: 2px;
+  }
+}
+
+.lb-close {
+  top: $space-md;
+  right: $space-md;
+}
+
+.lb-nav {
+  top: 50%;
+  transform: translateY(-50%);
+
+  @include mobile {
+    top: auto;
+    bottom: $space-md;
+    transform: none;
+  }
+}
+
+.lb-prev {
+  left: $space-md;
+}
+
+.lb-next {
+  right: $space-md;
+}
+
+@keyframes lb-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-body {
+  @include flex-col($space-md);
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+.dropzone {
+  @include flex-col($space-xs);
+  align-items: center;
+  text-align: center;
+  padding: $space-xl $space-md;
+  border: 2px dashed $border-hover;
+  border-radius: $radius-lg;
+  background: tint(0.02);
+  color: $text-secondary;
+  cursor: pointer;
+  transition: $transition;
+
+  i {
+    font-size: 2.2rem;
+    color: $primary-text;
+  }
+
+  strong {
+    font-size: $text-base;
+    color: $text-primary;
+  }
+
+  span {
+    font-size: $text-xs;
+    color: $text-muted;
+    line-height: 1.5;
+  }
+
+  &:hover,
+  &.dragover {
+    border-color: $primary;
+    background: $primary-muted;
+  }
+}
+.sr-only:focus-visible + .dropzone {
+  border-color: $primary;
+  background: $primary-muted;
+  outline: 2px solid $primary;
+  outline-offset: 2px;
+}
+
+.cropper {
+  @include flex-col($space-sm);
+}
+.crop-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  background: $bg-overlay;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+
+  &.panning {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+.crop-img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.crop-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 33.1%,
+      rgba(255, 255, 255, 0.4) 33.1%,
+      rgba(255, 255, 255, 0.4) 33.5%,
+      transparent 33.5%
+    ),
+    linear-gradient(
+      to right,
+      transparent 66.5%,
+      rgba(255, 255, 255, 0.4) 66.5%,
+      rgba(255, 255, 255, 0.4) 66.9%,
+      transparent 66.9%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 33.1%,
+      rgba(255, 255, 255, 0.4) 33.1%,
+      rgba(255, 255, 255, 0.4) 33.5%,
+      transparent 33.5%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 66.5%,
+      rgba(255, 255, 255, 0.4) 66.5%,
+      rgba(255, 255, 255, 0.4) 66.9%,
+      transparent 66.9%
+    );
+
+  .crop-frame:hover &,
+  .crop-frame.panning &,
+  .crop-frame:focus-visible & {
+    opacity: 1;
+  }
+}
+
+.crop-hint {
+  position: absolute;
+  left: $space-sm;
+  bottom: $space-sm;
+  padding: 0.2rem 0.65rem;
+  border-radius: $radius-full;
+  background: $glass;
+  backdrop-filter: blur(6px);
+  color: $on-image;
+  font-size: $text-xs;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  .crop-frame.panning & {
+    opacity: 0;
+  }
+}
+
+.crop-controls {
+  @include flex(center, space-between, $space-md);
+  flex-wrap: wrap;
+}
+
+.zoom {
+  @include flex(center, flex-start, $space-xs);
+  flex: 1;
+  min-width: 200px;
+}
+
+.zoom-range {
+  flex: 1;
+  min-width: 0;
+  accent-color: $primary;
+  cursor: pointer;
+}
+
+.ratio-switch {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  background: $bg-overlay;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+}
+
+.ratio-btn {
+  @include btn-base;
+  padding: 0.3rem 0.8rem;
+  background: transparent;
+  color: $text-secondary;
+  border-radius: $radius-sm;
+  font-size: $text-sm;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $primary-muted;
+    color: $primary-text;
+    box-shadow: inset 0 0 0 1px $primary-border;
+  }
+}
+
+.crop-info {
+  @include flex(center, space-between, $space-sm);
+  flex-wrap: wrap;
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.crop-meta {
+  @include flex-col(2px);
+  flex: 1;
+  min-width: 0;
+
+  .file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $text-secondary;
+  }
+}
+
+.crop-actions {
+  display: flex;
+  gap: $space-sm;
+
+  button {
+    padding: 0.35rem 0.75rem;
+    font-size: $text-sm;
+  }
+}
+
+.file-error {
+  @include alert($error, $error-bg, $error-border);
+  font-size: $text-sm;
+  line-height: 1.5;
+}
+
+.group {
+  @include flex-col($space-xs);
+}
+
+.group-label {
+  font-size: $text-sm;
+  font-weight: 500;
+  color: $text-muted;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: $bg-overlay;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+}
+
+.segment {
+  padding: 0.5rem 0.25rem;
+  border-radius: $radius-sm;
+  text-align: center;
+  font-size: $text-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $primary-muted;
+    color: $primary-text;
+    box-shadow: inset 0 0 0 1px $primary-border;
+  }
+
+  &:focus-within {
+    outline: 2px solid $primary;
+    outline-offset: 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .tile-media .tile-img,
+  .lightbox,
+  .tile--skeleton {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,197 @@
+<div class="glossary-page">
+    <div class="page-header">
+        <div>
+            <h2>Vasúti Fogalomtár</h2>
+            @if (!loading() && total() > 0) {
+            <p class="page-subtitle">{{ total() }} fogalom {{ realCategories().length }} kategóriában</p>
+            }
+        </div>
+        @if (canEdit()) {
+        <button type="button" class="btn-primary" (click)="openModal()">
+            <i class="bi bi-plus-lg"></i> Új fogalom
+        </button>
+        }
+    </div>
+
+    <!-- Keresés és szűrés -->
+    <div class="toolbar">
+        <div class="search-box">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <input type="text" inputmode="search" autocomplete="off" aria-label="Keresés a fogalmak között"
+                placeholder="Keresés a fogalmak között (pl. csonkavágány)..." [ngModel]="searchQuery()"
+                (ngModelChange)="searchQuery.set($event)" />
+            @if (searchQuery()) {
+            <button type="button" class="clear-btn" (click)="searchQuery.set('')" aria-label="Keresés törlése">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            }
+        </div>
+
+        @if (categories().length > 0) {
+        <div class="chips" role="group" aria-label="Szűrés kategória szerint">
+            <button type="button" class="chip" [class.active]="selectedCategory() === ''"
+                [attr.aria-pressed]="selectedCategory() === ''" (click)="setCategory('')">
+                Összes <span class="chip-count">{{ queryCount() }}</span>
+            </button>
+            @for (c of categories(); track c.name) {
+            <button type="button" class="chip" [class.active]="selectedCategory() === c.name"
+                [class.chip--empty]="c.count === 0" [attr.aria-pressed]="selectedCategory() === c.name"
+                (click)="setCategory(c.name)">
+                {{ c.name }} <span class="chip-count">{{ c.count }}</span>
+            </button>
+            }
+        </div>
+        }
+
+        @if (hasFilters() && !loading()) {
+        <div class="result-bar">
+            <span>{{ filtered().length }} találat</span>
+            <button type="button" class="link-btn" (click)="clearFilters()">Szűrők törlése</button>
+        </div>
+        }
+    </div>
+
+    @if (loadError()) {
+    <div class="alert alert--error">
+        {{ loadError() }}
+        <button type="button" class="link-btn" (click)="loadGlossaries()">Újra</button>
+    </div>
+    }
+
+    <!-- Lista -->
+    @if (loading()) {
+    <div class="term-list" aria-hidden="true">
+        @for (n of skeletons; track n) {
+        <div class="skeleton-row"></div>
+        }
+    </div>
+    } @else { @for (group of groups(); track group.category) {
+    <section class="category">
+        <div class="category-head">
+            <h3>{{ group.category }}</h3>
+            <span class="count">{{ group.items.length }}</span>
+        </div>
+
+        <div class="term-list">
+            @for (item of group.items; track item.id) {
+            <article class="term" [class.open]="isOpen(item.id)">
+                <div class="term-row">
+                    <button type="button" class="term-toggle" [attr.aria-expanded]="isOpen(item.id)"
+                        [attr.aria-controls]="'def-' + item.id" (click)="toggle(item.id)">
+                        <span class="term-title">
+                            @for (s of highlight(item.term); track $index) { @if (s.match) {<mark>{{ s.text }}</mark>}
+                            @else
+                            {<span>{{ s.text }}</span>} }
+                        </span>
+                        @if (onlyInDefinition(item)) {
+                        <span class="hint-chip">a magyarázatban</span>
+                        }
+                        <i class="bi bi-chevron-down chevron" aria-hidden="true"></i>
+                    </button>
+
+                    @if (canEdit()) {
+                    <div class="term-actions">
+                        <button type="button" class="btn-icon" (click)="openModal(item)"
+                            [attr.aria-label]="'Szerkesztés: ' + item.term" title="Szerkesztés">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn-icon btn-icon--danger" (click)="deleteGlossary(item)"
+                            [attr.aria-label]="'Törlés: ' + item.term" title="Törlés">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                    }
+                </div>
+
+                <div class="term-body" [class.open]="isOpen(item.id)" [id]="'def-' + item.id"
+                    [attr.inert]="isOpen(item.id) ? null : ''">
+                    <div class="term-body-inner">
+                        <p class="term-def">
+                            @for (s of highlight(item.definition); track $index) { @if (s.match) {<mark>{{ s.text
+                                }}</mark>}
+                            @else {<span>{{ s.text }}</span>} }
+                        </p>
+                    </div>
+                </div>
+            </article>
+            }
+        </div>
+    </section>
+    } @empty {
+    <div class="empty-state">
+        <i class="bi bi-search empty-icon"></i>
+        @if (total() === 0) {
+        <h3>A fogalomtár még üres</h3>
+        <p>Még nem került fogalom a gyűjteménybe.</p>
+        @if (canEdit()) {
+        <button type="button" class="btn-primary" (click)="openModal()">
+            <i class="bi bi-plus-lg"></i> Az első fogalom felvétele
+        </button>
+        } } @else {
+        <h3>Nincs találat</h3>
+        <p>Nem találtunk a keresésnek megfelelő fogalmat.</p>
+        <button type="button" class="btn-secondary" (click)="clearFilters()">Szűrők törlése</button>
+        }
+    </div>
+    } }
+</div>
+
+<!-- Új / szerkesztett fogalom -->
+@if (isModalOpen()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="glossary-modal-title"
+        (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 id="glossary-modal-title">{{ isEditing() ? 'Fogalom szerkesztése' : 'Új fogalom hozzáadása' }}</h2>
+            <button type="button" class="modal-close" (click)="closeModal()" aria-label="Bezárás">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        @if (saveError()) {
+        <div class="alert alert--error">{{ saveError() }}</div>
+        }
+
+        <form #f="ngForm" (ngSubmit)="saveGlossary()">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label for="gl-category">Kategória</label>
+                    <input id="gl-category" type="text" name="category" [(ngModel)]="currentGlossary.category"
+                        placeholder="pl. Járművek, Informatika..." list="categoryList" autocomplete="off" />
+                    <datalist id="categoryList">
+                        @for (cat of realCategories(); track cat) {
+                        <option [value]="cat"></option>
+                        }
+                    </datalist>
+                </div>
+
+                <div class="field col-span-2">
+                    <label for="gl-term">Fogalom megnevezése</label>
+                    <input id="gl-term" type="text" name="term" required #term="ngModel"
+                        [(ngModel)]="currentGlossary.term" placeholder="pl. Fékkar" autocomplete="off" />
+                    @if (term.invalid && (term.touched || f.submitted)) {
+                    <span class="error-text">A megnevezés megadása kötelező.</span>
+                    }
+                </div>
+
+                <div class="field col-span-2">
+                    <label for="gl-definition">Részletes magyarázat</label>
+                    <textarea id="gl-definition" rows="6" name="definition" required #definition="ngModel"
+                        [(ngModel)]="currentGlossary.definition"
+                        placeholder="Írd le pontosan a jelentését..."></textarea>
+                    @if (definition.invalid && (definition.touched || f.submitted)) {
+                    <span class="error-text">A magyarázat megadása kötelező.</span>
+                    }
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="f.invalid || saving()">
+                    {{ saving() ? 'Mentés folyamatban...' : 'Mentés' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+}

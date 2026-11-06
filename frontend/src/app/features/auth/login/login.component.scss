@@ -1,0 +1,4 @@
+@use 'styles/abstracts' as *;
+@use 'styles/auth' as *;
+
+@include auth-page;

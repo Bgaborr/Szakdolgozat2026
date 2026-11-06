@@ -1,0 +1,62 @@
+@use 'abstracts' as *;
+
+// Rács: a kártyák automatikusan sorokba törnek
+@mixin gallery-grid($min: 320px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+  gap: $space-lg;
+}
+
+// Kártya: kép + tartalom. A komponens a saját különbségeit
+// (hover-effekt, gombok) az @include UTÁN írja, azok felülírják az alapot.
+@mixin gallery-card {
+  background: tint(0.02);
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: $transition;
+
+  &:hover {
+    background: tint(0.04);
+  }
+
+  img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid tint(0.04);
+  }
+
+  .card-content {
+    padding: $space-lg;
+    flex-grow: 1;
+
+    h5 {
+      font-size: $text-md;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: $space-sm;
+    }
+
+    .badge {
+      display: inline-block;
+      background: $primary-muted;
+      color: $primary-text;
+      padding: 0.35rem 0.75rem;
+      border-radius: $radius-full;
+      font-size: $text-xs;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+// A kártya alján lévő sáv (lábléc vagy admin gombsor)
+@mixin gallery-card-bar {
+  display: flex;
+  padding: $space-md $space-lg;
+  background: shade(0.15);
+  border-top: 1px solid tint(0.02);
+}

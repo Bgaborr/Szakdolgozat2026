@@ -1,0 +1,114 @@
+<div class="users-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Felhasználók</h1>
+      <p class="page-subtitle">Felhasználók kezelése és szerepkörök kiosztása</p>
+    </div>
+    <button class="btn-primary" (click)="openCreate()">+ Új felhasználó</button>
+  </div>
+  
+  @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
+  @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+  
+  <div class="table-wrapper">
+    @if (loading()) {
+    <div class="loading">Betöltés...</div>
+    } @else if (users().length === 0) {
+    <div class="empty">Nincsenek felhasználók.</div>
+    } @else {
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Név</th>
+          <th>Email</th>
+          <th>Szerepkörök</th>
+          <th class="text-end">Műveletek</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+        <tr>
+          <td class="td-id">{{ user.id }}</td>
+          <td class="td-name">{{ user.name }}</td>
+          <td class="td-email">{{ user.email }}</td>
+          <td class="td-roles">
+            @if (user.roles.length === 0) {
+            <span class="badge badge--empty">Nincs szerepkör</span>
+            }
+            @for (role of user.roles.slice(0,2); track $index) {
+            <span class="badge" [class]="'badge--' + (role.name || role)">
+              {{ getRoleLabel(role) }}
+            </span>
+            }
+            @if (user.roles.length>3) {
+            <span class="badge">További +{{user.roles.length-2}}</span>
+            }
+          </td>
+          <td class="td-actions">
+            @if (user.id !== auth.getUserId()) {
+            <button class="btn-edit" (click)="openEdit(user)">Jogosultságok szerkesztése</button>
+            <button class="btn-danger" (click)="deleteUser(user)">Törlés</button>
+            } @else {
+            <span class="badge text-muted">Ez a te fiókod</span>
+            }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
+  </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ editingUser() ? 'Felhasználó szerkesztése' : 'Új felhasználó' }}</h2>
+      <button class="modal-close" (click)="closeModal()">&times;</button>
+    </div>
+    
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-body">
+      @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+      
+      <div class="field">
+        <label>Név</label>
+        <input type="text" formControlName="name" placeholder="Teljes név" />
+      </div>
+      
+      <div class="field">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="email@example.com" />
+      </div>
+      
+      <div class="field">
+        <label>
+          Jelszó
+          @if (editingUser()) { <span class="label-hint">(hagyja üresen ha nem változtat)</span> }
+        </label>
+        <input type="password" formControlName="password" placeholder="••••••••" />
+      </div>
+      
+      <div class="field">
+        <label>Szerepkörök</label>
+        <div class="role-checkboxes">
+          @for (role of roles(); track role.id) {
+          <label class="role-checkbox" [class.active]="hasRole(role.name)">
+            <input type="checkbox" [checked]="hasRole(role.name)" (change)="toggleRole(role.name)" />
+            {{ role.label }}
+          </label>
+          }
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+        <button type="submit" class="btn-primary" [disabled]="form.invalid">
+          {{ editingUser() ? 'Mentés' : 'Létrehozás' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}

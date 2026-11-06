@@ -1,0 +1,255 @@
+@use 'styles/abstracts' as *;
+:host {
+  @include tablet {
+    display: contents;
+  }
+}
+
+.sidebar {
+  width: $sidebar-width;
+  height: calc(100vh - $navbar-height);
+  background: $side-bg;
+  border-right: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width 0.3s ease-in-out;
+  overflow-x: hidden;
+  white-space: nowrap;
+  z-index: $z-sidebar;
+
+  &.collapsed {
+    width: $sidebar-collapsed;
+
+    .nav-label {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .nav-group-label {
+      text-align: center;
+      padding: 0;
+
+      .label-short {
+        display: inline-block;
+        font-size: 0.8rem;
+      }
+      .label-long {
+        display: none;
+      }
+    }
+  }
+
+  // Mobil nézet: kihúzható panel, a hamburger gomb nyitja/zárja
+  @include tablet {
+    position: fixed;
+    top: $navbar-height;
+    left: 0;
+    width: $sidebar-mobile-width;
+    max-width: $sidebar-mobile-max;
+    height: calc(100vh - $navbar-height); // fallback régebbi böngészőknek
+    height: calc(100dvh - $navbar-height); // a tényleges látható magassághoz igazodik
+    border-bottom: none;
+    box-shadow: 4px 0 20px shade(0.3);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-in-out;
+    z-index: $z-sidebar-mobile;
+    overflow: hidden;
+
+    &.mobile-open {
+      transform: translateX(0);
+    }
+
+    // Ha desktopon összecsukott állapotból váltunk mobil nézetre,
+    // a fiók akkor is teljes szélességű és feliratos maradjon.
+    &.collapsed {
+      width: $sidebar-mobile-width;
+      max-width: $sidebar-mobile-max;
+
+      .nav-label {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-group-label {
+        text-align: left;
+        padding: 0 0.6rem;
+
+        .label-short {
+          display: none;
+        }
+        .label-long {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.sidebar-backdrop {
+  display: none;
+
+  @include tablet {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: shade(0.5);
+    z-index: $z-backdrop;
+    animation: sidebar-fade-in 0.2s ease;
+  }
+}
+
+@keyframes sidebar-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sidebar-mobile-header {
+  display: none;
+
+  @include tablet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem $space-md;
+    border-bottom: 1px solid $border;
+    flex-shrink: 0;
+  }
+}
+
+.sidebar-mobile-title {
+  font-weight: 700;
+  font-size: $text-md;
+  color: $text-primary;
+}
+
+.sidebar-close-btn {
+  @include center;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-sm;
+  background: tint(0.05);
+  border: none;
+  color: $text-muted;
+  font-size: $text-md;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: tint(0.1);
+    color: $text-primary;
+  }
+}
+
+.sidebar-body {
+  flex: 1;
+  min-width: 0;
+  min-height: 0; // hogy a footer sose szoruljon ki a látható területről
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.75rem $space-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.nav-group-label {
+  display: block;
+  color: $text-muted;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 0.6rem;
+  margin-bottom: $space-xs;
+  white-space: nowrap;
+
+  .label-short {
+    display: none;
+  }
+  .label-long {
+    display: inline-block;
+  }
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: $radius-md;
+  color: $text-secondary;
+  text-decoration: none;
+  font-size: $text-base;
+  font-weight: 500;
+  transition: $transition;
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 100%;
+
+  &:hover {
+    background: tint(0.05);
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $primary-muted;
+    color: $primary-text;
+  }
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  flex-shrink: 0;
+  padding: $space-sm;
+  border-top: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  // iPhone-on a home-indikátor ne takarja a lábléc gombjait
+  @include tablet {
+    padding-bottom: max($space-sm, env(safe-area-inset-bottom));
+  }
+}
+
+.collapse-btn {
+  @include center;
+  width: 100%;
+  padding: 0.4rem;
+  background: tint(0.03);
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  color: $text-muted;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: tint(0.08);
+    color: $text-primary;
+  }
+
+  // Mobilon a nyitás/zárás a hamburger + backdrop feladata,
+  // az összecsukás nem értelmezhető
+  @include tablet {
+    display: none;
+  }
+}

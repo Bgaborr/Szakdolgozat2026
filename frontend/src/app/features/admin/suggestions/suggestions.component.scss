@@ -1,0 +1,143 @@
+@use 'styles/abstracts' as *;
+
+.suggestions-page {
+  @include page-container($page-width-wide);
+}
+
+// ── Táblázat cellák ───────────────────────────────────────────────
+.uic-text {
+  display: inline-block;
+  margin-top: $space-sm;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.date-cell {
+  color: $text-muted;
+  font-size: $text-sm;
+  white-space: nowrap;
+}
+.stacked-actions {
+  > * {
+    display: flex;
+    width: 100%;
+  }
+
+  > * + * {
+    margin-left: 0;
+    margin-top: $space-sm;
+  }
+}
+
+// ── Jármű-kategória badge ─────────────────────────────────────────
+// Az alapot a globális .badge adja, itt csak a színek. A korábbi tömör
+// színek helyett a szerepkör-badge-ekkel egységes halvány stílus.
+.badge {
+  &--car {
+    @include badge($primary-text, $primary-muted);
+  }
+  &--locomotive {
+    @include badge($warning, $warning-bg);
+  }
+  &--mu {
+    @include badge($info, $info-bg);
+  }
+}
+
+// ── Diff kártyák (régi vs új) ─────────────────────────────────────
+.diff-cell {
+  min-width: 500px;
+}
+
+.diff-container {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-md;
+
+  @include breakpoint(900px) {
+    flex-direction: column;
+  }
+}
+
+.data-box {
+  flex: 1;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  font-size: $text-sm;
+
+  .box-header {
+    padding: 0.5rem $space-md;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  pre {
+    padding: $space-md;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    font-family: $font-mono;
+  }
+
+  &.old-data {
+    border-color: $error-border;
+
+    .box-header {
+      background-color: $error-bg-hover;
+      color: $error;
+    }
+    pre {
+      background-color: alpha($error, 0.05);
+      color: $diff-old-text;
+    }
+  }
+
+  &.new-data {
+    border-color: $success-border;
+
+    .box-header {
+      background-color: $success-bg-hover;
+      color: $success;
+    }
+    pre {
+      background-color: alpha($success, 0.05);
+      color: $diff-new-text;
+    }
+  }
+}
+
+.source-info {
+  @include flex(center, flex-start, $space-sm);
+  flex-wrap: wrap;
+  padding: $space-sm $space-md;
+  font-size: 0.85rem;
+  color: $text-secondary;
+  background: tint(0.03);
+  border-left: 3px solid $primary;
+  border-radius: $radius-sm;
+
+  strong {
+    color: $text-primary;
+  }
+}
+
+.source-badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: $radius-full;
+  font-weight: 500;
+  color: $text-primary;
+  background: tint(0.1);
+}
+
+.source-link {
+  margin-left: auto;
+  color: $primary-text;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

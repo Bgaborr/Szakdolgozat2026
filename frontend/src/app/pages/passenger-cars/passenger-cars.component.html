@@ -1,0 +1,208 @@
+<div class="passenger-cars-page">
+    <div class="page-header">
+        @if (authService.hasPermission('edit-vehicles')) {
+        <h2>Személykocsik (Admin felület)</h2>
+        <button id="create-car" class="btn-primary" (click)="openCreate()">+ Új személykocsi</button>
+        }
+        @else {
+        <h2>Személykocsik</h2>
+        }
+    </div>
+
+    @if (success() && !showModal()) { <div class="alert alert--success">{{ success() }}</div> }
+    @if (error() && !showModal()) { <div class="alert alert--error">{{ error() }}</div> }
+
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Személykocsik betöltése...</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>UIC Pályaszám</th>
+                    <th>Típus</th>
+                    <th>Státusz</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (car of cars(); track car.id) {
+                <tr [class.row-inactive]="!car.is_active">
+                    <td class="td-city">{{ car.formatted_uic }}</td>
+                    <td>{{ car.type?.category?.name }} ({{ car.type?.type_number }})</td>
+                    <td>
+                        <span [class]="car.is_active ? 'text-success' : 'text-danger'">
+                            {{ car.is_active ? 'Üzemképes' : 'Javításra vár' }}
+                        </span>
+                    </td>
+                    <td class="td-actions">
+                        <button class="btn-secondary" (click)="openDetails(car)">Részletek</button>
+                        @if (authService.hasPermission('edit-vehicles')) {
+                        <button class="btn-edit" (click)="openEdit(car)">Szerkesztés</button>
+                        <button class="btn-danger" (click)="deleteCar(car)">Törlés</button>
+                        }
+                        @else if(authService.isLoggedIn()) {
+                        <button class="btn-suggest" (click)="openEdit(car)"> Javaslat</button>
+                        }
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="4" class="empty">Nincs rögzített személykocsi.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editingCar() ? 'Személykocsi szerkesztése' : 'Új személykocsi' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+
+        @if (success() && showModal()) { <div class="alert alert--success">{{ success() }}</div> }
+        @if (error() && showModal()) { <div class="alert alert--error">{{ error() }}</div> }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label for="uic_input">UIC Pályaszám</label>
+                    <input id="uic_input" type="text" formControlName="uic" placeholder="Pl.: 50552005001-2">
+                </div>
+                <div class="field col-span-2">
+                    <label for="type_id">Kocsi Típusa</label>
+                    <select id="type_id" formControlName="passenger_car_type_id" class="form-select">
+                        <option [ngValue]="null">-- Válassz típust --</option>
+                        @for (type of types(); track type.id) {
+                        <option [ngValue]="type.id">{{ type.type_number }} - {{ type?.category?.name}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="home_depot_id">Honállomás</label>
+                    <select id="home_depot_id" formControlName="home_depot_id" class="form-select">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="service_location_id">Honállomás KHT</label>
+                    <select id="service_location_id" formControlName="service_location_id" class="form-select">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="next_rev_date">Következő Rev. (KREV)</label>
+                    <input id="next_rev_date" type="date" formControlName="next_rev_date">
+                </div>
+                <div class="field col-span-2 checkbox-group">
+                    <input type="checkbox" formControlName="is_active" id="is_active_car">
+                    <label for="is_active_car">A jármű jelenleg aktív (Active)</label>
+                </div>
+                <div class="field col-span-2">
+                    <label for="comment">Megjegyzés</label>
+                    <textarea id="comment" formControlName="comment" rows="3"></textarea>
+                </div>
+
+                @if (!authService.hasPermission('edit vehicles')) {
+                <div class="field col-span-2">
+                    <hr>
+                </div>
+                <div class="field col-span-2">
+                    <label>Módosítás forrása</label>
+                    <select formControlName="source" class="form-select">
+                        <option value="saját forrás">Saját forrás (Saját észlelés / fotó)</option>
+                        <option value="más forrás">Más forrás (Hivatalos irat, weboldal stb.)</option>
+                    </select>
+                </div>
+                @if (form.get('source')?.value === 'más forrás') {
+                <div class="field col-span-2">
+                    <label>Forrás megnevezése / Linkje</label>
+                    <input type="text" formControlName="source_link"
+                        placeholder="Pl.: vagonweb.cz linkje, vagy határozat száma...">
+                </div>
+                }
+                }
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+@if (showDetails()) {
+<div class="modal-overlay" (click)="closeDetails()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Személykocsi részletes információk</h2>
+            <button class="modal-close" (click)="closeDetails()">&times;</button>
+        </div>
+        <div class="modal-body form-grid">
+            <div class="field col-span-2">
+                <label for="formatted_uic_detail">UIC Pályaszám</label>
+                <input id="formatted_uic_detail" type="text" readonly [value]="selectedCar()?.formatted_uic"
+                    class="readonly-input">
+            </div>
+            <div class="field col-span-2">
+                <label for="type_detail">Kocsi Típusa</label>
+                <input id="type_detail" type="text" readonly
+                    [value]="(selectedCar()?.type?.type_number || '') + ' - ' + (selectedCar()?.type?.category?.name || '')"
+                    class="readonly-input">
+            </div>
+            <div class="field">
+                <label for="home_depot_detail">Honállomás</label>
+                <input id="home_depot_detail" type="text" readonly
+                    [value]="selectedCar()?.home_depot?.name || 'Nincs megadva'" class="readonly-input">
+            </div>
+            <div class="field">
+                <label for="service_location_detail">Honos KTH</label>
+                <input id="service_location_detail" type="text" readonly
+                    [value]="selectedCar()?.service_location?.name || 'Nincs megadva'" class="readonly-input">
+            </div>
+            <div class="field">
+                <label for="next_rev_date_detail">Következő Rev. (KREV)</label>
+                <input id="next_rev_date_detail" type="text" readonly
+                    [value]="selectedCar()?.next_rev_date || 'Nincs adat'" class="readonly-input">
+            </div>
+            <div class="field">
+                <label for="status_detail">Státusz</label>
+                <input id="status_detail" type="text" readonly
+                    [value]="selectedCar()?.is_active ? 'Üzemképes (Aktív)' : 'Javításra vár (Inaktív)'"
+                    [class]="selectedCar()?.is_active ? 'text-success readonly-input' : 'text-danger readonly-input'">
+            </div>
+            <div class="field">
+                <label for="vmax_field">Engedélyezett maximális sebesség</label>
+                <input id="vmax_field" type="text" readonly [value]="(selectedCar()?.vmax || 0) + ' km/h'"
+                    class="readonly-input">
+            </div>
+            <div class="field">
+                <label for="numberofseats">Ülőhelyek száma</label>
+                <input id="numberofseats" type="text" readonly
+                    [value]="selectedCar()?.type?.number_of_seats || 'Nincs adat'" class="readonly-input">
+            </div>
+            <div class="field col-span-2">
+                <label for="comment_detail">Megjegyzés</label>
+                <textarea id="comment_detail" readonly [value]="selectedCar()?.comment || 'Nincs megjegyzés'"
+                    class="readonly-input" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-secondary" (click)="closeDetails()">Bezárás</button>
+        </div>
+    </div>
+</div>
+}

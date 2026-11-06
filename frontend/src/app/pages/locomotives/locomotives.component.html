@@ -1,0 +1,182 @@
+<div class="locomotive-page">
+    <div class="page-header">
+        @if (authservice.hasPermission("edit-vehicles")) {
+        <h2>Mozdonyok (Admin felület)</h2>
+        <button class="btn-primary" (click)="openCreate()">+ Új mozdony</button>
+        }
+        @else {
+        <h2>Mozdonyok</h2>
+        }
+    </div>
+
+    @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
+    @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Mozdonyok betöltése...</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>UIC Pályaszám</th>
+                    <th>Típus</th>
+                    <th>Státusz</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (loc of locomotives(); track loc.id) {
+                <tr [class.row-inactive]="!loc.is_active">
+                    <td class="td-city">{{ loc.formatted_uic }}</td>
+                    <td>{{ loc.type?.name || '-' }}</td>
+                    <td>
+                        <span [class]="loc.is_active ? 'text-success' : 'text-danger'">
+                            {{ loc.is_active ? 'Üzemképes' : 'Selejtezésre vár' }}
+                        </span>
+                    </td>
+                    <td class="td-actions">
+                        <button class="btn-secondary" (click)="openDetails(loc)">Részletek</button>
+                        @if (authservice.hasPermission("edit-vehicles")) {
+                        <button class="btn-edit" (click)="openEdit(loc)">Szerkesztés</button>
+                        <button class="btn-danger" (click)="deleteLoc(loc)">Törlés</button>
+                        } @else if(authservice.isLoggedIn()){
+                        <button class="btn-suggest" (click)="suggestLoc(loc)"> Javaslat</button>
+                        }
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="4" class="empty">Nincs rögzített mozdony.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editingLoc() ? (authservice.hasPermission("edit-vehicles") ? 'Mozdony szerkesztése' : 'Módosítási javaslat') : 'Új mozdony' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+        
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label>UIC Pályaszám</label>
+                    <input type="text" formControlName="uic" placeholder="Pl.: 50552005001-2">
+                </div>
+                
+                <div class="field col-span-2">
+                    <label>Mozdony Típusa</label>
+                    <select formControlName="locomotive_type_id" class="form-select">
+                        <option [ngValue]="null">-- Válassz típust --</option>
+                        @for (type of types(); track type.id) {
+                        <option [ngValue]="type.id">{{ type.type_number }} - {{ type.name }}</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label>Honállomás</label>
+                    <select formControlName="service_location_id" class="form-select">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="field col-span-2 checkbox-group">
+                    <input type="checkbox" formControlName="is_active" id="is_active_loc">
+                    <label for="is_active_loc">A jármű jelenleg aktív (Active)</label>
+                </div>
+                
+                @if (!authservice.hasPermission('edit-vehicles')) {
+                <div class="field col-span-2">
+                    <hr>
+                </div>
+                
+                <div class="field col-span-2">
+                    <label>Módosítás forrása</label>
+                    <select formControlName="source" class="form-select">
+                        <option value="saját forrás">Saját forrás (Saját észlelés / fotó)</option>
+                        <option value="más forrás">Más forrás (Hivatalos irat, weboldal stb.)</option>
+                    </select>
+                </div>
+                
+                @if (form.get('source')?.value === 'más forrás') {
+                <div class="field col-span-2">
+                    <label>Forrás megnevezése / Linkje</label>
+                    <input type="text" formControlName="source_link" placeholder="Pl.: hbweb.hu linkje...">
+                </div>
+                }
+                }
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+@if (showDetails()) {
+<div class="modal-overlay" (click)="closeDetails()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>Mozdony részletes információk</h2>
+            <button class="modal-close" (click)="closeDetails()">&times;</button>
+        </div>
+        
+        <form [formGroup]="form">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label>UIC Pályaszám</label>
+                    <input type="text" formControlName="uic" readonly class="readonly-input">
+                </div>
+                
+                <div class="field col-span-2">
+                    <label>Mozdony Típusa</label>
+                    <select formControlName="locomotive_type_id" class="form-select readonly-input">
+                        <option [ngValue]="null">-- Válassz típust --</option>
+                        @for (type of types(); track type.id) {
+                        <option [ngValue]="type.id">{{ type.type_number }} - {{ type.name }}</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label>Honállomás</label>
+                    <select formControlName="service_location_id" class="form-select readonly-input">
+                        <option [ngValue]="null">Nincs</option>
+                        @for (loc of locations(); track loc.id) {
+                        <option [ngValue]="loc.id">{{ loc.name }}</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="field col-span-2 checkbox-group readonly-input">
+                    <input type="checkbox" formControlName="is_active" id="is_active_loc_detail">
+                    <label for="is_active_loc_detail">A jármű jelenleg aktív (Active)</label>
+                </div>
+                
+                <div class="field">
+                    <label for="vmax_field_loc">Engedélyezett maximális sebesség</label>
+                    <input id="vmax_field_loc" type="text" readonly [value]="(selectedLoc()?.type?.vmax || 0) + ' km/h'" class="readonly-input">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeDetails()">Bezárás</button>
+            </div>
+        </form>
+    </div>
+</div>
+}

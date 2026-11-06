@@ -1,0 +1,115 @@
+<div class="roles-page">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Szerepkörök</h1>
+            <p class="page-subtitle">Szerepkörök kezelése</p>
+        </div>
+        <button class="btn-primary" (click)="openCreate()">
+            + Új szerepkör
+        </button>
+    </div>
+
+    @if (success()) {
+    <div class="alert alert--success">{{ success() }}</div>
+    }
+    @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+    }
+
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Betöltés...</div>
+        } @else if (roles().length === 0) {
+        <div class="empty">Nincsenek szerepkörök.</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Név</th>
+                    <th>Leírás</th>
+                    <th>Jogosultságok</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (role of roles(); track role.id) {
+                <tr>
+                    <td class="td-id">{{ role.id }}</td>
+                    <td class="td-name">{{ role.name }}</td>
+                    <td class="td-label">{{ role.label }}</td>
+                    <td class="td-permissions">
+                        @if (role.permissions && role.permissions.length > 0) {
+                        <div class="permission-list">
+                            @for (perm of role.permissions.slice(0,2); track perm) {
+                            <span class="badge">{{ getPermissionDescription(perm) }}</span>
+                            }
+                            @if (role.permissions.length>3) {
+                            <span class="badge">További + {{role.permissions.length-2}}</span>
+                            }
+                            @else {
+                            <span class="badge">{{ getPermissionDescription(role.permissions[2]) }}</span>
+                            }
+                        </div>
+                        } @else {
+                        <span class="empty-text">Nincs jogosultság</span>
+                        }
+                    </td>
+                    <td class="td-actions">
+                        <button class="btn-edit" (click)="openEdit(role)">Szerkesztés</button>
+                        <button class="btn-danger" (click)="deleteRole(role)">Törlés</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editingRole() ? 'Szerepkör szerkesztése' : 'Új szerepkör' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+        
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-body">
+            @if (error()) {
+            <div class="alert alert--error">{{ error() }}</div>
+            }
+            
+            <div class="field">
+                <label>Név (Kód)</label>
+                <input type="text" formControlName="name" placeholder="pl.: ADMIN" />
+            </div>
+            
+            <div class="field">
+                <label>Leírás</label>
+                <input type="text" formControlName="label" placeholder="pl.: Rendszergazda" />
+            </div>
+            
+            <div class="field">
+                <label>Jogosultságok</label>
+                <div class="role-checkboxes">
+                    @for (perm of permissions(); track perm.id) {
+                    <label class="role-checkbox" [class.active]="hasPermission(perm.name)">
+                        <input type="checkbox" [checked]="hasPermission(perm.name)"
+                            (change)="togglePermission(perm.name)" />
+                        {{ perm.description || perm.name }}
+                    </label>
+                    }
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">
+                    {{ editingRole() ? 'Mentés' : 'Létrehozás' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+}

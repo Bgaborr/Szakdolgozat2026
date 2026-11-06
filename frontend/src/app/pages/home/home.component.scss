@@ -1,0 +1,113 @@
+@use 'styles/abstracts' as *;
+$hero-title: #fbbf24;
+$hero-text: #e2e8f0;
+
+.home-page {
+  margin: calc(-1 * var(--content-pad));
+  min-height: calc(100vh - $navbar-height);
+  @include flex-col;
+  background: $bg-base;
+}
+
+.hero-banner {
+  @include center;
+  width: 100%;
+  min-height: 55vh;
+  padding: $space-xl $space-md;
+  text-align: center;
+  background-image:
+    linear-gradient(to bottom, shade(0.6), shade(0.55) 65%, $bg-base),
+    url('../../../assets/images/hatter.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-content {
+  max-width: 900px;
+  animation: slideUp 0.8s ease-out;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: $hero-title;
+    text-shadow: 0 4px 15px shade(0.8);
+    line-height: 1.2;
+    margin-bottom: $space-md;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+    @include mobile {
+      font-size: 1.8rem;
+    }
+  }
+
+  .subtitle {
+    font-size: $text-lg;
+    color: $hero-text;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 8px shade(0.6);
+
+    @include mobile {
+      font-size: $text-base;
+    }
+  }
+}
+
+.intro-section {
+  @include flex(flex-start, center);
+  flex: 1;
+  padding: 0 $space-md $space-xl;
+  position: relative;
+  z-index: 10;
+}
+
+.intro-card {
+  @include card($space-xl);
+  max-width: 800px;
+  margin-top: -4rem;
+  text-align: center;
+  border-top: 4px solid $primary;
+  box-shadow: 0 10px 30px shade(0.2);
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: $text-secondary;
+    margin-bottom: $space-md;
+    text-align: justify;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include mobile {
+      font-size: $text-md;
+      text-align: left;
+    }
+  }
+}
+
+.home-footer {
+  background: $bg-surface;
+  border-top: 1px solid $border;
+  padding: $space-lg $space-md;
+  text-align: center;
+
+  p {
+    color: $text-muted;
+    font-size: $text-sm;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

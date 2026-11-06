@@ -1,0 +1,84 @@
+<div class="permissions-page">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Jogosultságok</h1>
+            <p class="page-subtitle">Jogosultságok kezelése</p>
+        </div>
+        <button class="btn-primary" (click)="openCreate()">
+            + Új jogosultság
+        </button>
+    </div>
+    
+    @if (success()) {
+    <div class="alert alert--success">{{ success() }}</div>
+    }
+    @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+    }
+    
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Betöltés...</div>
+        } @else if (permission().length === 0) {
+        <div class="empty">Nincsenek jogosultságok.</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Név</th>
+                    <th>Leírás</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of permission(); track item.id) {
+                <tr>
+                    <td class="td-id">{{ item.id }}</td>
+                    <td class="td-name">{{ item.name }}</td>
+                    <td class="td-description">{{ item.description }}</td>
+                    <td class="td-actions">
+                        <button class="btn-edit" (click)="openEdit(item)">Szerkesztés</button>
+                        <button class="btn-delete" (click)="deletePermissions(item)">Törlés</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editingPermission() ? 'Jogosultság szerkesztése' : 'Új jogosultság' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+        
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-body">
+            @if (error()) {
+            <div class="alert alert--error">{{ error() }}</div>
+            }
+            
+            <div class="field">
+                <label>Név</label>
+                <input type="text" formControlName="name" placeholder="Teljes név" />
+            </div>
+            
+            <div class="field">
+                <label>Leírás</label>
+                <input type="text" formControlName="description" placeholder="Leírás" />
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">
+                    {{ editingPermission() ? 'Mentés' : 'Létrehozás' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+}

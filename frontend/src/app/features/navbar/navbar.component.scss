@@ -1,0 +1,137 @@
+@use 'styles/abstracts' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  height: $navbar-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $space-lg;
+  background-color: $nav-bg;
+  border-bottom: 1px solid $border;
+
+  // Eddig ez a szabály a globálisban élt és sosem érvényesült
+  @include tablet {
+    padding: 0 $space-md;
+  }
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  min-width: 0; // hogy a logo-text zsugorodni/eltűnni tudjon kis képernyőn
+}
+
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-right: $space-sm;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  border-radius: $radius-md;
+  color: $nav-text;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: static-tint(0.08);
+  }
+
+  @include tablet {
+    display: flex;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.logo-icon {
+  height: 36px; // fix magasság az 5vh helyett a reszponzivitás miatt
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  color: $nav-text;
+  font-weight: 700;
+  font-size: $text-md;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  // A hamburger gombbal együtt jelenik meg / tűnik el
+  @include tablet {
+    display: none;
+  }
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.user-avatar {
+  @include center;
+  width: 34px;
+  height: 34px;
+  background: $primary;
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.user-name {
+  color: $nav-text;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: $radius-md;
+  color: $nav-text-muted;
+  text-decoration: none;
+  font-size: $text-sm;
+  font-weight: 500;
+  transition: $transition;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    color: $nav-text;
+    background: static-tint(0.08);
+  }
+}
