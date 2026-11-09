@@ -1,10 +1,3 @@
-// ================================================================
-// app.component.scss
-// A shell elrendezése (navbar alatt: sidebar + tartalom).
-// A .shell és a .main-content EGYETLEN helyen él, a reszponzív
-// viselkedésük is itt van (nincs globális másolat).
-// ================================================================
-
 @use 'styles/abstracts' as *;
 
 .shell {
@@ -12,16 +5,12 @@
   height: calc(100vh - $navbar-height);
   margin-top: $navbar-height;
 
-  // Tableten/telefonon a sidebar kihúzható panel (position: fixed),
-  // a shellben csak a tartalom marad.
   @include tablet {
     flex-direction: column;
   }
 }
 
 .main-content {
-  // CSS custom property: az alatta lévő komponensek is elérik
-  // (pl. a home negatív marginjához: calc(-1 * var(--content-pad))).
   --content-pad: #{$content-pad};
 
   flex: 1;

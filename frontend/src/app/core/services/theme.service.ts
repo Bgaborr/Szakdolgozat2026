@@ -16,11 +16,7 @@ export class ThemeService {
     this.mode.set(mode);
     try {
       localStorage.setItem(STORAGE_KEY, mode);
-    } catch {
-      // privát módban / letiltott tárhelynél nem mentjük, de a váltás működik
-    }
-    // TODO (opcionális): itt mentheted a felhasználó profiljába is az API-n keresztül,
-    // hogy másik eszközön is ugyanaz a téma legyen.
+    } catch {}
   }
 
   private readStored(): ThemeMode {

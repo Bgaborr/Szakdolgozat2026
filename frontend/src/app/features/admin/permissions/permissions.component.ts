@@ -15,7 +15,7 @@ interface Permissions {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './permissions.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './permissions.component.scss',
 })
 export class PermissionsComponent {
@@ -75,7 +75,6 @@ export class PermissionsComponent {
     const editing = this.editingPermission();
 
     if (editing) {
-      // Update existing permission
       this.http
         .put(`${environment.apiUrl}/permissions/${editing.id}`, data, { withCredentials: true })
         .subscribe({
@@ -87,7 +86,6 @@ export class PermissionsComponent {
           error: () => this.error.set('Hiba történt a jogosultság frissítése során.'),
         });
     } else {
-      // Create new permission
       this.http
         .post(`${environment.apiUrl}/permissions`, data, { withCredentials: true })
         .subscribe({

@@ -29,7 +29,7 @@ class MultipleUnitController extends Controller
             'next_rev_date'         => ['nullable', 'date'],
             'number_of_seats'       => ['nullable', 'integer', 'min:0', 'max:1000'],
             'is_active'             => ['boolean'],
-            'comment'               => ['nullable', 'string', 'max:255'], // varchar(255)
+            'comment'               => ['nullable', 'string', 'max:255'],
         ];
     }
 

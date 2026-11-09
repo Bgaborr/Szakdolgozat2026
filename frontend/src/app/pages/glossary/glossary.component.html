@@ -12,8 +12,6 @@
         </button>
         }
     </div>
-
-    <!-- Keresés és szűrés -->
     <div class="toolbar">
         <div class="search-box">
             <i class="bi bi-search" aria-hidden="true"></i>
@@ -57,8 +55,6 @@
         <button type="button" class="link-btn" (click)="loadGlossaries()">Újra</button>
     </div>
     }
-
-    <!-- Lista -->
     @if (loading()) {
     <div class="term-list" aria-hidden="true">
         @for (n of skeletons; track n) {
@@ -136,7 +132,6 @@
     } }
 </div>
 
-<!-- Új / szerkesztett fogalom -->
 @if (isModalOpen()) {
 <div class="modal-overlay" (click)="closeModal()">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="glossary-modal-title"

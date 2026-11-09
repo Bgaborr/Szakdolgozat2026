@@ -57,20 +57,21 @@
 </div>
 
 @if (showModal()) {
-<div class="modal-overlay" (click)="closeModal()">
-    <div class="modal" (click)="$event.stopPropagation()">
+<div class="modal-overlay">
+    <div class="modal">
         <div class="modal-header">
-            <h2>{{ editingLoc() ? (authservice.hasPermission("edit-vehicles") ? 'Mozdony szerkesztése' : 'Módosítási javaslat') : 'Új mozdony' }}</h2>
+            <h2>{{ editingLoc() ? (authservice.hasPermission("edit-vehicles") ? 'Mozdony szerkesztése' :
+                'Módosításijavaslat') : 'Új mozdony' }}</h2>
             <button class="modal-close" (click)="closeModal()">&times;</button>
         </div>
-        
+
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="modal-body form-grid">
                 <div class="field col-span-2">
                     <label>UIC Pályaszám</label>
                     <input type="text" formControlName="uic" placeholder="Pl.: 50552005001-2">
                 </div>
-                
+
                 <div class="field col-span-2">
                     <label>Mozdony Típusa</label>
                     <select formControlName="locomotive_type_id" class="form-select">
@@ -80,7 +81,7 @@
                         }
                     </select>
                 </div>
-                
+
                 <div class="field">
                     <label>Honállomás</label>
                     <select formControlName="service_location_id" class="form-select">
@@ -90,17 +91,17 @@
                         }
                     </select>
                 </div>
-                
+
                 <div class="field col-span-2 checkbox-group">
                     <input type="checkbox" formControlName="is_active" id="is_active_loc">
                     <label for="is_active_loc">A jármű jelenleg aktív (Active)</label>
                 </div>
-                
+
                 @if (!authservice.hasPermission('edit-vehicles')) {
                 <div class="field col-span-2">
                     <hr>
                 </div>
-                
+
                 <div class="field col-span-2">
                     <label>Módosítás forrása</label>
                     <select formControlName="source" class="form-select">
@@ -108,7 +109,7 @@
                         <option value="más forrás">Más forrás (Hivatalos irat, weboldal stb.)</option>
                     </select>
                 </div>
-                
+
                 @if (form.get('source')?.value === 'más forrás') {
                 <div class="field col-span-2">
                     <label>Forrás megnevezése / Linkje</label>
@@ -117,7 +118,7 @@
                 }
                 }
             </div>
-            
+
             <div class="modal-footer">
                 <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
                 <button type="submit" class="btn-primary" [disabled]="form.invalid">Mentés</button>
@@ -128,20 +129,20 @@
 }
 
 @if (showDetails()) {
-<div class="modal-overlay" (click)="closeDetails()">
-    <div class="modal" (click)="$event.stopPropagation()">
+<div class="modal-overlay">
+    <div class="modal">
         <div class="modal-header">
             <h2>Mozdony részletes információk</h2>
             <button class="modal-close" (click)="closeDetails()">&times;</button>
         </div>
-        
+
         <form [formGroup]="form">
             <div class="modal-body form-grid">
                 <div class="field col-span-2">
                     <label>UIC Pályaszám</label>
                     <input type="text" formControlName="uic" readonly class="readonly-input">
                 </div>
-                
+
                 <div class="field col-span-2">
                     <label>Mozdony Típusa</label>
                     <select formControlName="locomotive_type_id" class="form-select readonly-input">
@@ -151,7 +152,7 @@
                         }
                     </select>
                 </div>
-                
+
                 <div class="field">
                     <label>Honállomás</label>
                     <select formControlName="service_location_id" class="form-select readonly-input">
@@ -161,18 +162,19 @@
                         }
                     </select>
                 </div>
-                
+
                 <div class="field col-span-2 checkbox-group readonly-input">
                     <input type="checkbox" formControlName="is_active" id="is_active_loc_detail">
                     <label for="is_active_loc_detail">A jármű jelenleg aktív (Active)</label>
                 </div>
-                
+
                 <div class="field">
                     <label for="vmax_field_loc">Engedélyezett maximális sebesség</label>
-                    <input id="vmax_field_loc" type="text" readonly [value]="(selectedLoc()?.type?.vmax || 0) + ' km/h'" class="readonly-input">
+                    <input id="vmax_field_loc" type="text" readonly [value]="(selectedLoc()?.type?.vmax || 0) + ' km/h'"
+                        class="readonly-input">
                 </div>
             </div>
-            
+
             <div class="modal-footer">
                 <button type="button" class="btn-secondary" (click)="closeDetails()">Bezárás</button>
             </div>

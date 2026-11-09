@@ -6,7 +6,7 @@ import {
   computed,
   inject,
   signal,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -36,7 +36,7 @@ interface Source {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './gallery.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent implements OnInit, OnDestroy {
@@ -114,7 +114,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
     return s ? cropSize(s.width, s.height, this.ratio().value, this.zoom()) : null;
   });
 
-  /** A feltöltendő kép mérete. */
   outSize = computed(() => {
     const c = this.crop();
     return c ? outputSize(c.w, this.ratio().value, MAX_OUT_WIDTH) : null;

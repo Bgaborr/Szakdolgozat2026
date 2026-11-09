@@ -2,7 +2,6 @@
 @use 'functions' as *;
 @use 'breakpoints' as *;
 
-// ── Layout segédletek ─────────────────────────────────────────────
 @mixin flex($align: center, $justify: flex-start, $gap: 0) {
   display: flex;
   align-items: $align;
@@ -12,7 +11,6 @@
   }
 }
 
-// Flex oszlop
 @mixin flex-col($gap: 0) {
   display: flex;
   flex-direction: column;
@@ -21,7 +19,6 @@
   }
 }
 
-// Középre igazítás
 @mixin center {
   display: flex;
   align-items: center;
@@ -34,15 +31,12 @@
   margin: 0 auto;
 }
 
-// ── Kártya ────────────────────────────────────────────────────────
 @mixin card($padding: $space-lg) {
   background: $bg-surface;
   border: 1px solid $border;
   border-radius: $radius-lg;
   padding: $padding;
 }
-
-// ── Gombok ────────────────────────────────────────────────────────
 @mixin btn-base {
   display: inline-flex;
   align-items: center;
@@ -62,7 +56,6 @@
   }
 }
 
-// Elsődleges gomb (kék, tömör)
 @mixin btn-primary($padding: 0.4rem 0.875rem) {
   @include btn-base;
   padding: $padding;
@@ -75,7 +68,6 @@
   }
 }
 
-// Másodlagos gomb (háttere: $secondary-bg)
 @mixin btn-secondary($padding: 0.4rem 0.875rem) {
   @include btn-base;
   padding: $padding;
@@ -89,7 +81,6 @@
   }
 }
 
-// Halvány kék gomb (szerkesztés)
 @mixin btn-edit($padding: 0.4rem 0.875rem) {
   @include btn-base;
   padding: $padding;
@@ -103,7 +94,6 @@
   }
 }
 
-// Veszélyes gomb (piros, törlés / elutasítás)
 @mixin btn-danger($padding: 0.4rem 0.875rem) {
   @include btn-base;
   padding: $padding;
@@ -117,7 +107,6 @@
   }
 }
 
-// Sikeres gomb (zöld, jóváhagyás)
 @mixin btn-success($padding: 0.4rem 0.875rem) {
   @include btn-base;
   padding: $padding;
@@ -131,7 +120,6 @@
   }
 }
 
-// Sárga gomb (javaslat)
 @mixin btn-suggest($padding: 0.4rem 0.875rem) {
   @include btn-base;
   padding: $padding;
@@ -145,7 +133,6 @@
   }
 }
 
-// Ikon-gomb: átlátszó, csak hoverre látszik (pl. szótár szerkesztés)
 @mixin btn-icon {
   background: transparent;
   border: none;
@@ -161,7 +148,6 @@
   }
 }
 
-// ── Input mező ────────────────────────────────────────────────────
 @mixin input {
   padding: 0.65rem 0.875rem;
   background: $bg-overlay;
@@ -182,7 +168,6 @@
   }
 }
 
-// ── Form mező (label + input együtt) ──────────────────────────────
 @mixin form-field {
   @include flex-col($space-xs);
 
@@ -199,7 +184,6 @@
   }
 }
 
-// ── Alert / Értesítés ─────────────────────────────────────────────
 @mixin alert($color, $bg, $border-color) {
   padding: 0.75rem $space-md;
   border-radius: $radius-md;
@@ -209,7 +193,6 @@
   border: 1px solid $border-color;
 }
 
-// ── Badge / Chip ──────────────────────────────────────────────────
 @mixin badge($color: $text-secondary, $bg: tint(0.06)) {
   display: inline-flex;
   align-items: center;
@@ -247,9 +230,6 @@
   }
 }
 
-// ── Oldal fejléc ──────────────────────────────────────────────────
-// EGY helyen él: a globális .page-header használja (_components.scss).
-// A komponensekben NE @include-old újra.
 @mixin page-header {
   @include flex(center, space-between, $space-md);
   margin-bottom: $space-lg;
@@ -275,7 +255,6 @@
     margin-bottom: $space-md;
   }
 
-  // Telefonon a cím és a gomb egymás alá kerül
   @include mobile {
     flex-direction: column;
     align-items: flex-start;
@@ -287,7 +266,6 @@
   }
 }
 
-// ── Modal ─────────────────────────────────────────────────────────
 @mixin modal-overlay {
   position: fixed;
   inset: 0;
@@ -307,7 +285,6 @@
   animation: modal-in 0.2s ease;
 }
 
-// ── Scrollbar ─────────────────────────────────────────────────────
 @mixin scrollbar {
   &::-webkit-scrollbar {
     width: 4px;
@@ -321,8 +298,6 @@
   }
 }
 
-// ── Animációk ─────────────────────────────────────────────────────
-// Csak EGYSZER, a styles.scss-ben @include-old (globális keyframes).
 @mixin keyframes-modal {
   @keyframes modal-in {
     from {

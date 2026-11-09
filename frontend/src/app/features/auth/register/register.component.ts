@@ -52,7 +52,7 @@ export class RegisterComponent {
     this.authService.getCsrfCookie().subscribe({
       next: () => {
         this.authService.register(this.form.value as any).subscribe({
-          next: () => this.router.navigate(['/dashboard']),
+          next: () => this.router.navigate(['/home']),
           error: (err: HttpErrorResponse) => {
             this.loading.set(false);
             this.error.set(err.error?.message || 'Hiba történt a regisztráció során.');

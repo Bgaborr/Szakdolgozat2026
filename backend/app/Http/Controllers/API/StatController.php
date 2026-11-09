@@ -45,6 +45,16 @@ class StatController extends Controller
             return $loco->serviceLocation ? $loco->serviceLocation->name : 'Ismeretlen';
         })->map->count();
 
+        $locomotiveVmaxDistribution = Locomotive::with('type')
+            ->get()
+            ->groupBy(function ($loco) {
+                if (!$loco->type || empty($loco->type->vmax)) {
+                    return 'Nincs adat';
+                }
+                return $loco->type->vmax . ' km/h';
+            })
+            ->map->count();
+
         return response()->json([
             'total' => $total,
             'types' => $types,
@@ -53,7 +63,8 @@ class StatController extends Controller
                 'Selejt' => $inactiveLocCount
             ],
             'traction' => $traction,
-            'locations' => $locations
+            'locations' => $locations,
+            'vmax_distribution' => $locomotiveVmaxDistribution
         ]);
     }
 
@@ -124,6 +135,15 @@ class StatController extends Controller
             }
         }
 
+        $avgSeatsByMultipleUnitType = MultipleUnit::with('type')
+            ->get()
+            ->groupBy(function ($mu) {
+                return $mu->type ? $mu->type->name : 'Ismeretlen';
+            })
+            ->map(function ($group) {
+                return round($group->avg('number_of_seats'));
+            });
+
         return response()->json([
             'total' => $total,
             'types' => $types,
@@ -132,7 +152,30 @@ class StatController extends Controller
                 'Javításra vár' => $total - $activeMuCount
             ],
             'traction' => $traction,
-            'locations' => $locations
+            'locations' => $locations,
+            'avg_seats_by_type' => $avgSeatsByMultipleUnitType
+        ]);
+    }
+    public function getAdvancedStats()
+    {
+        $mus = MultipleUnit::with(['type', 'serviceLocation', 'homeDepot'])->get();
+        $totalMus = $mus->count();
+        $cars = PassengerCar::with(['type.category', 'serviceLocation', 'homeDepot'])->get();
+        $totalPassCars = $cars->count();
+
+        $expiredRevCars = PassengerCar::whereNotNull('next_rev_date')
+            ->whereDate('next_rev_date', '<', now())
+            ->count();
+
+        $expiredRevMus = MultipleUnit::whereNotNull('next_rev_date')
+            ->whereDate('next_rev_date', '<', now())
+            ->count();
+
+        $totalExpiredRev = $expiredRevCars + $expiredRevMus;
+        $total = ($totalMus + $totalPassCars) - $totalExpiredRev;
+        return response()->json([
+            'valid_revision' => $total,
+            'expired_revision' => $totalExpiredRev,
         ]);
     }
 }

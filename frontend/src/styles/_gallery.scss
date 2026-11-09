@@ -1,14 +1,11 @@
 @use 'abstracts' as *;
 
-// Rács: a kártyák automatikusan sorokba törnek
 @mixin gallery-grid($min: 320px) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
   gap: $space-lg;
 }
 
-// Kártya: kép + tartalom. A komponens a saját különbségeit
-// (hover-effekt, gombok) az @include UTÁN írja, azok felülírják az alapot.
 @mixin gallery-card {
   background: tint(0.02);
   border: 1px solid $border;
@@ -52,8 +49,6 @@
     }
   }
 }
-
-// A kártya alján lévő sáv (lábléc vagy admin gombsor)
 @mixin gallery-card-bar {
   display: flex;
   padding: $space-md $space-lg;

@@ -3,7 +3,6 @@ export const environment = {
   apiUrl: 'http://localhost/api',
   baseUrl: 'http://localhost',
   '/storage': {
-    // target: 'http://localhost',
     target: 'http://localhost',
     secure: false,
   },

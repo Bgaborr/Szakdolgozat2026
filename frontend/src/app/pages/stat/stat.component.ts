@@ -87,33 +87,43 @@ export class StatComponent implements OnInit {
     },
   };
 
-  // Mozdony
+  // Általános / Fővizsga
+  public revisionStatusData = signal<ChartData<'pie'>>({
+    labels: ['Érvényes fővizsga', 'Lejárt fővizsga'],
+    datasets: [{ data: [], backgroundColor: ['#4ade80', '#ef4444'] }],
+  });
+
+  // Mozdony adatok
   public locoTractionData = signal<ChartData<'pie'>>({
     labels: [],
     datasets: [{ data: [], backgroundColor: ['#fb923c', '#38bdf8', '#94a3b8'] }],
   });
-
   public locoStatusData = signal<ChartData<'bar'>>({
     labels: [],
     datasets: [{ data: [], label: 'Állapot', backgroundColor: ['#4ade80', '#f87171'] }],
   });
-
   public locoTypesData = signal<ChartData<'bar'>>({
     labels: [],
     datasets: [{ data: [], label: 'Darabszám', backgroundColor: ['#277D84'] }],
   });
+  public locoLocationsData = signal<ChartData<'bar'>>({
+    labels: [],
+    datasets: [{ data: [], label: 'Telephelyek', backgroundColor: ['#3b82f6'] }],
+  });
+  public locoVmaxData = signal<ChartData<'bar'>>({
+    labels: [],
+    datasets: [{ data: [], label: 'Sebesség', backgroundColor: ['#eab308'] }],
+  });
 
-  // Motorvonat
+  // Motorvonat adatok
   public muTractionData = signal<ChartData<'pie'>>({
     labels: [],
     datasets: [{ data: [], backgroundColor: ['#a855f7', '#10b981', '#64748b'] }],
   });
-
   public muStatusData = signal<ChartData<'bar'>>({
     labels: [],
     datasets: [{ data: [], label: 'Állapot', backgroundColor: ['#4ade80', '#f59e0b'] }],
   });
-
   public muTypesData = signal<ChartData<'doughnut'>>({
     labels: [],
     datasets: [
@@ -124,8 +134,16 @@ export class StatComponent implements OnInit {
       },
     ],
   });
+  public muLocationsData = signal<ChartData<'bar'>>({
+    labels: [],
+    datasets: [{ data: [], label: 'Telephelyek', backgroundColor: ['#ec4899'] }],
+  });
+  public muAvgSeatsData = signal<ChartData<'bar'>>({
+    labels: [],
+    datasets: [{ data: [], label: 'Átlagos ülőhely', backgroundColor: ['#06b6d4'] }],
+  });
 
-  // Személykocsi
+  // Személykocsi adatok
   public carCategoryData = signal<ChartData<'pie'>>({
     labels: [],
     datasets: [
@@ -143,17 +161,19 @@ export class StatComponent implements OnInit {
       },
     ],
   });
-
   public carVmaxData = signal<ChartData<'bar'>>({
     labels: [],
     datasets: [{ data: [], label: 'Darabszám', backgroundColor: ['#c084fc'] }],
+  });
+  public carHomeDepotData = signal<ChartData<'bar'>>({
+    labels: [],
+    datasets: [{ data: [], label: 'Honállomás', backgroundColor: ['#6366f1'] }],
   });
 
   ngOnInit(): void {
     this.loadStats();
   }
 
-  /** Új objektumot állít be a signalba, így a nézet biztosan frissül. */
   private applyData<T extends ChartType>(
     target: WritableSignal<ChartData<T>>,
     source: Record<string, number> | undefined | null,
@@ -171,22 +191,41 @@ export class StatComponent implements OnInit {
       locomotives: this.statService.getLocomotiveStats(),
       passangerCars: this.statService.getPassengerCarStats(),
       multipleUnits: this.statService.getMultipleUnitStats(),
+      advanced: this.statService.getAdvancedStats(),
     }).subscribe({
       next: (results) => {
         const locoStats = results.locomotives;
         const carStats = results.passangerCars;
         const muStats = results.multipleUnits;
+        const advStats = results.advanced;
+        this.revisionStatusData.update((d) => ({
+          ...d,
+          datasets: [
+            {
+              ...d.datasets[0],
+              data: [advStats['valid_revision'], advStats['expired_revision']],
+            },
+          ],
+        }));
 
+        // Mozdony
         this.applyData(this.locoTractionData, locoStats['traction']);
         this.applyData(this.locoStatusData, locoStats['status']);
         this.applyData(this.locoTypesData, locoStats['types']);
+        this.applyData(this.locoLocationsData, locoStats['locations']);
+        this.applyData(this.locoVmaxData, locoStats['vmax_distribution']);
 
+        // Motorvonat
         this.applyData(this.muTractionData, muStats['traction']);
         this.applyData(this.muStatusData, muStats['status']);
         this.applyData(this.muTypesData, muStats['types']);
+        this.applyData(this.muLocationsData, muStats['locations']);
+        this.applyData(this.muAvgSeatsData, muStats['avg_seats_by_type']);
 
+        // Személykocsi
         this.applyData(this.carCategoryData, carStats['categories']);
         this.applyData(this.carVmaxData, carStats['vmax']);
+        this.applyData(this.carHomeDepotData, carStats['home_depots']);
 
         this.isDataLoaded.set(true);
       },

@@ -21,8 +21,6 @@
                 <tr>
                     <th>UIC Pályaszám</th>
                     <th>Típus</th>
-                    <th>Honállomás</th>
-                    <th>Honállomás KTH</th>
                     <th>Státusz</th>
                     <th style="text-align: right;">Műveletek</th>
                 </tr>
@@ -31,9 +29,7 @@
                 @for (mu of multipleunits(); track mu.id) {
                 <tr [class.row-inactive]="!mu.is_active">
                     <td class="td-city">{{ mu.formatted_uic || mu.uic }}</td>
-                    <td>{{ mu.type?.name || '-' }}</td>
-                    <td>{{ mu.home_depot?.name || 'Nincs megadva' }}</td>
-                    <td>{{ mu.service_location?.name || 'Nincs megadva'}}</td>
+                    <td>{{ mu.type?.name}}</td>
                     <td>
                         <span [ngClass]="mu.is_active ? 'text-success' : 'text-danger'">
                             {{ mu.is_active ? 'Üzemképes' : 'Javításra vár' }}

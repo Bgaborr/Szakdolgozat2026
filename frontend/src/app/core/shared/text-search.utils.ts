@@ -1,15 +1,5 @@
-/**
- * Keresés-segédek: ékezet- és kisbetű-független egyezés + találat-kiemelés.
- * Tiszta függvények, nincs bennük DOM vagy Angular.
- */
-
 const COMBINING_MARKS = /[\u0300-\u036f]/g;
 
-/**
- * Kisbetűssé teszi és leveszi az ékezeteket (á→a, ő→o, ű→u...).
- * FONTOS: az eredmény PONTOSAN ugyanolyan hosszú, mint a bemenet (karakterenként
- * dolgozik), ezért a találat helye a foldolt szövegben az eredetiben is ugyanaz.
- */
 export function fold(text: string): string {
   let out = '';
   for (let i = 0; i < text.length; i++) {
@@ -21,7 +11,6 @@ export function fold(text: string): string {
   return out;
 }
 
-/** Tartalmazza-e a szöveg a keresett kifejezést (ékezet- és kisbetű-függetlenül)? */
 export function matches(text: string, query: string): boolean {
   const q = fold(query.trim());
   return q === '' || fold(text).includes(q);
@@ -32,7 +21,6 @@ export interface Segment {
   match: boolean;
 }
 
-/** A szöveget találat / nem találat darabokra bontja (a kiemeléshez, innerHTML nélkül). */
 export function highlightSegments(text: string, query: string): Segment[] {
   const q = fold(query.trim());
   if (!q || !text) return [{ text, match: false }];

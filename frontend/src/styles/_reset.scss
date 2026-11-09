@@ -1,9 +1,3 @@
-// ================================================================
-// _reset.scss
-// Alap (base) réteg: böngésző-alapértékek nullázása, body, scrollbar.
-// Ezért NEM kell a komponensekben `margin: 0`-t írni h2-re, p-re stb.
-// ================================================================
-
 @use 'abstracts' as *;
 
 * {

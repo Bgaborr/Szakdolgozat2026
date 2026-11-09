@@ -1,8 +1,8 @@
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
-
+@use 'styles/abstracts' as *;
 .profile-container {
-  max-width: 600px; 
+  max-width: 600px;
   margin: 0 auto;
   padding: $space-xl 0;
 
@@ -22,4 +22,20 @@ form {
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 5px;
+}
+.user-info {
+  @include center;
+  margin-bottom: $space-md;
+}
+
+.user-avatar {
+  @include center;
+  width: 60px;
+  height: 60px;
+  background: $primary;
+  border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-size: 2.5rem;
+  flex-shrink: 0;
 }

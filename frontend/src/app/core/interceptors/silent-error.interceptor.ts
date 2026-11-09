@@ -1,4 +1,3 @@
-// src/app/core/interceptors/silent-error.interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 

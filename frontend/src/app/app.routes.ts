@@ -113,13 +113,6 @@ export const routes: Routes = [
         (m) => m.SuggestionsComponent,
       ),
   },
-  { 
-    path: 'vehicles', 
-    loadComponent: () =>
-      import('./pages/vehicle-list/vehicle-list.component').then(
-        (m) => m.VehicleListComponent,
-      ),
-  },
   {
     path: '**',
     redirectTo: '/home',

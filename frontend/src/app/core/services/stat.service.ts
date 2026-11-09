@@ -20,6 +20,9 @@ export class StatService {
   }
 
   getMultipleUnitStats() {
-    return this.http.get<any>(`${this.apiUrl}/multiple-units`, { withCredentials: true });
+    return this.http.get<any>(`${this.apiUrl}/multiple-units`);
+  }
+  getAdvancedStats() {
+    return this.http.get<any>(`${this.apiUrl}/advanced`);
   }
 }

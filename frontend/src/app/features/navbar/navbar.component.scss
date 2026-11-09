@@ -14,7 +14,6 @@
   background-color: $nav-bg;
   border-bottom: 1px solid $border;
 
-  // Eddig ez a szabály a globálisban élt és sosem érvényesült
   @include tablet {
     padding: 0 $space-md;
   }
@@ -23,7 +22,7 @@
 .navbar-left {
   display: flex;
   align-items: center;
-  min-width: 0; // hogy a logo-text zsugorodni/eltűnni tudjon kis képernyőn
+  min-width: 0;
 }
 
 .hamburger-btn {
@@ -60,7 +59,7 @@
 }
 
 .logo-icon {
-  height: 36px; // fix magasság az 5vh helyett a reszponzivitás miatt
+  height: 36px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -74,7 +73,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  // A hamburger gombbal együtt jelenik meg / tűnik el
   @include tablet {
     display: none;
   }

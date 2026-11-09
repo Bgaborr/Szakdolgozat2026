@@ -1,10 +1,9 @@
-// ── Töréspontok ───────────────────────────────────────────────────
-$bp-xs: 480px; // Kis telefon
-$bp-sm: 640px; // Telefon
-$bp-md: 768px; // Tablet
-$bp-lg: 1024px; // Kis laptop
-$bp-xl: 1280px; // Laptop
-$bp-2xl: 1536px; // Nagy monitor
+$bp-xs: 480px;
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
 
 @mixin mobile {
   @media (max-width: #{$bp-sm - 1px}) {
@@ -24,7 +23,6 @@ $bp-2xl: 1536px; // Nagy monitor
   }
 }
 
-// "Ha nagyobb mint X, akkor..."
 @mixin tablet-up {
   @media (min-width: $bp-md) {
     @content;

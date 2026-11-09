@@ -73,15 +73,15 @@ Route::middleware(['auth:sanctum', 'permission:edit-vehicles'])->group(function 
     Route::post('/service-locations', [ServiceLocationController::class, 'store']);
     Route::put('/service-locations/{id}', [ServiceLocationController::class, 'update']);
     Route::delete('/service-locations/{id}', [ServiceLocationController::class, 'destroy']);
-    //Passenger car 
+
     Route::post('/passenger-cars', [PassengerCarController::class, 'store']);
     Route::put('/passenger-cars/{id}', [PassengerCarController::class, 'update']);
     Route::delete('/passenger-cars/{id}', [PassengerCarController::class, 'destroy']);
-    //Locomotive
+
     Route::post('/locomotives', [LocomotiveController::class, 'store']);
     Route::put('/locomotives/{id}', [LocomotiveController::class, 'update']);
     Route::delete('/locomotives/{id}', [LocomotiveController::class, 'destroy']);
-    //Motorvonat
+
     Route::post('/mu', [MultipleUnitController::class, 'store']);
     Route::put('/mu/{id}', [MultipleUnitController::class, 'update']);
     Route::delete('/mu/{id}', [MultipleUnitController::class, 'destroy']);
@@ -91,6 +91,7 @@ Route::middleware(['auth:sanctum', 'permission:stat-view'])->group(function () {
     Route::get('/stat/locomotives', [StatController::class, 'getLocomotiveStats']);
     Route::get('/stat/passenger-cars', [StatController::class, 'getPassengerCarStats']);
     Route::get('/stat/multiple-units', [StatController::class, 'getMultipleUnitStats']);
+    Route::get('/stat/advanced', [StatController::class, 'getAdvancedStats']);
 });
 Route::middleware(['auth:sanctum', 'permission:glossary-edit'])->group(function () {
     Route::post('/glossary', [GlossaryController::class, 'store']);

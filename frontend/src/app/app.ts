@@ -16,7 +16,6 @@ import { AuthService } from './core/services/auth.service';
 export class App {
   private authService = inject(AuthService);
   ngOnInit(): void {
-    // Alkalmazás indulásakor (és F5 után) leellenőrizzük a session-t a Laravelnél
     this.authService.checkAuthStatus().subscribe();
   }
 }

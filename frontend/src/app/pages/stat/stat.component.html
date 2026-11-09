@@ -1,7 +1,20 @@
-<div class="stat-page">
+<div class="stat-page" *ngIf="isDataLoaded()">
     <div class="page-header">
         <h2>📊 Statisztikák</h2>
     </div>
+    <section class="stat-section">
+        <h3 class="section-title">📅 Általános Fővizsga Állapot</h3>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4>Érvényes / Lejárt arány</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="revisionStatusData()" [options]="pieChartOptions" type="pie"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
 
     <section class="stat-section">
         <h3 class="section-title">🚂 Mozdony Statisztikák</h3>
@@ -22,6 +35,18 @@
                 <h4>Típusok eloszlása</h4>
                 <div class="chart-wrapper">
                     <canvas baseChart [data]="locoTypesData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Telephelyek</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="locoLocationsData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Sebességeloszlás</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="locoVmaxData()" [options]="barChartOptions" type="bar"></canvas>
                 </div>
             </div>
         </div>
@@ -50,6 +75,18 @@
                     <canvas baseChart [data]="muTypesData()" [options]="pieChartOptions" type="doughnut"></canvas>
                 </div>
             </div>
+            <div class="chart-card">
+                <h4>Telephelyek</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="muLocationsData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Átlagos ülőhelyszám (típusonként)</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="muAvgSeatsData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -68,6 +105,12 @@
                 <h4>Maximális sebesség eloszlása</h4>
                 <div class="chart-wrapper">
                     <canvas baseChart [data]="carVmaxData()" [options]="barChartOptions" type="bar"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h4>Honállomások</h4>
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="carHomeDepotData()" [options]="barChartOptions" type="bar"></canvas>
                 </div>
             </div>
         </div>

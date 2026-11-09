@@ -14,6 +14,11 @@
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="field">
+            <div class="user-info">
+                <div class="user-avatar">{{ auth.currentUser()?.name?.charAt(0)?.toUpperCase() }}</div>
+            </div>
+        </div>
+        <div class="field">
             <label for="name-input">Név</label>
             <input id="name-input" type="text" formControlName="name" placeholder="Írd be a neved" />
             @if (form.get('name')?.invalid && form.get('name')?.touched) {

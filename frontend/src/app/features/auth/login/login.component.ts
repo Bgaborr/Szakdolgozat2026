@@ -31,12 +31,11 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-    
+
     this.loading.set(true);
     this.error.set(null);
 
-    // === MOCK VERZIÓ (Közvetlen hívás CSRF nélkül) ===
-    this.authService.login(this.form.value as any).subscribe({
+    /*  this.authService.login(this.form.value as any).subscribe({
       next: () => {
         this.loading.set(false);
         this.router.navigate(['/dashboard']);
@@ -46,12 +45,19 @@ export class LoginComponent {
         this.error.set('Hibás email vagy jelszó.');
       },
     });
+    */
 
-    /* === EREDETI ÉLES KÓD (CSRF láncolással) ===
     this.authService.getCsrfCookie().subscribe({
       next: () => {
         this.authService.login(this.form.value as any).subscribe({
-          next: () => this.router.navigate(['/dashboard']),
+          next: () => {
+            const canAccessDashboard = this.authService.hasPermission('view-admin-dashboard');
+            if (canAccessDashboard) {
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.router.navigate(['/home']);
+            }
+          },
           error: (err: HttpErrorResponse) => {
             this.loading.set(false);
             this.error.set(err.error?.message || 'Hibás email vagy jelszó.');
@@ -63,6 +69,5 @@ export class LoginComponent {
         this.error.set('Nem sikerült kapcsolódni a szerverhez.');
       },
     });
-    */
   }
 }

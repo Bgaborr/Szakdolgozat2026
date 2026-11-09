@@ -40,15 +40,14 @@
     }
   }
 
-  // Mobil nézet: kihúzható panel, a hamburger gomb nyitja/zárja
   @include tablet {
     position: fixed;
     top: $navbar-height;
     left: 0;
     width: $sidebar-mobile-width;
     max-width: $sidebar-mobile-max;
-    height: calc(100vh - $navbar-height); // fallback régebbi böngészőknek
-    height: calc(100dvh - $navbar-height); // a tényleges látható magassághoz igazodik
+    height: calc(100vh - $navbar-height);
+    height: calc(100dvh - $navbar-height);
     border-bottom: none;
     box-shadow: 4px 0 20px shade(0.3);
     transform: translateX(-100%);
@@ -60,8 +59,6 @@
       transform: translateX(0);
     }
 
-    // Ha desktopon összecsukott állapotból váltunk mobil nézetre,
-    // a fiók akkor is teljes szélességű és feliratos maradjon.
     &.collapsed {
       width: $sidebar-mobile-width;
       max-width: $sidebar-mobile-max;
@@ -148,7 +145,7 @@
 .sidebar-body {
   flex: 1;
   min-width: 0;
-  min-height: 0; // hogy a footer sose szoruljon ki a látható területről
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0.75rem $space-sm;
@@ -224,8 +221,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-
-  // iPhone-on a home-indikátor ne takarja a lábléc gombjait
   @include tablet {
     padding-bottom: max($space-sm, env(safe-area-inset-bottom));
   }
@@ -247,8 +242,6 @@
     color: $text-primary;
   }
 
-  // Mobilon a nyitás/zárás a hamburger + backdrop feladata,
-  // az összecsukás nem értelmezhető
   @include tablet {
     display: none;
   }

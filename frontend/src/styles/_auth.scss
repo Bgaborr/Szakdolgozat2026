@@ -4,8 +4,8 @@
   .auth-wrapper {
     @include center;
     min-height: 100vh;
-    min-height: 100dvh; // mobilon a böngészősáv mozgását is követi
-    padding: $space-md; // keskeny telefonon se érjen a kártya a képernyő széléhez
+    min-height: 100dvh;
+    padding: $space-md;
     background: $bg-base;
   }
 

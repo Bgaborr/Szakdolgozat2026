@@ -1,6 +1,5 @@
 @use 'abstracts' as *;
 
-// ── Gombok ────────────────────────────────────────────────────────
 .btn-primary {
   @include btn-primary;
 }
@@ -27,7 +26,6 @@
   @include btn-success;
 }
 
-// ── Értesítések (Alert) ───────────────────────────────────────────
 .alert {
   &--success {
     @include alert($success, $success-bg, $success-border);
@@ -39,7 +37,6 @@
   }
 }
 
-// ── Szöveg segédosztályok ─────────────────────────────────────────
 .text-success {
   color: $success;
   font-weight: 600;
@@ -52,17 +49,14 @@
   text-align: right !important;
 }
 
-// ── Oldal fejléc ──────────────────────────────────────────────────
 .page-header {
   @include page-header;
 
-  // Nagyobb alsó térköz (dashboard)
   &--spacious {
     margin-bottom: $space-xl;
   }
 }
 
-// ── Üres / betöltési állapot ──────────────────────────────────────
 .loading,
 .empty {
   padding: 3rem;
@@ -98,7 +92,6 @@
   }
 }
 
-// ── Táblázat ──────────────────────────────────────────────────────
 .table-wrapper {
   @include card(0);
   width: 100%;
@@ -145,19 +138,15 @@
     color: $text-secondary;
     vertical-align: middle;
   }
-
-  // Telefonon a táblázat nem törpül össze, inkább görgethető
   @include mobile {
     min-width: 750px;
   }
 }
 
-// Inaktív sor (pl. mozdonyoknál)
 tr.row-inactive {
   background-color: alpha($error, 0.1);
 }
 
-// Cella-segédosztályok (több oldal használja)
 .td-id {
   color: $text-subtle;
   width: 80px;
@@ -177,18 +166,15 @@ tr.row-inactive {
   }
 }
 
-// ── Badge ─────────────────────────────────────────────────────────
 .badge {
   @include badge-class;
 }
 
-// ── Modális ablakok (Modal) ───────────────────────────────────────
 @include keyframes-modal;
 
 .modal-overlay {
   @include modal-overlay;
 
-  // Telefonon alulról kicsúszó panel
   @include mobile {
     align-items: flex-end;
     padding: 0;
@@ -262,7 +248,6 @@ tr.row-inactive {
   }
 }
 
-// ── Formok és rács ────────────────────────────────────────────────
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -305,8 +290,6 @@ tr.row-inactive {
   pointer-events: none;
   background-color: tint(0.02);
 }
-
-// ── Admin: szerepkör- és jogosultság-checkboxok ───────────────────
 .role-checkboxes {
   @include flex(center, flex-start, $space-sm);
   flex-wrap: wrap;
