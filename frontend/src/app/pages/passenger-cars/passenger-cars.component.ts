@@ -1,4 +1,11 @@
-import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  OnInit,
+  ChangeDetectionStrategy,
+  computed,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PassengerCar } from '../../models/passenger-car.model';
@@ -32,6 +39,7 @@ export class PassengerCarsComponent implements OnInit {
   showDetails = signal(false);
   editingCar = signal<PassengerCar | null>(null);
   selectedCar = signal<PassengerCar | null>(null);
+  searchQuery = signal<string>('');
 
   error = signal<string | null>(null);
   success = signal<string | null>(null);
@@ -133,7 +141,22 @@ export class PassengerCarsComponent implements OnInit {
     this.showModal.set(false);
     this.error.set(null);
   }
+  filteredCars = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    if (!query) return this.cars();
 
+    return this.cars().filter(
+      (car) =>
+        car.uic.toLowerCase().includes(query) ||
+        car.formatted_uic?.toLowerCase().includes(query) ||
+        car.type?.category?.name?.toLowerCase().includes(query) ||
+        car.type?.type_number?.toLowerCase().includes(query),
+    );
+  });
+
+  updateSearch(event: Event) {
+    this.searchQuery.set((event.target as HTMLInputElement).value);
+  }
   onSubmit() {
     if (this.form.invalid) return;
 

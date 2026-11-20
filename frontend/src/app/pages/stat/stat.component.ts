@@ -56,7 +56,7 @@ export class StatComponent implements OnInit {
     plugins: {
       legend: {
         position: 'top',
-        labels: { color: '#e2e8f0', font: { family: 'Inter, sans-serif' } },
+        labels: { color: '#51565C', font: { family: 'Inter, sans-serif' } },
       },
     },
   };
@@ -66,13 +66,13 @@ export class StatComponent implements OnInit {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        labels: { color: '#e2e8f0', font: { family: 'Inter, sans-serif' } },
+        labels: { color: '#51565C', font: { family: 'Inter, sans-serif' } },
       },
     },
     scales: {
       x: {
         ticks: {
-          color: '#94a3b8',
+          color: '#535e6d',
           autoSkip: false,
           maxRotation: 70,
           minRotation: 70,
@@ -81,19 +81,17 @@ export class StatComponent implements OnInit {
         grid: { color: 'rgba(255, 255, 255, 0.05)' },
       },
       y: {
-        ticks: { color: '#94a3b8' },
+        ticks: { color: '#535e6d' },
         grid: { color: 'rgba(255, 255, 255, 0.05)' },
       },
     },
   };
 
-  // Általános / Fővizsga
   public revisionStatusData = signal<ChartData<'pie'>>({
     labels: ['Érvényes fővizsga', 'Lejárt fővizsga'],
     datasets: [{ data: [], backgroundColor: ['#4ade80', '#ef4444'] }],
   });
 
-  // Mozdony adatok
   public locoTractionData = signal<ChartData<'pie'>>({
     labels: [],
     datasets: [{ data: [], backgroundColor: ['#fb923c', '#38bdf8', '#94a3b8'] }],
@@ -115,7 +113,6 @@ export class StatComponent implements OnInit {
     datasets: [{ data: [], label: 'Sebesség', backgroundColor: ['#eab308'] }],
   });
 
-  // Motorvonat adatok
   public muTractionData = signal<ChartData<'pie'>>({
     labels: [],
     datasets: [{ data: [], backgroundColor: ['#a855f7', '#10b981', '#64748b'] }],
@@ -143,7 +140,6 @@ export class StatComponent implements OnInit {
     datasets: [{ data: [], label: 'Átlagos ülőhely', backgroundColor: ['#06b6d4'] }],
   });
 
-  // Személykocsi adatok
   public carCategoryData = signal<ChartData<'pie'>>({
     labels: [],
     datasets: [
@@ -208,21 +204,18 @@ export class StatComponent implements OnInit {
           ],
         }));
 
-        // Mozdony
         this.applyData(this.locoTractionData, locoStats['traction']);
         this.applyData(this.locoStatusData, locoStats['status']);
         this.applyData(this.locoTypesData, locoStats['types']);
         this.applyData(this.locoLocationsData, locoStats['locations']);
         this.applyData(this.locoVmaxData, locoStats['vmax_distribution']);
 
-        // Motorvonat
         this.applyData(this.muTractionData, muStats['traction']);
         this.applyData(this.muStatusData, muStats['status']);
         this.applyData(this.muTypesData, muStats['types']);
         this.applyData(this.muLocationsData, muStats['locations']);
         this.applyData(this.muAvgSeatsData, muStats['avg_seats_by_type']);
 
-        // Személykocsi
         this.applyData(this.carCategoryData, carStats['categories']);
         this.applyData(this.carVmaxData, carStats['vmax']);
         this.applyData(this.carHomeDepotData, carStats['home_depots']);

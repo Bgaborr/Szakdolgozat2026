@@ -1,13 +1,20 @@
 <div class="suggestions-page">
     <div class="page-header">
-        <div class="header-content">
-            <h2>Várakozási Javaslatok</h2>
-            <p class="subtitle">Itt bírálhatod el a felhasználók által beküldött módosításokat.</p>
-        </div>
+        <h2><i class="bi bi-pencil-square text-warning me-2"></i> Várakozó javaslatok moderálása</h2>
+        <span class="badge badge-pending">
+            Összesen: {{ suggestions().length }} db
+        </span>
     </div>
 
     @if (message()) {
     <div class="alert alert--{{ message()?.type }}">
+        @if (message()?.type === 'success') {
+        <i class="bi bi-check-circle-fill me-2"></i>
+        } @else if (message()?.type === 'error') {
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        } @else {
+        <i class="bi bi-info-circle-fill me-2"></i>
+        }
         {{ message()?.text }}
     </div>
     }
@@ -16,8 +23,9 @@
         @if (isLoading()) {
         <div class="loading">Adatok betöltése folyamatban...</div>
         } @else if (suggestions().length === 0) {
-        <div class="empty">
-            <h3 class="text-success mb-2"><i class="bi bi-check2-circle me-2"></i>Nincs várakozó javaslat!</h3>
+        <div class="empty-state">
+            <i class="bi bi-inbox mb-3 empty-icon"></i>
+            <h4>Nincs várakozó javaslat!</h4>
             <p>Minden beküldött adatot feldolgoztál. Szép munka!</p>
         </div>
         } @else {
@@ -48,7 +56,7 @@
                                 {{ sugg.suggestable?.uic || sugg.suggestable?.track_number || 'Ismeretlen azonosító' }}
                             </span>
                         </td>
-                        <td class="text-muted">Felhasználó #{{ sugg.user_id }}</td>
+                        <td class="text-muted">{{ sugg.user?.name }}</td>
                         <td class="diff-cell">
                             <div class="diff-container">
                                 <div class="data-box old-data">
@@ -71,9 +79,13 @@
                         <td class="date-cell">
                             {{ sugg.created_at | date:'yyyy. MM. dd. HH:mm' }}
                         </td>
-                        <td class="td-actions stacked-actions">
-                            <button class="btn-primary w-100 justify-content-center" (click)="approve(sugg.id)">Elfogad</button>
-                            <button class="btn-danger w-100 justify-content-center" (click)="reject(sugg.id)">Elutasít</button>
+                        <td class="td-actions admin-actions">
+                            <button class="btn-approve" (click)="approve(sugg.id)">
+                                Elfogad
+                            </button>
+                            <button class="btn-reject" (click)="reject(sugg.id)">
+                                Elutasít
+                            </button>
                         </td>
                     </tr>
                     }

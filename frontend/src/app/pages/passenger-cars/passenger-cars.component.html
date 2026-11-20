@@ -11,7 +11,9 @@
 
     @if (success() && !showModal()) { <div class="alert alert--success">{{ success() }}</div> }
     @if (error() && !showModal()) { <div class="alert alert--error">{{ error() }}</div> }
-
+    <div class="search-bar">
+        <input type="text" (input)="updateSearch($event)" placeholder="Keresés pályaszám vagy típus alapján...">
+    </div>
     <div class="table-wrapper">
         @if (loading()) {
         <div class="loading">Személykocsik betöltése...</div>
@@ -26,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (car of cars(); track car.id) {
+                @for (car of filteredCars(); track car.id) {
                 <tr [class.row-inactive]="!car.is_active">
                     <td class="td-city">{{ car.formatted_uic }}</td>
                     <td>{{ car.type?.category?.name }} ({{ car.type?.type_number }})</td>

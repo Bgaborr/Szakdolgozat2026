@@ -13,7 +13,6 @@ class MultipleUnit extends Model
         'service_location_id',
         'next_rev_date',
         'is_active',
-        'number_of_seats',
         'comment'
     ];
     protected $appends = ['formatted_uic'];

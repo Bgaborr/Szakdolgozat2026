@@ -4,7 +4,6 @@
   @include page-container(900px);
 }
 
-// ── Keresés és szűrők ─────────────────────────────────────────────
 .toolbar {
   @include flex-col($space-md);
   margin-bottom: $space-xl;
@@ -46,7 +45,6 @@
   flex-wrap: wrap;
   gap: $space-sm;
 
-  // Telefonon egy sorban, vízszintesen görgethető (nem foglal sok helyet)
   @include mobile {
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -86,7 +84,6 @@
     border-color: $primary-border;
   }
 
-  // Nincs találat ebben a kategóriában az aktuális keresésre
   &--empty:not(.active) {
     opacity: 0.45;
   }
@@ -118,7 +115,6 @@
   text-decoration: underline;
 }
 
-// ── Kategória szakaszok ───────────────────────────────────────────
 .category {
   margin-bottom: $space-xl;
 }
@@ -145,7 +141,6 @@
     font-weight: 600;
   }
 
-  // Vékony vonal a fejléc után
   &::after {
     content: '';
     flex: 1;
@@ -154,13 +149,11 @@
   }
 }
 
-// Egy kategória fogalmai egyetlen lekerekített "kártyában", vékony elválasztókkal
 .term-list {
   @include card(0);
   overflow: hidden;
 }
 
-// ── Egy fogalom (harmonika) ───────────────────────────────────────
 .term {
   border-bottom: 1px solid $border;
   transition: background 0.2s ease;
@@ -171,7 +164,7 @@
 
   &.open {
     background: tint(0.025);
-    box-shadow: inset 3px 0 0 $primary; // bal oldali kiemelő sáv
+    box-shadow: inset 3px 0 0 $primary;
   }
 }
 
@@ -252,7 +245,6 @@
   color: $error;
 }
 
-// Kinyílás animációja: a sor magassága 0fr → 1fr (nem kell fix magasság)
 .term-body {
   display: grid;
   grid-template-rows: 0fr;
@@ -269,19 +261,18 @@
 }
 
 .term-def {
-  max-width: 70ch; // kényelmes sorhossz olvasáshoz
+  max-width: 70ch; 
   padding: 0 $space-lg 1.1rem;
   color: $text-secondary;
   font-size: $text-base;
   line-height: 1.75;
-  white-space: pre-line; // a magyarázatban beírt sortöréseket megtartja
+  white-space: pre-line; 
 
   @include mobile {
     padding: 0 $space-md 1rem;
   }
 }
 
-// Keresett kifejezés kiemelése
 mark {
   padding: 0 2px;
   border-radius: 3px;
@@ -289,7 +280,6 @@ mark {
   color: inherit;
 }
 
-// ── Betöltés közbeni váz ──────────────────────────────────────────
 .skeleton-row {
   height: 54px;
   border-bottom: 1px solid $border;

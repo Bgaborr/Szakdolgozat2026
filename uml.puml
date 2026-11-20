@@ -1,0 +1,44 @@
+@startuml Login és CSRF Védelem
+<style>
+participant {
+    BackgroundColor #4EC8CC
+    LineColor #063971
+    FontColor #0A0A0A
+  }
+database {
+    BackgroundColor #F2F2F2
+    LineColor #063971
+    FontColor #0A0A0A
+  }
+  actor {
+    BackgroundColor #B8B8B6
+    LineColor #354D73
+    FontColor #0A0A0A
+  }
+</style>
+skinparam maxMessageSize 150
+
+actor "Felhasználó (Böngésző)" as user
+participant "Angular (Frontend)" as frontend
+participant "Laravel API (Backend)" as backend
+database "MySQL Adatbázis" as db
+
+== CSRF Védelem és Bejelentkezés (Login) ==
+
+user -> frontend : Email és Jelszó megadása (Login)
+frontend -> backend : GET /sanctum/csrf-cookie\n(CSRF védelem lekérése)
+backend --> frontend : Válasz (Set-Cookie: XSRF-TOKEN)
+
+frontend -> backend : POST /api/auth/login (JSON: email, password)\n[withCredentials: true]
+backend -> db : Felhasználó keresése és jelszó ellenőrzése
+db --> backend : Hitelesítés sikeres
+
+backend -> db : Munkamenet (Session) létrehozása
+db --> backend : Munkamenet rögzítve
+
+backend --> frontend : Válasz (200 OK)\n+ Set-Cookie (laravel_session, HttpOnly)
+note over frontend : A böngésző automatikusan elmenti\na HttpOnly sütit. Nem kell\nLocalStorage-ba menteni.
+
+user -> frontend : Sikeres belépés, átirányítás a Főoldalra
+
+@enduml

@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+  computed,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { ServiceLocationService } from '../../core/services/service-location.service';
@@ -32,6 +39,7 @@ export class MultipleUnitsComponent implements OnInit {
 
   selectedMu = signal<MultipleUnit | null>(null);
   editingMu = signal<MultipleUnit | null>(null);
+  searchQuery = signal<string>('');
 
   error = signal<string | null>(null);
   success = signal<string | null>(null);
@@ -41,6 +49,7 @@ export class MultipleUnitsComponent implements OnInit {
     uic: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(16)]],
     home_depot_id: [null as number | null],
     service_location_id: [null as number | null],
+    next_rev_date: [null as Date | null],
     is_active: [true],
     comment: [''],
     source: ['saját forrás', [Validators.required]],
@@ -85,6 +94,7 @@ export class MultipleUnitsComponent implements OnInit {
       uic: mu.uic,
       home_depot_id: mu.home_depot_id,
       service_location_id: mu.service_location_id,
+      next_rev_date: mu.next_rev_date,
       is_active: mu.is_active,
       comment: mu.comment,
       source: 'saját forrás',
@@ -100,6 +110,7 @@ export class MultipleUnitsComponent implements OnInit {
       uic: mu.uic,
       home_depot_id: mu.home_depot_id,
       service_location_id: mu.service_location_id,
+      next_rev_date: mu.next_rev_date,
       is_active: mu.is_active,
       comment: mu.comment,
       source: 'saját forrás',
@@ -117,6 +128,7 @@ export class MultipleUnitsComponent implements OnInit {
         uic: mu.formatted_uic || mu.uic,
         home_depot_id: mu.home_depot_id,
         service_location_id: mu.service_location_id,
+        next_rev_date: mu.next_rev_date,
         is_active: mu.is_active,
         comment: mu.comment,
       });
@@ -131,6 +143,22 @@ export class MultipleUnitsComponent implements OnInit {
   closeModal() {
     this.showModal.set(false);
     this.error.set(null);
+  }
+
+  filteredMultipleUnits = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    if (!query) return this.multipleunits();
+
+    return this.multipleunits().filter(
+      (mu) =>
+        mu.uic.toLowerCase().includes(query) ||
+        mu.formatted_uic?.toLowerCase().includes(query) ||
+        mu.type?.name?.toLowerCase().includes(query),
+    );
+  });
+
+  updateSearch(event: Event) {
+    this.searchQuery.set((event.target as HTMLInputElement).value);
   }
 
   onSubmit() {

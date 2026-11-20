@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('designation')->nullable();
             $table->string('number_of_seats')->nullable();
             $table->integer('vmax')->nullable();
-            $table->integer('description_id')->nullable();
+            $table->bigInteger('description_id')->nullable();
             $table->timestamps();
         });
     }

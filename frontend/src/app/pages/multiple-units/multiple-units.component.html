@@ -11,7 +11,9 @@
 
     @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
     @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
-
+    <div class="search-bar">
+        <input type="text" (input)="updateSearch($event)" placeholder="Keresés pályaszám vagy típus alapján...">
+    </div>
     <div class="table-wrapper">
         @if (loading()) {
         <div class="loading">Motorvonatok betöltése...</div>
@@ -26,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (mu of multipleunits(); track mu.id) {
+                @for (mu of filteredMultipleUnits(); track mu.id) {
                 <tr [class.row-inactive]="!mu.is_active">
                     <td class="td-city">{{ mu.formatted_uic || mu.uic }}</td>
                     <td>{{ mu.type?.name}}</td>
@@ -102,7 +104,10 @@
                         }
                     </select>
                 </div>
-
+                <div class="field">
+                    <label for="next_rev_date">Következő Rev. (KREV)</label>
+                    <input id="next_rev_date" type="date" formControlName="next_rev_date">
+                </div>
                 <div class="field col-span-2 checkbox-group">
                     <input type="checkbox" formControlName="is_active" id="is_active">
                     <label for="is_active">A jármű jelenleg aktív (Active)</label>
@@ -193,7 +198,11 @@
                         }
                     </select>
                 </div>
-
+                <div class="field">
+                    <label for="next_rev_date_detail">Következő Rev. (KREV)</label>
+                    <input id="next_rev_date_detail" type="text" readonly
+                        [value]="selectedMu()?.next_rev_date || 'Nincs adat'" class="readonly-input">
+                </div>
                 <div class="field col-span-2 checkbox-group readonly-input">
                     <input type="checkbox" formControlName="is_active" id="is_active_detail" onclick="return false;">
                     <label for="is_active_detail">A jármű jelenleg aktív (Active)</label>

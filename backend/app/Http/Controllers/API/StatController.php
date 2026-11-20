@@ -141,7 +141,8 @@ class StatController extends Controller
                 return $mu->type ? $mu->type->name : 'Ismeretlen';
             })
             ->map(function ($group) {
-                return round($group->avg('number_of_seats'));
+                $type = $group->first()->type;
+                return $type ? (int) $type->number_of_seats : 0;
             });
 
         return response()->json([

@@ -1,4 +1,11 @@
-import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  OnInit,
+  ChangeDetectionStrategy,
+  computed,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Locomotive } from '../../models/locomotive.model';
@@ -31,6 +38,7 @@ export class LocomotivesComponent implements OnInit {
   showDetails = signal(false);
   editingLoc = signal<Locomotive | null>(null);
   selectedLoc = signal<Locomotive | null>(null);
+  searchQuery = signal<string>('');
 
   error = signal<string | null>(null);
   success = signal<string | null>(null);
@@ -130,6 +138,21 @@ export class LocomotivesComponent implements OnInit {
   closeDetails() {
     this.showDetails.set(false);
     this.selectedLoc.set(null);
+  }
+  filteredLocomotives = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    if (!query) return this.locomotives();
+
+    return this.locomotives().filter(
+      (loc) =>
+        loc.uic.toLowerCase().includes(query) ||
+        loc.formatted_uic?.toLowerCase().includes(query) ||
+        loc.type?.name?.toLowerCase().includes(query),
+    );
+  });
+
+  updateSearch(event: Event) {
+    this.searchQuery.set((event.target as HTMLInputElement).value);
   }
 
   onSubmit() {

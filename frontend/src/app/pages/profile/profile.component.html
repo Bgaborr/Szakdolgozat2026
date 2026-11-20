@@ -20,7 +20,8 @@
         </div>
         <div class="field">
             <label for="name-input">Név</label>
-            <input id="name-input" type="text" formControlName="name" placeholder="Írd be a neved" />
+            <input id="name-input" type="text" formControlName="name" placeholder="Írd be a neved"
+                autocomplete="name" />
             @if (form.get('name')?.invalid && form.get('name')?.touched) {
             <small class="text-danger">A név megadása kötelező (min. 3 karakter).</small>
             }
@@ -28,7 +29,8 @@
 
         <div class="field">
             <label for="email-input">E-mail cím</label>
-            <input id="email-input" type="email" formControlName="email" placeholder="pelda@email.hu" />
+            <input id="email-input" type="email" formControlName="email" placeholder="pelda@email.hu"
+                autocomplete="email" />
             @if (form.get('email')?.invalid && form.get('email')?.touched) {
             <small class="text-danger">Érvényes e-mail cím megadása kötelező.</small>
             }
@@ -36,7 +38,7 @@
 
         <div class="field">
             <label for="password">Új jelszó</label>
-            <input id="password" type="password" formControlName="password"
+            <input id="password" type="password" formControlName="password" autocomplete="password"
                 placeholder="Hagyd üresen, ha nem akarod módosítani" />
         </div>
         <div class="field">

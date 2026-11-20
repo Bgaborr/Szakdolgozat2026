@@ -103,7 +103,7 @@
                 <span><i class="bi bi-person-circle"></i> {{ uploaderName(post) ?? 'Ismeretlen feltöltő' }}</span>
                 <span><i class="bi bi-calendar3"></i> {{ post.created_at | date:'yyyy. MM. dd.' }}</span>
                 @if (canDelete(post)) {
-                <button type="button" class="lb-delete" (click)="askDelete(post)">
+                <button type="button" class="btn-primary" (click)="askDelete(post)">
                     <i class="bi bi-trash3"></i> Kép törlése
                 </button>
                 }

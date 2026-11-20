@@ -34,24 +34,11 @@ export class LoginComponent {
 
     this.loading.set(true);
     this.error.set(null);
-
-    /*  this.authService.login(this.form.value as any).subscribe({
-      next: () => {
-        this.loading.set(false);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err: HttpErrorResponse) => {
-        this.loading.set(false);
-        this.error.set('Hibás email vagy jelszó.');
-      },
-    });
-    */
-
     this.authService.getCsrfCookie().subscribe({
       next: () => {
         this.authService.login(this.form.value as any).subscribe({
           next: () => {
-            const canAccessDashboard = this.authService.hasPermission('view-admin-dashboard');
+            const canAccessDashboard = this.authService.hasPermission('view-admin-panel');
             if (canAccessDashboard) {
               this.router.navigate(['/dashboard']);
             } else {

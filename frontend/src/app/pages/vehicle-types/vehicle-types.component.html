@@ -1,0 +1,155 @@
+<div class="locomotive-page">
+    <div class="page-header">
+        @if (authservice.hasPermission("edit-vehicles")) {
+        <h2>Járműtípusok (Admin felület)</h2>
+        <button class="btn-primary" (click)="openCreate()">+ Új típus</button>
+        } @else {
+        <h2>Járműtípusok</h2>
+        }
+    </div>
+
+    <div class="tabs">
+        <button [class.active]="activeTab() === 'locomotive'" (click)="switchTab('locomotive')">Mozdonyok</button>
+        <button [class.active]="activeTab() === 'multiple_unit'"
+            (click)="switchTab('multiple_unit')">Motorvonatok</button>
+        <button [class.active]="activeTab() === 'passenger_car'"
+            (click)="switchTab('passenger_car')">Személykocsik</button>
+    </div>
+
+    @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
+    @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+
+    <div class="search-bar">
+        <input type="text" (input)="updateSearch($event)" placeholder="Keresés megnevezés vagy sorozatszám alapján...">
+    </div>
+
+    <div class="table-wrapper">
+        @if (loading()) {
+        <div class="loading">Típusok betöltése...</div>
+        } @else {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sorozatszám</th>
+                    <th>Megnevezés</th>
+                    <th>Vmax</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (type of filteredTypes(); track type.id) {
+                <tr>
+                    <td><strong>{{ type.type_number }}</strong></td>
+                    <td>{{ type.name }}</td>
+                    <td>{{ type.vmax ? type.vmax + ' km/h' : '-' }}</td>
+                    <td class="td-actions">
+                        <button class="btn-secondary" (click)="openDetails(type)">Részletek</button>
+                        @if (authservice.hasPermission("edit-vehicles")) {
+                        <button class="btn-edit" (click)="openEdit(type)">Szerkesztés</button>
+                        <button class="btn-danger" (click)="deleteType(type)">Törlés</button>
+                        } @else if(authservice.isLoggedIn()) {
+                        <button class="btn-suggest" (click)="suggestType(type)">Javaslat</button>
+                        }
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="4" class="empty">Nincs rögzített típus ebben a kategóriában.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+@if (showModal()) {
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>{{ editingType() ? (authservice.hasPermission("edit-vehicles") ? 'Típus szerkesztése' :
+                'Módosítási javaslat') : 'Új típus' }}</h2>
+            <button class="modal-close" (click)="closeModal()">&times;</button>
+        </div>
+        @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label>Sorozatszám / Típus kód</label>
+                    <input type="text" formControlName="type_number" placeholder="Pl.: 431, 415, Flirt...">
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Megnevezés</label>
+                    <input type="text" formControlName="name" placeholder="Pl.: V43 Szili, Stadler Flirt...">
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Maximális sebesség (Vmax)</label>
+                    <input type="number" formControlName="vmax" placeholder="km/h">
+                </div>
+
+                @if (!authservice.hasPermission('edit-vehicles')) {
+                <div class="field col-span-2">
+                    <hr>
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Módosítás forrása</label>
+                    <select formControlName="source" class="form-select">
+                        <option value="saját forrás">Saját forrás (Saját észlelés / fotó)</option>
+                        <option value="más forrás">Más forrás (Hivatalos irat, weboldal stb.)</option>
+                    </select>
+                </div>
+
+                @if (form.get('source')?.value === 'más forrás') {
+                <div class="field col-span-2">
+                    <label>Forrás megnevezése / Linkje</label>
+                    <input type="text" formControlName="source_link" placeholder="Pl.: hbweb.hu linkje...">
+                </div>
+                }
+                }
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
+                <button type="submit" class="btn-primary" [disabled]="form.invalid">Mentés</button>
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+@if (showDetails()) {
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Típus részletes információk</h2>
+            <button class="modal-close" (click)="closeDetails()">&times;</button>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="modal-body form-grid">
+                <div class="field col-span-2">
+                    <label>Sorozatszám</label>
+                    <input type="text" formControlName="type_number" readonly class="readonly-input">
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Megnevezés</label>
+                    <input type="text" formControlName="name" readonly class="readonly-input">
+                </div>
+
+                <div class="field col-span-2">
+                    <label>Maximális sebesség</label>
+                    <input type="text" readonly [value]="(selectedType()?.vmax || 0) + ' km/h'" class="readonly-input">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" (click)="closeDetails()">Bezárás</button>
+            </div>
+        </form>
+    </div>
+</div>
+}

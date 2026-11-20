@@ -114,6 +114,12 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'admin/vehicle-types',
+    canActivate: [authGuard, permissionGuard('manage-vehicle-types')],
+    loadComponent: () =>
+      import('./pages/vehicle-types/vehicle-types.component').then((m) => m.VehicleTypesComponent),
+  },
+  {
     path: '**',
     redirectTo: '/home',
   },

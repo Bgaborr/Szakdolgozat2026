@@ -9,6 +9,7 @@ class MultipleUnitType extends Model
     protected $fillable = [
         'name',
         'type_number',
+        'number_of_seats',
         'description_id'
     ];
 

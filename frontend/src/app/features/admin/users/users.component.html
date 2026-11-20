@@ -6,10 +6,10 @@
     </div>
     <button class="btn-primary" (click)="openCreate()">+ Új felhasználó</button>
   </div>
-  
+
   @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
   @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
-  
+
   <div class="table-wrapper">
     @if (loading()) {
     <div class="loading">Betöltés...</div>
@@ -62,26 +62,26 @@
 </div>
 
 @if (showModal()) {
-<div class="modal-overlay" (click)="closeModal()">
-  <div class="modal" (click)="$event.stopPropagation()">
+<div class="modal-overlay">
+  <div class="modal">
     <div class="modal-header">
       <h2>{{ editingUser() ? 'Felhasználó szerkesztése' : 'Új felhasználó' }}</h2>
       <button class="modal-close" (click)="closeModal()">&times;</button>
     </div>
-    
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal-body">
       @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
-      
+
       <div class="field">
         <label>Név</label>
         <input type="text" formControlName="name" placeholder="Teljes név" />
       </div>
-      
+
       <div class="field">
         <label>Email</label>
         <input type="email" formControlName="email" placeholder="email@example.com" />
       </div>
-      
+
       <div class="field">
         <label>
           Jelszó
@@ -89,7 +89,7 @@
         </label>
         <input type="password" formControlName="password" placeholder="••••••••" />
       </div>
-      
+
       <div class="field">
         <label>Szerepkörök</label>
         <div class="role-checkboxes">
@@ -101,7 +101,7 @@
           }
         </div>
       </div>
-      
+
       <div class="modal-footer">
         <button type="button" class="btn-secondary" (click)="closeModal()">Mégse</button>
         <button type="submit" class="btn-primary" [disabled]="form.invalid">

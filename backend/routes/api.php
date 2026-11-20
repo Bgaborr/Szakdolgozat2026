@@ -38,7 +38,6 @@ Route::middleware(['auth:sanctum', 'permission:manage-users'])->group(function (
     Route::apiResource('/permissions', PermissionController::class);
 });
 
-//GET
 Route::get('/service-locations', [ServiceLocationController::class, 'index']);
 Route::get('/service-locations/{id}', [ServiceLocationController::class, 'show']);
 
@@ -54,13 +53,14 @@ Route::get('/passenger-cars/{id}', [PassengerCarController::class, 'show']);
 Route::get('/passenger-car-types', [PassengerCarTypeController::class, 'index']);
 Route::get('/locomotive-types', [LocomotivTypeController::class, 'index']);
 Route::get('/mu-types', [MultipleUnitTypeController::class, 'index']);
-
+Route::get('/glossary', [GlossaryController::class, 'index']);
 Route::get('/gallery', [GalleryPostController::class, 'index']);
+
 Route::middleware(['permission:edit-gallery'])->group(function () {
     Route::delete('/gallery/{id}', [GalleryPostController::class, 'destroy']);
 });
 
-Route::get('/glossary', [GlossaryController::class, 'index']);
+
 
 Route::middleware(['auth:sanctum', 'permission:approve-gallery'])->group(function () {
     Route::get('/gallery/pending', [GalleryPostController::class, 'getPending']);
@@ -85,6 +85,19 @@ Route::middleware(['auth:sanctum', 'permission:edit-vehicles'])->group(function 
     Route::post('/mu', [MultipleUnitController::class, 'store']);
     Route::put('/mu/{id}', [MultipleUnitController::class, 'update']);
     Route::delete('/mu/{id}', [MultipleUnitController::class, 'destroy']);
+});
+Route::middleware(['auth:sanctum', 'permission:manage-vehicle-types'])->group(function () {
+    Route::post('/passenger-car-types', [PassengerCarTypeController::class, 'store']);
+    Route::put('/passenger-car-types/{id}', [PassengerCarTypeController::class, 'update']);
+    Route::delete('/passenger-car-types/{id}', [PassengerCarTypeController::class, 'destroy']);
+
+    Route::post('/locomotive-types', [LocomotivTypeController::class, 'store']);
+    Route::put('/locomotive-types/{id}', [LocomotivTypeController::class, 'update']);
+    Route::delete('/locomotive-types/{id}', [LocomotivTypeController::class, 'destroy']);
+
+    Route::post('/mu-types', [MultipleUnitTypeController::class, 'store']);
+    Route::put('/mu-types/{id}', [MultipleUnitTypeController::class, 'update']);
+    Route::delete('/mu-types/{id}', [MultipleUnitTypeController::class, 'destroy']);
 });
 
 Route::middleware(['auth:sanctum', 'permission:stat-view'])->group(function () {

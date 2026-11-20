@@ -1,0 +1,52 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.locomotive-page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-header {
+  @include page-header;
+  @include flex(center, space-between);
+  margin-bottom: $space-md;
+
+  h2 {
+    font-size: $text-lg;
+    color: $text-primary;
+    margin: 0;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0;
+
+  button {
+    background: none;
+    border: none;
+    padding: $space-sm $space-md;
+    font-size: 1rem;
+    color: #64748b;
+    cursor: pointer;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+
+    &.active {
+      color: $text-primary;
+      border-bottom-color: $primary;
+    }
+
+    &:hover:not(.active) {
+      color: #334155;
+    }
+  }
+}
+
+.search-bar {
+  @include search-bar;
+}

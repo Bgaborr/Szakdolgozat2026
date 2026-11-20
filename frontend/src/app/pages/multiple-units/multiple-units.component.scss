@@ -3,3 +3,6 @@
 .mu-page {
   @include page-container;
 }
+.search-bar {
+  @include search-bar;
+}

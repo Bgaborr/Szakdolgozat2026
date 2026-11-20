@@ -13,7 +13,6 @@ class GalleryPost extends Model
         'user_id',
         'image_path',
         'vehicle_category',
-        'type_id',
         'is_approved'
     ];
     public function user(): BelongsTo

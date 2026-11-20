@@ -43,7 +43,6 @@ class MultipleUnitController extends Controller
         return $rules;
     }
 
-    /** A number_of_seats oszlop NOT NULL: null helyett 0-t mentünk. */
     private function withZeroSeats(array $validated): array
     {
         if (array_key_exists('number_of_seats', $validated) && $validated['number_of_seats'] === null) {
@@ -53,19 +52,15 @@ class MultipleUnitController extends Controller
         return $validated;
     }
 
-    //GET/api/mu
     public function index(): JsonResponse
     {
         return response()->json(MultipleUnit::with(self::RELATIONS)->get());
     }
 
-    //GET/api/mu/{id}
     public function show($id): JsonResponse
     {
         return response()->json(MultipleUnit::with(self::RELATIONS)->findOrFail($id));
     }
-
-    //POST/api/mu
     public function store(Request $request): JsonResponse
     {
         $validated = $this->withZeroSeats($request->validate($this->rules()));
@@ -79,7 +74,6 @@ class MultipleUnitController extends Controller
         ], 201);
     }
 
-    //PUT/api/mu/{id}
     public function update(Request $request, $id): JsonResponse
     {
         $mu = MultipleUnit::findOrFail($id);
@@ -95,7 +89,6 @@ class MultipleUnitController extends Controller
         ]);
     }
 
-    //DELETE/api/mu/{id}
     public function destroy($id): JsonResponse
     {
         $mu = MultipleUnit::findOrFail($id);

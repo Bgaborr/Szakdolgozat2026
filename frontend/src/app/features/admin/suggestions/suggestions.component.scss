@@ -1,10 +1,124 @@
 @use 'styles/abstracts' as *;
 
 .suggestions-page {
-  @include page-container($page-width-wide);
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-// ── Táblázat cellák ───────────────────────────────────────────────
+.page-header {
+  @include page-header;
+  @include flex(center, space-between);
+  margin-bottom: $space-lg;
+
+  h2 {
+    font-size: $text-lg;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  .badge-pending {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+}
+.alert {
+  margin-bottom: $space-md;
+  padding: 1rem;
+  border-radius: $radius-md;
+
+  &--success {
+    @include alert($success, $success-bg, $success-border);
+  }
+  &--error {
+    @include alert($error, $error-bg, $error-border);
+  }
+  &--info {
+    @include alert($info, $info-bg, $info-border);
+  }
+}
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px dashed $border;
+  border-radius: $radius-md;
+
+  .empty-icon {
+    font-size: 2.5rem;
+    color: $text-subtle;
+    display: block;
+    animation: gentle-pulse 3s infinite;
+  }
+
+  h4 {
+    color: $text-primary;
+    margin: $space-md 0 $space-xs;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $text-sm;
+    margin: 0;
+  }
+}
+
+@keyframes gentle-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: $text-sm;
+    padding: 0.6rem;
+    border-radius: $radius-sm;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn-approve {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid #28a745;
+
+    &:hover {
+      background-color: #28a745;
+      color: #fff;
+    }
+  }
+
+  .btn-reject {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+
+    &:hover {
+      background-color: #dc3545;
+      color: #fff;
+    }
+  }
+}
+
 .uic-text {
   display: inline-block;
   margin-top: $space-sm;
@@ -18,21 +132,7 @@
   font-size: $text-sm;
   white-space: nowrap;
 }
-.stacked-actions {
-  > * {
-    display: flex;
-    width: 100%;
-  }
 
-  > * + * {
-    margin-left: 0;
-    margin-top: $space-sm;
-  }
-}
-
-// ── Jármű-kategória badge ─────────────────────────────────────────
-// Az alapot a globális .badge adja, itt csak a színek. A korábbi tömör
-// színek helyett a szerepkör-badge-ekkel egységes halvány stílus.
 .badge {
   &--car {
     @include badge($primary-text, $primary-muted);
@@ -45,7 +145,6 @@
   }
 }
 
-// ── Diff kártyák (régi vs új) ─────────────────────────────────────
 .diff-cell {
   min-width: 500px;
 }
@@ -80,11 +179,11 @@
     white-space: pre-wrap;
     overflow-wrap: break-word;
     font-family: $font-mono;
+    margin: 0;
   }
 
   &.old-data {
     border-color: $error-border;
-
     .box-header {
       background-color: $error-bg-hover;
       color: $error;
@@ -97,7 +196,6 @@
 
   &.new-data {
     border-color: $success-border;
-
     .box-header {
       background-color: $success-bg-hover;
       color: $success;

@@ -13,10 +13,13 @@ class PermissionController extends Controller
 {
     use FormatsUsers;
     private const SYSTEM_PERMISSIONS = [
+        'manage-users',
         'view-admin-panel',
         'approve-gallery',
         'approve-suggestions',
+        'edit-gallery',
         'delete-images',
+        'view-permissions',
         'glossary-edit',
     ];
     private function requireTopLevel(Request $request): void

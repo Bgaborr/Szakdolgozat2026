@@ -6,15 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Útvonal-védelem jogosultság alapján.
- *
- * Használat az útvonalaknál (bármelyik felsorolt jogosultság elég):
- *   Route::post('/glossary', [GlossaryController::class, 'store'])->middleware('permission:glossary-edit');
- *
- * Regisztráció (Laravel 11/12, bootstrap/app.php):
- *   $middleware->alias(['permission' => \App\Http\Middleware\EnsureHasPermission::class]);
- */
 class EnsureHasPermission
 {
     public function handle(Request $request, Closure $next, string ...$permissions): Response

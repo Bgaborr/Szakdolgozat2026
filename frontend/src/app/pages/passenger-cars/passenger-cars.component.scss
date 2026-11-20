@@ -23,3 +23,7 @@
 textarea {
   resize: none;
 }
+
+.search-bar {
+  @include search-bar;
+}

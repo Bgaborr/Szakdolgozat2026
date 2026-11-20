@@ -7,6 +7,7 @@ export interface MultipleUnit {
   uic: string;
   home_depot_id?: number | null;
   service_location_id?: number | null;
+  next_rev_date?: Date | null;
   is_active: boolean;
   comment?: string | null;
 

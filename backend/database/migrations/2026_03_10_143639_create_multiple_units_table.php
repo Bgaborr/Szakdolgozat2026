@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('multiple_unit_type_id')->constrained('multiple_unit_types');
             $table->string('uic', 16)->unique();
+            $table->date('next_rev_date')->nullable();
             $table->foreignId('home_depot_id')->constrained('service_locations');
             $table->foreignId('service_location_id')->constrained('service_locations');
-            $table->date('next_rev_date')->nullable();
             $table->boolean('is_active')->default(true);
             $table->integer('number_of_seats')->default(0);
             $table->string('comment')->nullable();

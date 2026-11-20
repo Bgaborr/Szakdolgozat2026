@@ -11,7 +11,9 @@
 
     @if (success()) { <div class="alert alert--success">{{ success() }}</div> }
     @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
-
+    <div class="search-bar">
+        <input type="text" (input)="updateSearch($event)" placeholder="Keresés pályaszám vagy típus alapján...">
+    </div>
     <div class="table-wrapper">
         @if (loading()) {
         <div class="loading">Mozdonyok betöltése...</div>
@@ -26,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (loc of locomotives(); track loc.id) {
+                @for (loc of filteredLocomotives(); track loc.id) {
                 <tr [class.row-inactive]="!loc.is_active">
                     <td class="td-city">{{ loc.formatted_uic }}</td>
                     <td>{{ loc.type?.name || '-' }}</td>
@@ -64,12 +66,12 @@
                 'Módosításijavaslat') : 'Új mozdony' }}</h2>
             <button class="modal-close" (click)="closeModal()">&times;</button>
         </div>
-
+        @if (error()) { <div class="alert alert--error">{{ error() }}</div> }
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="modal-body form-grid">
                 <div class="field col-span-2">
                     <label>UIC Pályaszám</label>
-                    <input type="text" formControlName="uic" placeholder="Pl.: 50552005001-2">
+                    <input id="uic_input" type="text" formControlName="uic" placeholder="Pl.: 50552005001-2">
                 </div>
 
                 <div class="field col-span-2">

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('image_path');
-            $table->string('vehicle_category');
+            $table->enum("vehicle_category", ["locomotive", "multiple_unit", "passenger_car"]);
             $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('type_number', 24)->unique();
             $table->string('name');
             $table->string('vmax')->nullable();
-            $table->integer('description_id')->nullable();
+            $table->bigInteger('description_id')->nullable();
             $table->timestamps();
         });
     }

@@ -12,8 +12,6 @@ class PassengerCar extends Model
         'next_rev_date',
         'home_depot_id',
         'service_location_id',
-        'number_of_seats',
-        'vmax',
         'is_active',
         'comment'
     ];
@@ -35,11 +33,8 @@ class PassengerCar extends Model
     {
         return $this->morphMany(Suggestion::class, 'suggestable');
     }
-    public function getVmaxAttribute($value)
+    public function getVmaxAttribute()
     {
-        if ($value > 0) {
-            return $value;
-        }
         return $this->type->vmax ?? 0;
     }
 

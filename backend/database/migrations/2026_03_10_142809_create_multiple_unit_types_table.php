@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('type_number', 24)->unique();
             $table->string('name');
-            $table->integer('description_id')->nullable();
+            $table->integer('number_of_seats')->default(0);
+            $table->bigInteger('description_id')->nullable();
             $table->timestamps();
         });
     }

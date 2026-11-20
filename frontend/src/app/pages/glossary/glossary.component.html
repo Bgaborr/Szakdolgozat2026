@@ -89,11 +89,11 @@
                     <div class="term-actions">
                         <button type="button" class="btn-icon" (click)="openModal(item)"
                             [attr.aria-label]="'Szerkesztés: ' + item.term" title="Szerkesztés">
-                            <i class="bi bi-pencil-square"></i>
+                            ✏️
                         </button>
                         <button type="button" class="btn-icon btn-icon--danger" (click)="deleteGlossary(item)"
                             [attr.aria-label]="'Törlés: ' + item.term" title="Törlés">
-                            <i class="bi bi-trash"></i>
+                            🗑️
                         </button>
                     </div>
                     }
@@ -133,9 +133,8 @@
 </div>
 
 @if (isModalOpen()) {
-<div class="modal-overlay" (click)="closeModal()">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="glossary-modal-title"
-        (click)="$event.stopPropagation()">
+<div class="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="glossary-modal-title">
         <div class="modal-header">
             <h2 id="glossary-modal-title">{{ isEditing() ? 'Fogalom szerkesztése' : 'Új fogalom hozzáadása' }}</h2>
             <button type="button" class="modal-close" (click)="closeModal()" aria-label="Bezárás">

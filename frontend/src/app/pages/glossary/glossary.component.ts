@@ -183,7 +183,18 @@ export class GlossaryComponent implements OnInit {
       },
       error: (err) => {
         this.saving.set(false);
-        this.saveError.set(err?.error?.message || 'Hiba történt a mentés során.');
+
+        let errorMessage = 'Váratlan hiba történt a mentés során.';
+
+        if (err.status === 422) {
+          errorMessage = 'Érvénytelen vagy hiányos adatokat adott meg!';
+        } else if (err.status === 403 || err.status === 401) {
+          errorMessage = 'Nincs jogosultsága a mentés végrehajtásához.';
+        } else if (err.status === 500) {
+          errorMessage = 'Szerverhiba történt. Kérjük, próbálja újra később.';
+        }
+
+        this.saveError.set(errorMessage);
       },
     });
   }
