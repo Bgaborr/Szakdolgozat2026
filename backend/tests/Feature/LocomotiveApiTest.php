@@ -13,11 +13,11 @@ use Tests\TestCase;
 
 class LocomotiveApiTest extends TestCase
 {
-
+    use RefreshDatabase;
     private function createAdminUser(): User
     {
         $user = User::factory()->create();
-        $role = Role::firstOrCreate(['name' => 'admin'], ['label' => 'Admin']);
+        $role = Role::firstOrCreate(['name' => 'admin2'], ['label' => 'Admin2']);
         $permission = Permission::firstOrCreate(['name' => 'edit-vehicles',   'description' => 'Járművek szerkesztése']);
 
         $role->permissions()->attach($permission->id);

@@ -11,6 +11,7 @@ use Tests\TestCase;
 
 class GalleryApiTest extends TestCase
 {
+    use RefreshDatabase;
     #[Test]
     public function regisztralt_felhasznalo_tud_kepet_feltolteni_moderaciora()
     {

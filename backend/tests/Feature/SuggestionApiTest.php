@@ -12,6 +12,7 @@ use Tests\TestCase;
 
 class SuggestionApiTest extends TestCase
 {
+    use RefreshDatabase;
     #[Test]
     public function felhasznalo_tud_modositasi_javaslatot_bekuldeni_mozdonyhoz()
     {

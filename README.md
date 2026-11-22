@@ -52,9 +52,9 @@ docker compose up -d --build
 ## Adatbázis beállítása
 
 ```bash
-docker compose exec backend php artisan key:generate
-docker compose exec backend php artisan migrate --seed
-docker compose exec backend php artisan storage:link
+docker compose exec laravel php artisan key:generate
+docker compose exec laravel php artisan migrate --seed
+docker compose exec laravel php artisan storage:link
 ```
 
 _(Ha a `docker-compose.yml` fájlban eltérő a backend szolgáltatás neve, a `backend` szót cseréld le arra.)_
