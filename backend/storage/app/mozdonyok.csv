@@ -1,0 +1,739 @@
+﻿UIC;Típus;Becenév;Vmax;Honállomás;Aktív;Komment
+92 55 0418 103-1;START 418;Csörgő;100;Békéscsaba;1;retró festés
+92 55 0418 104-9;START 418;Csörgő;100;Békéscsaba;0;selejtezésre vár
+92 55 0418 106-4;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 108-0;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 110-6;START 418;Csörgő;100;Hatvan;0;selejtezésre vár
+92 55 0418 112-2;START 418;Csörgő;100;Debrecen;1;retró festés
+92 55 0418 115-5;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 118-9;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 120-5;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 122-1;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 126-2;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 128-8;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 130-4;START 418;Csörgő;100;Hatvan;0;baleset
+92 55 0418 131-2;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 135-3;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 140-3;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 142-9;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 143-7;START 418;Csörgő;100;Békéscsaba;1;retró festés
+92 55 0418 145-2;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 146-0;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 148-6;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 149-4;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 150-2;START 418;Csörgő;100;Hatvan;0;selejtezésre vár
+92 55 0418 152-8;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 153-6;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 154-4;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 156-9;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 157-7;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 163-5;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 164-3;START 418;Csörgő;100;Hatvan;0;selejtezésre vár
+92 55 0418 165-0;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 166-8;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 167-6;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 170-0;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 171-9;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 172-6;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 174-2;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 175-9;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 177-5;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 178-3;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 185-8;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 187-4;START 418;Csörgő;100;Békéscsaba;1;
+92 55 0418 188-2;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 191-6;START 418;Csörgő;100;Hatvan;0;selejtezésre vár
+92 55 0418 194-0;START 418;Csörgő;100;Békéscsaba;0;selejtezésre vár
+92 55 0418 197-3;START 418;Csörgő;100;Hatvan;1;
+92 55 0418 198-1;START 418;Csörgő;100;Békéscsaba;0;selejtezésre vár
+92 55 0418 202-1;START 418;Csörgő;100;Békéscsaba;0;
+92 55 0418 203-9;START 418;Csörgő;100;Békéscsaba;0;selejtezésre vár
+92 55 0418 204-7;START 418;Csörgő;100;Dombóvár;0;
+92 55 0418 211-2;START 418;Csörgő;100;Békéscsaba;0;
+92 55 0418 301-0;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 302-9;START 418;Csörgő;100;Celldömölk;0;selejtezésre vár
+92 55 0418 303-7;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 304-5;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 305-2;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 306-0;START 418;Csörgő;100;Celldömölk;0;selejtezésre vár
+92 55 0418 307-8;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 308-6;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 309-4;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 310-2;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 311-0;START 418;Csörgő;100;Celldömölk;0;
+92 55 0418 312-8;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 313-6;START 418;Csörgő;100;Celldömölk;0;selejtezésre vár
+92 55 0418 314-4;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0418 315-1;START 418;Csörgő;100;Celldömölk;0;selejtezésre vár
+92 55 0418 316-9;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 317-7;START 418;Csörgő;100;Celldömölk;0;
+92 55 0418 318-5;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 319-3;START 418;Csörgő;100;Celldömölk;0;
+92 55 0418 320-1;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 321-9;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 322-7;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 323-5;START 418;Csörgő;100;Szombathely;1;
+92 55 0418 324-3;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 325-0;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 326-8;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 327-6;START 418;Csörgő;100;Celldömölk;0;selejtezésre vár
+92 55 0418 328-4;START 418;Csörgő;100;Celldömölk;0;
+92 55 0418 329-2;START 418;Csörgő;100;Székesfehérvár;0;selejtezésre vár
+92 55 0418 330-0;START 418;Csörgő;100;Celldömölk;1;
+92 55 0418 331-8;START 418;Csörgő;100;Székesfehérvár;0;selejtezésre vár
+92 55 0418 332-6;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 333-4;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 334-2;START 418;Csörgő;100;Debrecen;1;
+92 55 0418 335-9;START 418;Csörgő;100;Debrecen;0;selejtezésre vár
+92 55 0408 201-5;START 408;Púpos;100;Záhony;0;
+92 55 0408 224-7;START 408;Púpos;100;Hatvan;1;
+92 55 0408 235-3;START 408;Púpos;100;Hatvan;0;
+92 55 0408 301-3;START 408.3;Púpos;100;Záhony;1;
+92 55 0408 302-1;START 408.3;Púpos;100;Záhony;0;
+92 55 0408 303-9;START 408.3;Púpos;100;Záhony;1;
+92 55 0628 001-3;START 628;Szergej;100;Záhony;1;retró festés (telipiros)
+92 55 0628 053-4;START 628;Szergej;100;Záhony;0;
+92 55 0628 057-5;START 628;Szergej;100;Záhony;1;
+92 55 0628 069-0;VHÍD M62;Szergej;100;-;1;
+92 55 0628 089-8;START 628;Szergej;100;Szolnok;1;
+92 55 0628 096-3;START 628;Szergej;100;Szeged;1;
+92 55 0628 104-5;VHÍD M62;Szergej;100;-;1;
+92 55 0628 109-4;START 628;Szergej;100;Szeged;1;
+92 55 0628 116-9;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 120-1;START 628;Szergej;100;Szolnok;1;
+92 55 0628 127-6;START 628;Szergej;100;Záhony;1;retró festés
+92 55 0628 145-8;START 628;Szergej;100;Szeged;0;
+92 55 0628 151-6;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 157-3;START 628;Szergej;100;Záhony;1;
+92 55 0628 163-1;START 628;Szergej;100;Záhony;0;
+92 55 0628 165-6;START 628;Szergej;100;Záhony;1;
+92 55 0628 168-0;KV 628;Szergej;100;-;1;
+92 55 0628 175-5;START 628;Szergej;100;Dombóvár;0;selejtezésre vár
+92 55 0628 178-9;VHÍD M62;Szergej;100;-;1;628230
+92 55 0628 187-0;START 628;Szergej;100;Záhony;1;retró festés
+92 55 0628 191-2;START 628;Szergej;100;Záhony;1;
+92 55 0628 194-6;START 628;Szergej;100;Szeged;1;retró festés
+92 55 0628 203-5;START 628;Szergej;100;Záhony;1;
+92 55 0628 204-3;START 628;Szergej;100;Debrecen;0;selejtezésre vár
+92 55 0628 210-0;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 213-4;START 628;Szergej;100;Miskolc;0;selejtezésre vár
+92 55 0628 215-9;START 628;Szergej;100;Dombóvár;0;
+92 55 0628 223-3;START 628;Szergej;100;Szeged;0;
+92 55 0628 224-1;START 628;Szergej;100;Hatvan;0;selejtezésre vár
+92 55 0628 228-2;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 231-6;START 628;Szergej;100;Szeged;1;
+92 55 0628 232-4;START 628;Szergej;100;Záhony;1;
+92 55 0628 235-7;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 260-5;START 628;Szergej;100;Dombóvár;0;selejtezésre vár
+92 55 0628 265-4;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 271-2;START 628;Szergej;100;Székesfehérvár;0;selejtezésre vár
+92 55 0628 301-7;START 628;Szergej;100;Celldömölk;1;
+92 55 0628 302-5;START 628;Szergej;100;Celldömölk;0;
+92 55 0628 303-3;START 628;Szergej;100;Celldömölk;0;
+92 55 0628 304-1;START 628;Szergej;100;Celldömölk;1;
+92 55 0628 305-8;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 306-6;START 628;Szergej;100;Székesfehérvár;0;selejtezésre vár
+92 55 0628 307-4;START 628;Szergej;100;Miskolc;1;
+92 55 0628 308-2;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 309-0;START 628;Szergej;100;Dombóvár;0;
+92 55 0628 310-8;START 628;Szergej;100;Celldömölk;1;
+92 55 0628 311-6;START 628;Szergej;100;Miskolc;1;
+92 55 0628 312-4;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 313-2;START 628;Szergej;100;Debrecen;1;
+92 55 0628 314-0;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 315-7;START 628;Szergej;100;Miskolc;0;
+92 55 0628 316-5;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 317-3;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 318-1;START 628;Szergej;100;Miskolc;0;selejtezésre vár
+92 55 0628 319-9;START 628;Szergej;100;Celldömölk;1;
+92 55 0628 320-7;START 628;Szergej;100;Miskolc;1;
+92 55 0628 321-5;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 322-3;START 628;Szergej;100;Debrecen;1;
+92 55 0628 323-1;START 628;Szergej;100;Debrecen;1;
+92 55 0628 324-9;START 628;Szergej;100;Debrecen;1;
+92 55 0628 325-6;START 628;Szergej;100;Miskolc;0;
+92 55 0628 326-4;START 628;Szergej;100;Miskolc;0;selejtezésre vár
+92 55 0628 327-2;START 628;Szergej;100;Debrecen;0;
+92 55 0628 328-0;START 628;Szergej;100;Miskolc;0;
+92 55 0628 329-8;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 330-6;START 628;Szergej;100;Székesfehérvár;1;
+92 55 0628 331-4;START 628;Szergej;100;Miskolc;1;
+92 55 0628 332-2;START 628;Szergej;100;Dombóvár;1;
+92 55 0628 333-0;START 628;Szergej;100;Miskolc;0;
+92 55 0628 334-8;START 628;Szergej;100;Székesfehérvár;0;
+92 55 0629 001-2;VHÍD M62;Szergej;100;-;1;
+92 55 0628 501-2;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 503-8;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 505-3;START 628;Szergej;100;Záhony;0;széles nyomtáv
+92 55 0628 508-7;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 509-5;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 517-8;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 518-6;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 519-4;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 530-1;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 531-9;START 628;Szergej;100;Záhony;1;széles nyomtáv
+92 55 0628 532-7;VHÍD M62;Szergej;100;-;1;széles nyomtáv
+92 55 0629 501-1;EWG M62;Szergej;100;-;1;széles nyomtáv
+92 55 0629 502-9;EWG M62;Szergej;100;-;1;széles nyomtáv
+98 55 0478 202-2;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 203-0;START 478;Dácia;35/70;Győr;1;
+98 55 0478 204-8;START 478;Dácia;35/70;Győr;1;
+98 55 0478 205-6;START 478;Dácia;35/70;Győr;1;
+98 55 0478 206-3;START 478;Dácia;35/70;Pécs;1;
+98 55 0478 207-1;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 208-9;START 478;Dácia;35/70;Pécs;1;
+98 55 0478 209-7;START 478;Dácia;35/70;Pécs;1;
+98 55 0478 210-5;START 478;Dácia;35/70;Nagykanizsa;1;
+98 55 0478 211-3;START 478;Dácia;35/70;Nagykanizsa;1;
+98 55 0478 212-2;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 213-9;START 478;Dácia;35/70;Pécs;1;
+98 55 0478 214-7;START 478;Dácia;35/70;Pécs;1;
+98 55 0478 215-4;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 216-2;START 478;Dácia;35/70;Nagykanizsa;1;
+98 55 0478 217-0;START 478;Dácia;35/70;Nagykanizsa;1;
+98 55 0478 218-8;START 478;Dácia;35/70;Székesfehérvár;1;
+98 55 0478 219-6;START 478;Dácia;35/70;Győr;1;
+98 55 0478 220-4;START 478;Dácia;35/70;Pécs;1;
+98 55 0478 221-2;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 222-0;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 223-8;START 478;Dácia;35/70;Szolnok;1;
+98 55 0478 224-6;START 478;Dácia;35/70;Szolnok;1;
+98 55 0478 225-3;START 478;Dácia;35/70;Szolnok;1;
+98 55 0478 226-1;START 478;Dácia;35/70;Szolnok;0;selejtezésre vár
+98 55 0478 227-9;START 478;Dácia;35/70;Békéscsaba;1;
+98 55 0478 228-7;START 478;Dácia;35/70;Békéscsaba;1;
+98 55 0478 229-5;START 478;Dácia;35/70;Békéscsaba;1;
+98 55 0478 230-3;START 478;Dácia;35/70;Szeged;1;
+98 55 0478 231-1;START 478;Dácia;35/70;Szeged;1;
+98 55 0478 232-9;START 478;Dácia;35/70;Szolnok;1;
+98 55 0478 233-7;START 478;Dácia;35/70;Szolnok;1;
+98 55 0478 234-5;START 478;Dácia;35/70;Hatvan;1;
+98 55 0478 235-2;START 478;Dácia;35/70;Hatvan;1;
+98 55 0478 236-0;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 237-8;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 238-6;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 239-4;START 478;Dácia;35/70;Szeged;1;
+98 55 0478 240-2;START 478;Dácia;35/70;Hatvan;1;
+98 55 0478 301-2;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 302-0;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 303-8;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 304-6;START 478;Dácia;35/70;Miskolc;0;selejtezésre vár
+98 55 0478 305-3;START 478;Dácia;35/70;Győr;1;
+98 55 0478 306-1;START 478;Dácia;35/70;Győr;1;
+98 55 0478 307-9;START 478;Dácia;35/70;Győr;0;selejtezésre vár
+98 55 0478 311-1;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 312-9;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 313-7;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 314-5;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 315-2;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 316-0;START 478;Dácia;35/70;Győr;1;
+98 55 0478 317-8;START 478;Dácia;35/70;Miskolc;1;
+98 55 0478 318-6;START 478;Dácia;35/70;Dombóvár;1;
+98 55 0478 319-4;START 478;Dácia;35/70;Dombóvár;1;
+98 55 0478 320-2;START 478;Dácia;35/70;Hatvan;1;
+98 55 0478 321-0;START 478;Dácia;35/70;Szolnok;1;
+98 55 0478 322-8;START 478;Dácia;35/70;Záhony;1;
+98 55 0478 323-6;START 478;Dácia;35/70;Záhony;1;
+98 55 0478 324-4;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 325-1;START 478;Dácia;35/70;Békéscsaba;0;selejtezésre vár
+98 55 0478 326-9;START 478;Dácia;35/70;Békéscsaba;1;
+98 55 0478 327-7;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 328-5;START 478;Dácia;35/70;Székesfehérvár;1;
+98 55 0478 329-3;START 478;Dácia;35/70;Székesfehérvár;1;
+98 55 0478 330-1;START 478;Dácia;35/70;Székesfehérvár;1;
+98 55 0478 331-9;START 478;Dácia;35/70;Székesfehérvár;0;selejtezésre vár
+98 55 0478 332-7;START 478;Dácia;35/70;Szombathely;1;
+98 55 0478 333-5;START 478;Dácia;35/70;Székesfehérvár;1;
+98 55 0478 334-3;START 478;Dácia;35/70;Székesfehérvár;1;
+98 55 0438 029-8;START 438;Kisdácia;30/60;Hatvan;1;
+98 55 0438 038-9;START 438;Kisdácia;30/60;Celldömölk;1;
+98 55 0438 081-9;START 438;Kisdácia;30/60;Celldömölk;1;
+98 55 0438 117-1;START 438;Kisdácia;30/60;Hatvan;1;
+98 55 0438 137-9;START 438;Kisdácia;30/60;Hatvan;1;
+98 55 0438 201-3;START 438;Kisdácia;30/60;Szombathely;1;
+98 55 0438 202-1;START 438;Kisdácia;30/60;Szombathely;1;
+98 55 0448 211-0;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 401-7;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 402-5;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 403-3;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 404-1;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 405-8;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 406-6;START 448;Bobó;80 ;Dombóvár;1;
+98 55 0448 409-0;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 410-8;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 411-6;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 412-4;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 413-2;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 414-0;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 415-7;START 448;Bobó;80 ;Szeged;1;
+98 55 0448 416-5;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 417-3;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 418-1;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 419-9;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 420-7;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 421-5;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 422-3;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 423-1;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 424-9;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 425-6;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 426-4;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 427-2;START 448;Bobó;80 ;Nagykanizsa;1;
+98 55 0448 428-0;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 429-8;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 430-6;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 431-4;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 432-2;START 448;Bobó;80 ;Nagykanizsa;1;
+98 55 0448 433-0;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 434-8;START 448;Bobó;80 ;Dombóvár;1;
+98 55 0448 435-5;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 436-3;START 448;Bobó;80 ;Debrecen;1;
+98 55 0448 437-1;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 438-9;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 439-7;START 448;Bobó;80 ;Ferencváros;1;
+98 55 0448 440-5;START 448;Bobó;80 ;Ferencváros;1;
+95 55 2920 713-1;START C50;C50;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2920 727-1;START C50;C50;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2920 733-9;START C50;C50;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2948 003-5;START Mk48;Mk48;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2948 008-4;START Mk48;Mk48;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2948 013-4;START Mk48;Mk48;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2948 022-5;START Mk48;Mk48;30;Nagykanizsa;1;kisvasút Balatonfenyves
+95 55 2948 036-5;START Mk48;Mk48;30;Nagykanizsa;1;kisvasút Balatonfenyves
+98 55 0288 104-0;START 288 z;Mazsola;30;Szeged;1;
+98 55 0288 105-7;START 288;Mazsola;30;Békéscsaba;1;
+98 55 0288 107-3;START 288 z;Mazsola;30;Székesfehérvár;1;
+98 55 0288 112-3;START 288 z;Mazsola;30;Szeged;1;
+98 55 0288 114-9;START 288;Mazsola;30;Debrecen;1;
+98 55 0288 205-5;START 288 z;Mazsola;30;Pécs;1;
+98 55 0288 206-3;START 288;Mazsola;30;Dombóvár;1;
+98 55 0288 208-9;START 288;Mazsola;30;Ferencváros;1;
+98 55 0288 209-7;START 288;Mazsola;30;Dombóvár;1;
+98 55 0288 210-5;START 288;Mazsola;30;Dombóvár;1;
+91 55 0431 001-1;START 431;Szili;120;Dombóvár;1;retró festés
+91 55 0431 002-9;START 431;Szili;120;Dombóvár;0;selejtezésre vár
+91 55 0431 005-2;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 006-0;START 431;Szili;120;Szeged;1;
+91 55 0431 007-8;START 431;Szili;120;Szeged;1;
+91 55 0431 008-6;START 431;Szili;120;Szombathely;1;retró festés
+91 55 0431 010-2;START 431;Szili;120;Szeged;1;
+91 55 0431 011-0;START 431;Szili;120;Dombóvár;1;
+91 55 0431 013-6;START 431;Szili;120;Miskolc;1;
+91 55 0431 014-4;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 015-1;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 023-5;START 431;Szili;120;Miskolc;0;selejtezésre vár
+91 55 0431 044-1;START 431;Szili;120;Miskolc;1;
+91 55 0431 048-2;START 431;Szili;120;Miskolc;1;
+91 55 0431 052-4;START 431;Szili;120;Miskolc;0;selejtezésre vár
+91 55 0431 058-1;START 431;Szili;120;Szeged;0;selejtezésre vár
+91 55 0431 065-6;START 431;Szili;120;Békéscsaba;0;selejtezésre vár
+91 55 0431 066-4;START 431;Szili;120;Dombóvár;0;selejtezésre vár
+91 55 0431 067-2;START 431;Szili;120;Dombóvár;0;selejtezésre vár
+91 55 0431 068-0;START 431;Szili;120;Dombóvár;1;
+91 55 0431 069-8;START 431;Szili;120;Dombóvár;1;
+91 55 0431 070-6;START 431;Szili;120;Dombóvár;1;
+91 55 0431 071-4;START 431;Szili;120;Dombóvár;1;
+91 55 0431 072-2;START 431;Szili;120;Dombóvár;0;selejtezésre vár
+91 55 0431 073-0;START 431;Szili;120;Dombóvár;0;selejtezésre vár
+91 55 0431 074-8;START 431;Szili;120;Dombóvár;0;selejtezésre vár
+91 55 0431 077-1;START 431;Szili;120;Dombóvár;1;
+91 55 0431 078-9;START 431;Szili;120;Dombóvár;1;
+91 55 0431 079-7;START 431;Szili;120;Dombóvár;1;
+91 55 0431 081-3;START 431;Szili;120;Nyíregyháza;0;selejtezésre vár
+91 55 0431 083-9;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 092-0;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 093-8;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 094-6;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 095-3;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 096-1;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 098-7;START 431;Szili;120;Szeged;1;
+91 55 0431 099-5;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 100-1;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 102-7;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 103-5;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 104-3;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 105-0;START 431;Szili;120;Miskolc;1;
+91 55 0431 106-8;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 108-4;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 109-2;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 111-8;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 112-6;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 114-2;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 115-9;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 116-7;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 117-5;START 431;Szili;120;Szeged;1;
+91 55 0431 118-3;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 119-1;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 120-9;START 431;Szili;120;Szeged;0;selejtezésre vár
+91 55 0431 122-5;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 123-3;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 124-1;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 125-8;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 126-6;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 129-0;START 431;Szili;120;Szeged;1;
+91 55 0431 131-6;START 431;Szili;120;Szeged;1;
+91 55 0431 132-4;START 431;Szili;120;Szeged;1;
+91 55 0431 134-0;START 431;Szili;120;Szombathely;1;
+91 55 0431 135-7;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 139-9;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 140-7;START 431;Szili;120;Szolnok;1;
+91 55 0431 142-3;START 431;Szili;120;Szolnok;1;
+91 55 0431 143-1;START 431;Szili;120;Miskolc;1;
+91 55 0431 146-4;START 431;Szili;120;Dombóvár;1;
+91 55 0431 147-2;START 431;Szili;120;Dombóvár;1;
+91 55 0431 148-0;START 431;Szili;120;Dombóvár;1;
+91 55 0431 149-8;START 431;Szili;120;Dombóvár;1;
+91 55 0431 150-6;START 431;Szili;120;Dombóvár;1;
+91 55 0431 151-4;START 431;Szili;120;Dombóvár;1;
+91 55 0431 152-2;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 153-0;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 154-8;START 431;Szili;120;Dombóvár;1;
+91 55 0431 156-3;START 431;Szili;120;Miskolc;1;
+91 55 0431 157-1;START 431;Szili;120;Szeged;1;
+91 55 0431 158-9;START 431;Szili;120;Szeged;1;
+91 55 0431 165-4;START 431;Szili;120;Miskolc;1;
+91 55 0431 166-2;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 167-0;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 173-8;START 431;Szili;120;Dombóvár;1;
+91 55 0431 174-6;START 431;Szili;120;Szombathely;1;
+91 55 0431 176-1;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 177-9;START 431;Szili;120;Szombathely;1;
+91 55 0431 179-5;START 431;Szili;120;Szombathely;1;
+91 55 0431 180-3;START 431;Szili;120;Szombathely;1;
+91 55 0431 181-1;START 431;Szili;120;Szombathely;1;
+91 55 0431 182-9;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 183-7;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 188-6;START 431;Szili;120;Szombathely;1;
+91 55 0431 189-4;START 431;Szili;120;Szombathely;0;
+91 55 0431 190-2;START 431;Szili;120;Szombathely;1;
+91 55 0431 191-0;START 431;Szili;120;Szombathely;1;
+91 55 0431 192-8;START 431;Szili;120;Szombathely;1;
+91 55 0431 193-6;START 431;Szili;120;Szeged;1;
+91 55 0431 194-4;START 431;Szili;120;Szeged;1;
+91 55 0431 195-1;START 431;Szili;120;Nyíregyháza;1;
+91 55 0431 198-5;START 431;Szili;120;Miskolc;0;baleset Sáp
+91 55 0431 202-5;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 203-3;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 204-1;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 205-8;START 431;Szili;120;Szeged;1;
+91 55 0431 206-6;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 208-2;START 431;Szili;120;Szeged;0;selejtezésre vár
+91 55 0431 212-4;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 214-0;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 215-7;START 431;Szili;120;Szeged;1;
+91 55 0431 217-3;START 431;Szili;120;Szeged;1;
+91 55 0431 218-1;START 431;Szili;120;Szeged;1;
+91 55 0431 219-9;START 431;Szili;120;Szeged;1;
+91 55 0431 221-5;START 431;Szili;120;Szeged;1;
+91 55 0431 223-1;START 431;Szili;120;Szeged;1;
+91 55 0431 225-6;START 431;Szili;120;Szeged;1;
+91 55 0431 226-4;START 431;Szili;120;Szeged;1;
+91 55 0431 228-0;START 431;Szili;120;Szeged;1;
+91 55 0431 229-8;START 431;Szili;120;Szeged;1;
+91 55 0431 230-6;START 431;Szili;120;Szeged;1;
+91 55 0431 232-2;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 234-8;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 237-1;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 240-5;START 431;Szili;120;Szolnok;1;
+91 55 0431 246-2;START 431;Szili;120;Nyíregyháza;0;selejtezésre vár
+91 55 0431 249-6;START 431;Szili;120;Szolnok;1;
+91 55 0431 259-5;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 261-1;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 265-2;START 431;Szili;120;Szolnok;1;
+91 55 0431 271-0;START 431;Szili;120;Székesfehérvár;0;
+91 55 0431 272-8;START 431;Szili;120;Szeged;1;
+91 55 0431 274-4;START 431;Szili;120;Szeged;1;
+91 55 0431 276-9;START 431;Szili;120;Szeged;1;
+91 55 0431 279-3;START 431;Szili;120;Székesfehérvár;0;selejtezésre vár
+91 55 0431 282-7;START 431;Szili;120;Székesfehérvár;0;selejtezésre vár
+91 55 0431 283-5;START 431;Szili;120;Székesfehérvár;0;selejtezésre vár
+91 55 0431 284-3;START 431;Szili;120;Székesfehérvár;0;selejtezésre vár
+91 55 0431 285-0;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 286-8;START 431;Szili;120;Székesfehérvár;0;selejtezésre vár
+91 55 0431 287-6;START 431;Szili;120;Miskolc;1;
+91 55 0431 289-2;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 290-0;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 294-2;START 431;Szili;120;Miskolc;1;
+91 55 0431 295-9;START 431;Szili;120;Szeged;1;
+91 55 0431 296-7;START 431;Szili;120;Miskolc;1;
+91 55 0431 298-3;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 306-4;START 431;Szili;120;Miskolc;1;
+91 55 0431 332-0;START 431;Szili;120;Békéscsaba;1;
+91 55 0431 334-6;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 335-3;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 336-1;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 337-9;START 431;Szili;120;Székesfehérvár;0;selejtezésre vár
+91 55 0431 339-5;START 431;Szili;120;Székesfehérvár;1;
+91 55 0431 340-3;START 431;Szili;120;Szombathely;1;
+91 55 0431 341-1;START 431;Szili;120;Miskolc;1;
+91 55 0431 342-9;START 431;Szili;120;Miskolc;1;
+91 55 0431 344-5;START 431;Szili;120;Miskolc;1;
+91 55 0431 346-0;START 431;Szili;120;Miskolc;1;
+91 55 0431 348-6;START 431;Szili;120;Miskolc;1;
+91 55 0431 349-4;START 431;Szili;120;Miskolc;1;
+91 55 0431 350-2;START 431;Szili;120;Miskolc;1;
+91 55 0431 351-0;START 431;Szili;120;Miskolc;1;
+91 55 0431 352-8;START 431;Szili;120;Miskolc;1;
+91 55 0431 359-3;START 431;Szili;120;Szombathely;1;
+91 55 0431 361-9;START 431;Szili;120;Miskolc;1;
+91 55 0431 362-7;START 431;Szili;120;Miskolc;1;
+91 55 0431 364-3;START 431;Szili;120;Miskolc;0;2021.04.20. Újfehértó, baleset, kisiklott
+91 55 0431 365-0;START 431;Szili;120;Miskolc;1;
+91 55 0431 366-8;START 431;Szili;120;Miskolc;1;
+91 55 0431 367-6;START 431;Szili;120;Miskolc;1;
+91 55 0431 368-4;START 431;Szili;120;Miskolc;1;
+91 55 0431 369-2;START 431;Szili;120;Miskolc;1;
+91 55 0431 370-0;START 431;Szili;120;Miskolc;1;
+91 55 0431 371-8;START 431;Szili;120;Miskolc;1;
+91 55 0431 372-6;START 431;Szili;120;Miskolc;1;
+91 55 0431 374-2;START 431;Szili;120;Dombóvár;1;
+91 55 0431 375-9;START 431;Szili;120;Dombóvár;1;
+91 55 0431 379-1;START 431;Szili;120;Dombóvár;1;
+91 55 0432 144-8;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 171-1;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 184-4;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 199-2;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 200-8;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 213-1;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 235-4;START 432;Szili;120;Szolnok;1;
+91 55 0432 238-8;START 432;Szili;120;Szolnok;1;
+91 55 0432 241-2;START 432;Szili;120;Szolnok;1;
+91 55 0432 247-9;START 432;Szili;120;Szolnok;1;
+91 55 0432 248-7;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 251-1;START 432;Szili;120;Szolnok;1;
+91 55 0432 252-9;START 432;Szili;120;Szolnok;1;
+91 55 0432 256-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 257-8;START 432;Szili;120;Szolnok;1;
+91 55 0432 260-2;START 432;Szili;120;Szolnok;1;
+91 55 0432 262-8;START 432;Szili;120;Szolnok;0;selejtezésre vár
+91 55 0432 270-1;START 432;Szili;120;Szolnok;1;
+91 55 0432 277-6;START 432;Szili;120;Szolnok;1;
+91 55 0432 281-8;START 432;Szili;120;Szolnok;1;
+91 55 0432 300-6;START 432;Szili;120;Szolnok;1;
+91 55 0432 302-2;START 432;Szili;120;Szolnok;1;
+91 55 0432 303-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 309-7;START 432;Szili;120;Szolnok;0;selejtezésre vár
+91 55 0432 345-1;START 432;Szili;120;Szolnok;1;
+91 55 0432 353-5;START 432;Szili;120;Szolnok;1;
+91 55 0432 358-4;START 432;Szili;120;Szolnok;1;
+91 55 0432 360-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 373-3;START 432;Szili;120;Szolnok;0;selejtezésre vár
+91 55 0432 377-4;START 432;Szili;120;Szolnok;1;
+91 55 0432 160-4;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 162-0;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 236-2;START 432;Szili;120;Szolnok;1;
+91 55 0432 243-8;START 432;Szili;120;Szolnok;1;
+91 55 0432 244-6;START 432;Szili;120;Szolnok;1;
+91 55 0432 250-3;START 432;Szili;120;Szolnok;1;
+91 55 0432 254-5;START 432;Szili;120;Szolnok;1;
+91 55 0432 255-2;START 432;Szili;120;Nyíregyháza;1;
+91 55 0432 258-6;START 432;Szili;120;Szolnok;0;selejtezésre vár
+91 55 0432 263-6;START 432;Szili;120;Szolnok;1;
+91 55 0432 264-4;START 432;Szili;120;Szolnok;1;
+91 55 0432 273-5;START 432;Szili;120;Szolnok;1;
+91 55 0432 275-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 291-7;START 432;Szili;120;Szolnok;1;
+91 55 0432 292-5;START 432;Szili;120;Szolnok;1;
+91 55 0432 293-3;START 432;Szili;120;Szolnok;1;
+91 55 0432 299-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 304-8;START 432;Szili;120;Szolnok;1;
+91 55 0432 307-1;START 432;Szili;120;Szolnok;1;
+91 55 0432 311-3;START 432;Szili;120;Szolnok;1;
+91 55 0432 317-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 318-8;START 432;Szili;120;Szolnok;1;
+91 55 0432 343-6;START 432;Szili;120;Szolnok;1;
+91 55 0432 355-0;START 432;Szili;120;Szolnok;1;
+91 55 0432 376-6;START 432;Szili;120;Szolnok;1;
+91 55 0432 378-2;START 432;Szili;120;Szolnok;1;
+91 55 0433 159-5;START 433;Szili;120;Dombóvár;1;
+91 55 0433 161-1;START 433;Szili;120;Dombóvár;1;
+91 55 0433 170-2;START 433;Szili;120;Dombóvár;1;
+91 55 0433 185-0;START 433;Szili;120;Dombóvár;1;
+91 55 0433 187-6;START 433;Szili;120;Dombóvár;1;
+91 55 0433 197-5;START 433;Szili;120;Dombóvár;1;
+91 55 0433 201-5;START 433;Szili;120;Dombóvár;1;
+91 55 0433 209-8;START 433;Szili;120;Dombóvár;1;
+91 55 0433 210-6;START 433;Szili;120;Dombóvár;1;
+91 55 0433 211-4;START 433;Szili;120;Dombóvár;1;
+91 55 0433 216-3;START 433;Szili;120;Dombóvár;1;
+91 55 0433 220-5;START 433;Szili;120;Dombóvár;1;
+91 55 0433 222-1;START 433;Szili;120;Dombóvár;1;
+91 55 0433 224-7;START 433;Szili;120;Dombóvár;1;
+91 55 0433 227-0;START 433;Szili;120;Dombóvár;1;
+91 55 0433 239-5;START 433;Szili;120;Dombóvár;1;
+91 55 0433 242-9;START 433;Szili;120;Dombóvár;1;
+91 55 0433 245-2;START 433;Szili;120;Dombóvár;1;
+91 55 0433 268-4;START 433;Szili;120;Dombóvár;1;
+91 55 0433 278-3;START 433;Szili;120;Dombóvár;1;
+91 55 0433 280-9;START 433;Szili;120;Dombóvár;1;
+91 55 0433 288-2;START 433;Szili;120;Dombóvár;1;
+91 55 0433 305-4;START 433;Szili;120;Dombóvár;1;
+91 55 0433 308-8;START 433;Szili;120;Dombóvár;1;
+91 55 0433 312-0;START 433;Szili;120;Dombóvár;1;
+91 55 0433 313-8;START 433;Szili;120;Dombóvár;1;
+91 55 0433 315-3;START 433;Szili;120;Dombóvár;1;
+91 55 0433 316-1;START 433;Szili;120;Dombóvár;1;
+91 55 0433 333-6;START 433;Szili;120;Dombóvár;1;
+91 55 0433 347-6;START 433;Szili;120;Dombóvár;1;
+91 55 0470 001-3;START 470;Taurus;160;Ferencváros;1;werbelok: 1956
+91 55 0470 002-1;START 470;Taurus;160;Ferencváros;1;werbelok: Gyermekvasút
+91 55 0470 003-9;START 470;Taurus;160;Ferencváros;1;werbelok: German-Hungarian friendship
+91 55 0470 004-7;START 470;Taurus;160;Ferencváros;1;werbelok: Pécsi Tudományegyetem
+91 55 0470 005-4;START 470;Taurus;160;Ferencváros;1;werbelok: Planet Budapest 2021
+91 55 0470 006-2;START 470;Taurus;160;Ferencváros;1;werbelok: Semmelweis Egyetem
+91 55 0470 007-0;START 470;Taurus;160;Ferencváros;1;werbelok: Jókai 200
+91 55 0470 008-8;START 470;Taurus;160;Ferencváros;1;
+91 55 0470 009-6;START 470;Taurus;160;Ferencváros;1;
+91 55 0470 010-4;START 470;Taurus;160;Ferencváros;1;werbelok: Aranycsapat
+91 55 0480 001-1;START 480;Traxx;160;Ferencváros;1;werbelok: Kandó Kálmán
+91 55 0480 002-9;START 480;Traxx;160;Ferencváros;1;werbelok: Tamási Áron
+91 55 0480 003-7;START 480;Traxx;160;Ferencváros;1;werbelok: Szent István
+91 55 0480 004-5;START 480;Traxx;160;Ferencváros;1;werbelok: 170 éves a magyar vasút
+91 55 0480 005-2;START 480;Traxx;160;Ferencváros;0;werbelok: Mátyás király
+91 55 0480 006-0;START 480;Traxx;160;Ferencváros;1;werbelok: Szent Márton
+91 55 0480 007-8;START 480;Traxx;160;Ferencváros;1;werbelok: Rákóczi Ferenc
+91 55 0480 008-6;START 480;Traxx;160;Ferencváros;1;werbelok: Toldi
+91 55 0480 009-4;START 480;Traxx;160;Ferencváros;1;werbelok: Kajla
+91 55 0480 010-2;START 480;Traxx;160;Ferencváros;1;werbelok: zöld úton járunk
+91 55 0480 011-0;START 480;Traxx;160;Ferencváros;1;werbelok: Planet Budapest 2021
+91 55 0480 012-8;START 480;Traxx;160;Ferencváros;0;werbelok: gyermekrajzok
+91 55 0480 013-6;START 480;Traxx;160;Ferencváros;1;werbelok: Máltai Szeretetszolgálat
+91 55 0480 014-4;START 480;Traxx;160;Ferencváros;1;werbelok: Planet Budapest 2021
+91 55 0480 015-1;START 480;Traxx;160;Ferencváros;0;
+91 55 0480 016-9;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 017-7;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 018-5;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 019-3;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 020-1;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 021-9;START 480;Traxx;160;Ferencváros;0;
+91 55 0480 022-7;START 480;Traxx;160;Ferencváros;1;werbelok: Weöres Sándor
+91 55 0480 023-5;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 024-3;START 480;Traxx;160;Ferencváros;1;
+91 55 0480 025-0;START 480;Traxx;160;Ferencváros;1;
+91 55 0630 004-4;START 630;Gigant;120/130;Dombóvár;1;retró
+91 55 0630 006-9;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 007-7;START 630;Gigant;120/130;Dombóvár;0;
+91 55 0630 008-5;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 009-3;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 010-1;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 011-9;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 012-7;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 013-5;START 630;Gigant;120/130;Dombóvár;1;Dombóvár matrica
+91 55 0630 014-3;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 015-0;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 016-8;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 017-6;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 018-4;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 019-5;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 020-0;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 021-8;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 022-6;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 023-4;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 024-2;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 025-9;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 026-7;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 027-5;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 028-3;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 029-1;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 030-9;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 031-7;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 032-5;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 033-3;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 034-1;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 035-8;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 036-6;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 037-4;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 038-2;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 039-0;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 040-8;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 041-6;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 042-4;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 043-2;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 044-0;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 045-7;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 046-5;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 047-3;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 048-1;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 049-9;START 630;Gigant;120/130;Nyíregyháza;1;
+91 55 0630 050-7;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 051-5;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 052-3;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 053-1;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 054-9;START 630;Gigant;120/130;Dombóvár;0;selejtezésre vár
+91 55 0630 055-6;START 630;Gigant;120/130;Dombóvár;1;
+91 55 0630 056-4;START 630;Gigant;120/130;Dombóvár;1;retró
+97 55 0460 001-9;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 003-5;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 005-0;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 006-8;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 007-6;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 009-2;START 460;Szöcske;80;Miskolc;1;
+97 55 0460 014-2;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 018-3;START 460;Szöcske;80;Győr;1;
+97 55 0460 021-7;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 022-5;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 023-3;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 024-1;START 460;Szöcske;80;Szeged;1;
+97 55 0460 025-8;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 026-6;START 460;Szöcske;80;Miskolc;1;
+97 55 0460 032-4;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 034-0;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 035-7;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 036-5;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 043-1;START 460;Szöcske;80;Miskolc;1;
+97 55 0460 045-6;START 460;Szöcske;80;Nyíregyháza;1;
+97 55 0460 046-4;START 460;Szöcske;80;Dombóvár;1;
+97 55 0460 047-2;START 460;Szöcske;80;Dombóvár;1;
+97 55 0460 048-0;START 460;Szöcske;80;Dombóvár;1;
+97 55 0460 050-6;START 460;Szöcske;80;Dombóvár;1;
+97 55 0460 051-4;START 460;Szöcske;80;Szombathely;1;
+97 55 0460 052-2;START 460;Szöcske;80;Szombathely;1;
+97 55 0460 053-0;START 460;Szöcske;80;Ferencváros;1;
+97 55 0460 054-8;START 460;Szöcske;80;Szeged;1;
+97 55 0460 056-3;START 460;Szöcske;80;Győr;1;
+97 55 0460 057-1;START 460;Szöcske;80;Szeged;1;
+97 55 0460 058-9;START 460;Szöcske;80;Ferencváros;1;
+91 80 6193 210-2;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 214-4;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 216-9;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 227-6;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 230-0;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 231-8;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 242-5;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 243-3;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 246-6;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 247-4;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 248-1;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 721-8;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 723-4;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 757-2;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 935-4;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 936-2;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 940-4;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 943-8;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 967-7;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 7193 025-2;AKIEM 193;Vectron;160;Ferencváros;1;MÁV+ matrica
+91 80 7193 026-0;AKIEM 193;Vectron;160;Ferencváros;1;MÁV+ matrica
+91 80 7193 604-4;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 7193 627-5;ELOC 193;Vectron;160;Ferencváros;1;fehér
+91 80 7193 632-5;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 7193 633-3;ELOC 193;Vectron;160;Ferencváros;1;MÁV+ matrica
+91 80 7193 634-1;ELOC 193;Vectron;160;Ferencváros;1;MÁV+ matrica
+91 80 7193 638-2;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 7193 890-9;ELOC 193;Vectron;160;Ferencváros;1;
+91 80 6193 220-1;ELOC 193;Vectron;160;Ferencváros;1;
+91 55 0490 001-9;AKIEM 490;Astride;200;-;1;
+91 55 0490 002-7;MÁVRT 490;Astride;200;-;1;
+91 55 0490 003-5;MÁVRT 490;Astride;200;-;1;
+91 55 0490 004-3;MÁVRT 490;Astride;200;-;1;
+91 55 0490 005-0;AKIEM 490;Astride;200;-;1;
+91 55 0490 006-8;MÁVRT 490;Astride;200;-;1;
+91 55 0490 007-6;AKIEM 490;Astride;200;-;1;
+91 55 0490 008-4;MÁVRT 490;Astride;200;-;1;
+91 55 0490 009-2;MÁVRT 490;Astride;200;-;1;
+91 55 0490 010-0;MÁVRT 490;Astride;200;-;1;
+91 55 0490 011-8;MÁVRT 490;Astride;200;-;1;
+91 55 0490 012-6;MÁVRT 490;Astride;200;-;1;
+91 55 0490 013-4;MÁVRT 490;Astride;200;-;1;
+91 55 0490 014-2;MÁVRT 490;Astride;200;-;1;
+91 55 0490 015-9;MÁVRT 490;Astride;200;-;1;
+91 55 0490 016-7;MÁVRT 490;Astride;200;-;1;

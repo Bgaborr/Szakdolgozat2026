@@ -18,7 +18,7 @@ class PassengerCarImportSeeder extends Seeder
      */
     public function run(): void
     {
-        $filePath = storage_path('app/szemelykocsik2.csv');
+        $filePath = storage_path('app/szemelykocsik.csv');
 
         if (!file_exists($filePath)) {
             $this->command->error("Hiba: Nem található a fájl: {$filePath}");

@@ -12,7 +12,7 @@ class LocomotiveImportSeeder extends Seeder
 {
     public function run()
     {
-        $filePath = storage_path('app/mozdony.csv');
+        $filePath = storage_path('app/mozdonyok.csv');
 
         if (!file_exists($filePath)) {
             $this->command->error("Hiba: Nem található a fájl: {$filePath}");

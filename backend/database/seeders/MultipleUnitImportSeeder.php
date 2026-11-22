@@ -15,7 +15,7 @@ class MultipleUnitImportSeeder extends Seeder
      */
     public function run()
     {
-        $filePath = storage_path('app/motorvonat.csv');
+        $filePath = storage_path('app/motorvonatok.csv');
 
         if (!file_exists($filePath)) {
             $this->command->error("Hiba: Nem található a fájl: {$filePath}");

@@ -1,0 +1,36 @@
+@startuml Login és CSRF Védelem
+<style>
+participant {
+    BackgroundColor #4EC8CC
+    LineColor #063971
+    FontColor #0A0A0A
+  }
+database {
+    BackgroundColor #F2F2F2
+    LineColor #063971
+    FontColor #0A0A0A
+  }
+  actor {
+    BackgroundColor #B8B8B6
+    LineColor #354D73
+    FontColor #0A0A0A
+  }
+</style>
+skinparam maxMessageSize 150
+
+actor "Felhasználó (Böngésző)" as user
+participant "Angular (Frontend)" as frontend
+participant "Laravel API (Backend)" as backend
+database "MySQL Adatbázis" as db
+== Védett adatok lekérése (pl. MÁV járművek) ==
+
+user -> frontend : Járművek listájának megnyitása
+frontend -> backend : GET /api/vehicles\n[Sütik automatikusan csatolva a kéréshez]
+backend -> db : Munkamenet és RBAC jogosultság ellenőrzése
+db --> backend : Érvényes munkamenet és jog
+
+backend --> frontend : Válasz (200 OK) + Járművek adatai JSON formátumban
+frontend --> user : Megjelenik a járművek listája a felületen
+
+@enduml
+
